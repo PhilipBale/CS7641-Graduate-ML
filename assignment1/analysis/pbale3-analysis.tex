@@ -19,52 +19,63 @@
 
 \maketitle
 
-\section*{1 - K-Means}
-\subsection*{a)}  
-\subsubsection*{Iteration 1}
-Centers: \{1, 6\} \\
-Cluster 1: \{1, 2, 3\} \\
-Cluster 2: \{4, 9, 12, 6, 10, 9\}
-\subsubsection*{Iteration 2}
-Cluster 1 Center: $(1 + 2 + 3) / 3 = 2$ \\
-Cluster 2 Center: $(4 + 9 + 12 + 6 + 10 + 9) / 6 = 8.33333333333$ \\ 
-Avg: $(2 + 8.33333333333) / 2 = 5.1666666666$\\ \\
-Centers: \{2, 8.33333333333\} \\
-Cluster 1: \{1, 2, 3, 4\} \\
-Cluster 2: \{9, 12, 6, 10, 9\}
-\subsubsection*{Iteration 3}
-Cluster 1 Center: $(1 + 2 + 3 + 4) / 4 = 2.5$ \\
-Cluster 2 Center: $( 9 + 12 + 6 + 10 + 9) / 5 = 9.2$ \\ 
-Avg: $(2.5 + 9.2) / 2 = 5.85$\\ \\
-Centers: \{2.5, 9.2\} \\
-Cluster 1: \{1, 2, 3, 4\} \\
-Cluster 2: \{9, 12, 6, 10, 9\}
-\subsection*{b)} 
-Yes, the algorithms has converged.  If you continued doing more iterations, the clusters would not change.
+2 most important plots: learning curve and model complexity curve
 
-\section*{2 - K-Means and Variance}
-\subsection*{a)}  
-The variance of a partition would go down since the furthest data points would realign with new clusters, allowing for a cluster to remove its furthest (and highest variance contributing) data point.
-\subsection*{b)} 
-A value of $n$ for k would \textbf{always} yield a variance of 0 because each instance would be aligned its own cluster.
+\section*{Classification Problems}
+\subsection*{Problem 1: X}  
+hi
 
-\section*{3 - Reinforcement Learning I}
-The reward function does not effectively communicate the goal to the agent.  By giving negative rewards per step taken and rewarding it for completion, you can train the agent to minimize the number of time spent in the maze and therefore have it complete the maze quicker.
+\subsection*{Problem 2: X}  
+bye
 
-\section*{4 - Reinforcement Learning II}
-\subsection*{a)}  Only the intervals between the rewards are important.
-\subsection*{b)}
-$R_t=\sum_{k=0}^{\infty}\gamma^kr_{t+k+1}$ \\
-$V^\pi(s)=E_\pi[R_t \vert s_t = s]$\\
-$V^\pi(s)=E_\pi[\sum_{k=0}^{\infty}\gamma^kr_{t+k+1} \vert s_t = s]$\\ \\
-By adding constant C:\\
- $R_{t,c}=\sum_{k=0}^{\infty}\gamma^k[r_{t+k+1} + C]$ \\
- $=\sum_{k=0}^{\infty}\gamma^kr_{t+k+1} + \sum_{k=0}^{\infty}\gamma^kC$ \\
- $=R_t + \sum_{k=0}^{\infty}\gamma^kC$ \\
- $=R_t + \frac{C}{1-\gamma}$ \\
- $=R_t + K$ by setting $K = \frac{C}{1-\gamma}$ 
- 
- 
+
+
+
+%
+%\subsubsection*{Iteration 1}
+%Centers: \{1, 6\} \\
+%Cluster 1: \{1, 2, 3\} \\
+%Cluster 2: \{4, 9, 12, 6, 10, 9\}
+%\subsubsection*{Iteration 2}
+%Cluster 1 Center: $(1 + 2 + 3) / 3 = 2$ \\
+%Cluster 2 Center: $(4 + 9 + 12 + 6 + 10 + 9) / 6 = 8.33333333333$ \\ 
+%Avg: $(2 + 8.33333333333) / 2 = 5.1666666666$\\ \\
+%Centers: \{2, 8.33333333333\} \\
+%Cluster 1: \{1, 2, 3, 4\} \\
+%Cluster 2: \{9, 12, 6, 10, 9\}
+%\subsubsection*{Iteration 3}
+%Cluster 1 Center: $(1 + 2 + 3 + 4) / 4 = 2.5$ \\
+%Cluster 2 Center: $( 9 + 12 + 6 + 10 + 9) / 5 = 9.2$ \\ 
+%Avg: $(2.5 + 9.2) / 2 = 5.85$\\ \\
+%Centers: \{2.5, 9.2\} \\
+%Cluster 1: \{1, 2, 3, 4\} \\
+%Cluster 2: \{9, 12, 6, 10, 9\}
+%\subsection*{b)} 
+%Yes, the algorithms has converged.  If you continued doing more iterations, the clusters would not change.
+%
+%\section*{2 - K-Means and Variance}
+%\subsection*{a)}  
+%The variance of a partition would go down since the furthest data points would realign with new clusters, allowing for a cluster to remove its furthest (and highest variance contributing) data point.
+%\subsection*{b)} 
+%A value of $n$ for k would \textbf{always} yield a variance of 0 because each instance would be aligned its own cluster.
+%
+%\section*{3 - Reinforcement Learning I}
+%The reward function does not effectively communicate the goal to the agent.  By giving negative rewards per step taken and rewarding it for completion, you can train the agent to minimize the number of time spent in the maze and therefore have it complete the maze quicker.
+%
+%\section*{4 - Reinforcement Learning II}
+%\subsection*{a)}  Only the intervals between the rewards are important.
+%\subsection*{b)}
+%$R_t=\sum_{k=0}^{\infty}\gamma^kr_{t+k+1}$ \\
+%$V^\pi(s)=E_\pi[R_t \vert s_t = s]$\\
+%$V^\pi(s)=E_\pi[\sum_{k=0}^{\infty}\gamma^kr_{t+k+1} \vert s_t = s]$\\ \\
+%By adding constant C:\\
+% $R_{t,c}=\sum_{k=0}^{\infty}\gamma^k[r_{t+k+1} + C]$ \\
+% $=\sum_{k=0}^{\infty}\gamma^kr_{t+k+1} + \sum_{k=0}^{\infty}\gamma^kC$ \\
+% $=R_t + \sum_{k=0}^{\infty}\gamma^kC$ \\
+% $=R_t + \frac{C}{1-\gamma}$ \\
+% $=R_t + K$ by setting $K = \frac{C}{1-\gamma}$ 
+% 
+% 
 
 %\begin{figure}
 %  \centering
