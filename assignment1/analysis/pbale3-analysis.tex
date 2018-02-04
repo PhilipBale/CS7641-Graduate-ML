@@ -100,22 +100,27 @@ part of an ongoing Kaggle competition that does not have a winning solution yet.
  'entropy' criterion was more effective.
 
 \subsection*{US Permanent Visa}
-\begin{tabular}{ | c | c | c | c | } 
+\begin{tabular}{ | c | c  | c | c | c | c | c |} 
 \hline
-\textbf{Max Depth} & \textbf{Train \%} & \textbf{Test \%} & \textbf{Runtime} \%} \\
+\textbf{Max Depth} & \textbf{Criterion} & \textbf{Tree Size} & \textbf{Train \%} & \textbf{Train runtime} & \textbf{Test \%} & \textbf{Test runtime}   \\
 \hline
-cell1 dummy text dummy text dummy text& cell2 & cell3 \\ 
-\hline
-cell1 dummy text dummy text dummy text & cell5 & cell6 \\ 
-\hline
-cell7 & cell8 & cell9 \\ 
-\hline
+1 & gini & 3 & 0.7657 & 0.1212 & 0.7680 & 0.0010 \\ \hline
+3 & gini & 15 & 0.6775 & 0.1417 & 0.6749 & 0.0009 \\ \hline
+5 & gini & 63 & 0.7136 & 0.2175 & 0.7067 & 0.0011 \\ \hline
+7 & entropy & 211 & 0.7256 & 0.2599 & 0.7193 & 0.0011 \\ \hline
+10 & gini & 889 & 0.7584 & 0.3192 & 0.7072 & 0.0011 \\ \hline
+15 & gini & 3013 & 0.8628 & 0.4199 & 0.7582 & 0.0014 \\ \hline
+20 & gini & 4751 & 0.9299 & 0.4517 & 0.7917 & 0.0010 \\ \hline
+25 & gini & 5349 & 0.9545 & 0.5284 & 0.8032 & 0.0010 \\ \hline
+30 & gini & 5471 & 0.9588 & 0.4390 & 0.7982 & 0.0011 \\ \hline
+40 & entropy & 5277 & 0.9592 & 0.4522 & 0.8070 & 0.0009 \\ \hline
+50 & gini & 5493 & 0.9592 & 0.4631 & 0.8032 & 0.0010 \\ \hline
 \end{tabular}
 
 \subsection*{Home Sale Prices}
 \begin{tabular}{ | c | c | c | c | } 
 \hline
-\textbf{Max Depth} & \textbf{Train \%} & \textbf{Test \%} & \textbf{Runtime} \%} \\
+\textbf{Max Depth} & \textbf{Train \%} & \textbf{Test \%} & \textbf{Runtime}  \\
 \hline
 cell1 dummy text dummy text dummy text& cell2 & cell3 \\ 
 \hline
