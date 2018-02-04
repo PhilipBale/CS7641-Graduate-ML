@@ -17,9 +17,7 @@
 
 \begin{document}
 
-\maketitle
-
-2 most important plots: learning curve and model complexity curve
+\maketitle2 most important plots: learning curve and model complexity curve
 
 \section*{Classification Problems}
 \subsection*{1) US Permanent Visa Applications}  
@@ -79,6 +77,22 @@ part of an ongoing Kaggle competition that does not have a winning solution yet.
  excellent problem, full of depth and complexity, that is suitable for a machine 
  learning approach.
  
+  \section*{General Data Processing}
+  The datasets I used were both relatively clean to begin with.  One small 
+  problem, however, was that a lot of my features on both datasets were 
+  text-based.  To transform the features into numeric values suitable for the 
+  machine learning algorithms, I used a label encoder built into ScikitLearn.
+  \\ \\
+  I also did a small amount of preprocessing of the data to make it more 
+  suitable for classification.  I dropped all unnecessary columns to help 
+  speed up with data processing in general--which proved immensely helpful when 
+  dealing with the more computationall intensive algorithms.  In the 
+  case of home prices, I precalculated the brackets based on the 'sale price' data label.  
+  In the case of visa applications, I pregrouped the case outcome so that 
+  results such as 'certified' and 'certified withdrawn' are both concerned as 
+  'approved' conditions whereas 'denied', 'invalidated', and 'rejected' all 
+  resolve to 'denied'.
+  
  \section*{Decision Trees}
 
 
