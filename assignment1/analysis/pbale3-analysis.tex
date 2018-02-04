@@ -271,7 +271,7 @@ training.
 \minipage{0.69\textwidth}
 \begin{tabular}{ | c | c  | c | c | c | c | c |} 
 \hline
-\textbf{Depth} & \textbf{Learning Rate} & \textbf{# Estimators} & \textbf{Train \%} & \textbf{Train Time} & \textbf{Test \%} & \textbf{Test Time}   \\
+\textbf{Depth} & \textbf{Learning Rate} & \textbf{\# Estimators} & \textbf{Train \%} & \textbf{Train Time} & \textbf{Test \%} & \textbf{Test Time}   \\
 1 & 0.1 & 150 & 0.8705 & 24.1484 & 0.8662 & 0.0327 \\ \hline
 3 & 0.1 & 100 & 0.8770 & 39.7266 & 0.8679 & 0.0216 \\ \hline
 5 & 0.1 & 5 & 0.8761 & 53.8227 & 0.8706 & 0.0021 \\ \hline
@@ -306,7 +306,7 @@ training.
 \minipage{0.69\textwidth}
 \begin{tabular}{ | c | c  | c | c | c | c | c |} 
 \hline
-\textbf{Depth} & \textbf{Learning Rate} & \textbf{# Estimators} & \textbf{Train \%} & \textbf{Train Time} & \textbf{Test \%} & \textbf{Test Time}   \\
+\textbf{Depth} & \textbf{Learning Rate} & \textbf{\# Estimators} & \textbf{Train \%} & \textbf{Train Time} & \textbf{Test \%} & \textbf{Test Time}   \\
 \hline
 1 & 0.1 & 15 & 0.6881 & 6.9413 & 0.6918 & 0.0018 \\ \hline
 3 & 0.1 & 5 & 0.7724 & 8.2909 & 0.7945 & 0.0013 \\ \hline
@@ -336,7 +336,37 @@ training.
    \endminipage\hfill
 \end{figure}
 
-\subsection*{Analysis for AdaBoost Boosted  Tree}
+\subsection*{Analysis for AdaBoost Boosted Tree}
+The AdaBoost boosted tree relates significantly to the original decision tree 
+classifier.  It even uses the decision tree as its base classifier.  The main 
+difference, however, exists in the boosting.  As discussed in class, a boosted 
+tree is essentially an ensemble of weaker trees.  This ensemble works to 
+classify with greater accuracy than the original, simplified tree. 
+\\ \\
+Evaluating the performance in the chart and graphs above, it is quickly noticed that the AdaBoost tree works
+significantly better for both datasets.  For visa applications, it is approximately 7\% better in the optimal 
+configuration.  For housing prices, it i approximately 4\% better.  Training 
+times take signifcantly longer, which makes sense as the algorithm trains a much 
+larger, ensemble classifier.  For example, the larger permanent visa dataset took more than a minute to
+ train for depths greater than 5--compared to less than a second for a normal 
+ tree classifier.
+ \\ \\
+ In terms of parameters, learning rate, depth, and # of estimators were all 
+ tuned using a gridsearch to find an optimal model.  As # of estimators 
+ increased, optimal learning rate tended to increase too.  For a deeper tree, 
+ fewer estimators were needed because the optimal learning rate was achieved 
+ sooner.  The learning rate, which effects the rate of contribution for each 
+ classifier, was optimized between 0.1 and 1, where the learning rate trended 
+ higher for deeper trees.
+ \\ \\
+ While both types of trees peformed well on the datasets, AdaBoost performed 
+ exceptionally well.  I believe this is due to the rich set of features and logically 
+ classifiable outcomes.  The AdaBoosted tree still overclassified at 
+ increased depth.  By pruning depth to approximately 10 to 15, we were able to achieve 
+ an optimal tree.
+ 
+ \section*{#3) Neural Networks}
+
 
 
 
