@@ -8,7 +8,9 @@
 \usepackage{subcaption}
 \usepackage{float} 
 \usepackage{flafter}
-\graphicspath{ {img/} }
+\graphicspath{ {../images/} }
+\usepackage{adjustbox}
+
 
 \newcommand{\cent}{\textcent \hspace{4pt}}
 \title{CS 7641 Machine Learning \\ Assignment 1}
@@ -100,6 +102,12 @@ part of an ongoing Kaggle competition that does not have a winning solution yet.
  'entropy' criterion was more effective.
 
 \subsection*{US Permanent Visa}
+
+\begin{figure}[H]
+    \includegraphics[width=1.0\textwidth,keepaspectratio]{1_dtree.jpg} 
+    \caption*{Permanent Visa Decision Tree with max\_depth of 7} 
+\end{figure}
+
 \begin{tabular}{ | c | c  | c | c | c | c | c |} 
 \hline
 \textbf{Max Depth} & \textbf{Criterion} & \textbf{Tree Size} & \textbf{Train \%} & \textbf{Train runtime} & \textbf{Test \%} & \textbf{Test runtime}   \\
@@ -116,6 +124,21 @@ part of an ongoing Kaggle competition that does not have a winning solution yet.
 40 & entropy & 5277 & 0.9592 & 0.4522 & 0.8070 & 0.0009 \\ \hline
 50 & gini & 5493 & 0.9592 & 0.4631 & 0.8032 & 0.0010 \\ \hline
 \end{tabular}
+
+\begin{figure}[H]
+  \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{1_curve_dtree3.png} 
+      \caption*{Learning Curve for max\_depth = 3} 
+   \endminipage\hfill
+   \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{1_curve_dtree10.png} 
+      \caption*{Learning Curve for max\_depth = 10} 
+   \endminipage\hfill
+   \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{1_curve_dtree20.png} 
+      \caption*{Learning Curve for max\_depth = 20} 
+   \endminipage\hfill
+\end{figure}
 
 \subsection*{Home Sale Prices}
 \begin{tabular}{ | c | c | c | c | } 
