@@ -95,8 +95,8 @@ part of an ongoing Kaggle competition that does not have a winning solution yet.
   'approved' conditions whereas 'denied', 'invalidated', and 'rejected' all 
   resolve to 'denied'.
   
- \section*{Decision Trees}
- A decision tree classifier was the first algorithm applied to the datsets.  
+ \section*{#1: Decision Trees}
+ A decision tree classifier was the first algorithm applied to the datasets.  
  Various values of max\_depth were tested as a means of pruning unnecessary 
  leaves.  Similarly, a grid search was used to test whether a 'gini' or 
  'entropy' criterion was more effective.
@@ -260,7 +260,83 @@ started out at \textless 10\%, it was able to grow to approximately 76\%.
     \caption*{SampleDecision Tree: Permanent Visa with max\_depth of 7} 
 \end{figure}
 
-\section*{Boosted Tree}
+\section*{#2) AdaBoost - Boosted Trees}
+A boosted decision tree classifer, Adaboost, was the second algorithm applied.  It used the same 
+base decision tree as the first model algorithm.  Based on the results of the 
+first model, we decided to stick with 'gini' as the criterion for faster 
+training.
+
+\subsection*{US Permanent Visa Data}
+\begin{figure}[H]
+\minipage{0.69\textwidth}
+\begin{tabular}{ | c | c  | c | c | c | c | c |} 
+\hline
+\textbf{Depth} & \textbf{Learning Rate} & \textbf{# Estimators} & \textbf{Train \%} & \textbf{Train Time} & \textbf{Test \%} & \textbf{Test Time}   \\
+1 & 0.1 & 150 & 0.8705 & 24.1484 & 0.8662 & 0.0327 \\ \hline
+3 & 0.1 & 100 & 0.8770 & 39.7266 & 0.8679 & 0.0216 \\ \hline
+5 & 0.1 & 5 & 0.8761 & 53.8227 & 0.8706 & 0.0021 \\ \hline
+10 & 0.1 & 150 & 0.9775 & 82.2192 & 0.8745 & 0.0504 \\ \hline
+15 & 1 & 150 & 0.9775 & 94.5996 & 0.8701 & 0.0420 \\ \hline
+20 & 1 & 150 & 0.9775 & 107.0742 & 0.8618 & 0.0452 \\ \hline
+\hline
+
+
+\end{tabular}
+\caption*{Results at multiple depths for best learning rate/# estimators via grid search}
+\endminipage\hfill
+\end{figure}
+
+\begin{figure}[H]
+  \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{1_curve_boost3.png} 
+      \caption*{Learning Curve for max\_depth = 3} 
+   \endminipage\hfill
+   \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{1_curve_boost10.png} 
+      \caption*{Learning Curve for max\_depth = 10} 
+   \endminipage\hfill
+   \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{1_curve_boost20.png} 
+      \caption*{Learning Curve for max\_depth = 20} 
+   \endminipage\hfill
+\end{figure}
+
+\subsection*{Housing Prices Data}
+\begin{figure}[H]
+\minipage{0.69\textwidth}
+\begin{tabular}{ | c | c  | c | c | c | c | c |} 
+\hline
+\textbf{Depth} & \textbf{Learning Rate} & \textbf{# Estimators} & \textbf{Train \%} & \textbf{Train Time} & \textbf{Test \%} & \textbf{Test Time}   \\
+\hline
+1 & 0.1 & 15 & 0.6881 & 6.9413 & 0.6918 & 0.0018 \\ \hline
+3 & 0.1 & 5 & 0.7724 & 8.2909 & 0.7945 & 0.0013 \\ \hline
+5 & 0.1 & 3 & 0.8291 & 10.8559 & 0.7740 & 0.0011 \\ \hline
+10 & 1 & 50 & 1.0000 & 13.6713 & 0.7945 & 0.0057 \\ \hline
+15 & 1 & 100 & 1.0000 & 8.7526 & 0.8014 & 0.0145 \\ \hline
+20 & 0.1 & 15 & 1.0000 & 0.6862 & 0.6781 & 0.0009 \\ \hline
+
+\end{tabular}
+\caption*{Results at multiple depths for best learning rate/# estimators via grid search}
+\endminipage\hfill
+
+\end{figure}
+
+\begin{figure}[H]
+  \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{2_curve_boost3.png} 
+      \caption*{Learning Curve for max\_depth = 3} 
+   \endminipage\hfill
+   \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{2_curve_boost10.png} 
+      \caption*{Learning Curve for max\_depth = 10} 
+   \endminipage\hfill
+   \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{2_curve_boost20.png} 
+      \caption*{Learning Curve for max\_depth = 20} 
+   \endminipage\hfill
+\end{figure}
+
+\subsection*{Analysis for AdaBoost Boosted  Tree}
 
 
 
