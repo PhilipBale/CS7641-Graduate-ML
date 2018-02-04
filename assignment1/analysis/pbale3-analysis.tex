@@ -366,57 +366,66 @@ larger, ensemble classifier.  For example, the larger permanent visa dataset too
  an optimal tree.
  
  \section*{#3) Neural Networks}
+A neural network (using ScikitLearn's multi-layer perceptron classifier) was the third algorithm applied.  
+A combination of different solvers, learning rates, and scaling was used to 
+observe the functionality of the networks in regards to our dataset.
 
 
-\subsection*{US Permanent Visa Data}
+\begin{figure}[H]
+  \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{1_nn.png} 
+      \caption*{Permanent Visa Applicant NN Learning Curve} 
+   \endminipage\hfill
+   \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{2_nn.png} 
+      \caption*{Housing Price NN Learning Curve} 
+   \endminipage\hfill
+\end{figure}
+
+\begin{figure}[H]
+  \minipage{1\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{1_nn_together.png} 
+      \caption*{Permanent Visa Applicant NN Configurations Loss Curve} 
+   \endminipage\hfill
+   \minipage{1\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{2_nn_together.png} 
+      \caption*{Housing Price NN Configurations Loss Curve} 
+   \endminipage\hfill
+\end{figure}
+
 \begin{figure}[H]
 \minipage{0.69\textwidth}
 \begin{tabular}{ | c | c  | c | c | c | c | c |} 
 \hline
-\textbf{Alpha} & \textbf{Initial Learning Rate} & \textbf{Train \%} & \textbf{Train Time} & \textbf{Test \%} & \textbf{Test Time}   \\ 
+\textbf{NN Config} & \textbf{Test Score} & \textbf{Loss} & \textbf{Train Time}   \\ 
 \hline
-0.0001 & 0.001 & 0.8665 & 7.1652 & 0.8745 & 0.0031 \\ \hline
-0.0001 & 0.01 & 0.8665 & 6.9166 & 0.8745 & 0.0032 \\ \hline
-0.0001 & 0.1 & 0.8665 & 7.3174 & 0.8745 & 0.0032 \\ \hline
-0.0001 & 0.2 & 0.8665 & 7.0390 & 0.8745 & 0.0031 \\ \hline
-0.005 & 0.001 & 0.8665 & 7.0153 & 0.8745 & 0.0030 \\ \hline
-0.005 & 0.01 & 0.8665 & 7.5287 & 0.8745 & 0.0031 \\ \hline
-
-
-learning on dataset Test
-training: constant learning-rate
-0.5382 & 0.8647
-Training set score: 0.864663
-Training set loss: 0.384361
-training: constant with momentum
-1.4991 & 0.8670
-Training set score: 0.866966
-Training set loss: 0.378901
-training: constant with Nesterov's momentum
-1.6309 & 0.8670
-Training set score: 0.867021
-Training set loss: 0.378474
-training: inv-scaling learning-rate
-0.2412 & 0.8646
-Training set score: 0.864608
-Training set loss: 0.390257
-training: inv-scaling with momentum
-0.4583 & 0.8646
-Training set score: 0.864608
-Training set loss: 0.384544
-training: inv-scaling with Nesterov's momentum
-0.4428 & 0.8646
-Training set score: 0.864608
-Training set loss: 0.384611
-training: adam
-1.0725 & 0.8660
-Training set score: 0.866034
-Training set loss: 0.376134
-
-
-
+constant learning-rate & 0.8642 & 0.3842 & 0.6121 \\ \hline
+constant with momentum & 0.8663 & 0.3823 & 0.7120 \\ \hline
+constant with Nesterov's momentum & 0.8668 & 0.3779 & 1.4836 \\ \hline
+inv-scaling learning-rate & 0.8646 & 0.3905 & 0.2435 \\ \hline
+inv-scaling with momentum & 0.8646 & 0.3842 & 0.3750 \\ \hline
+inv-scaling with Nesterov's momentum & 0.8646 & 0.3848 & 0.2740 \\ \hline
+adam & 0.8677 & 0.3650 & 2.1166 \\ \hline
 \end{tabular}
-\caption*{Results at multiple depths for best learning rate/# estimators via grid search}
+\caption*{Permanent Visa results for various NN configs}
+\endminipage\hfill
+\end{figure}
+
+\begin{figure}[H]
+\minipage{0.69\textwidth}
+\begin{tabular}{ | c | c  | c | c | c | c | c |} 
+\hline
+\textbf{NN Config} & \textbf{Test Score} & \textbf{Loss} & \textbf{Train Time}   \\ 
+\hline
+constant learning-rate & 0.7664 & 0.6301 & 0.4272  \\ \hline
+constant with momentum & 0.7498 & 0.6058 & 0.0889 \\ \hline
+constant with Nesterov's momentum & 0.7595 & 0.5669 & 0.1286 \\ \hline
+inv-scaling learning-rate & 0.6278 & 1.0219 & 0.3932  \\ \hline
+inv-scaling with momentum & 0.7009 & 0.7936 & 1.9339  \\ \hline
+inv-scaling with Nesterov's momentum & 0.6278 & 1.2652 & 0.0205  \\ \hline
+adam & 0.7795 & 0.5237 & 0.2093  \\ \hline
+\end{tabular}
+\caption*{Housing Price results for various NN configs}
 \endminipage\hfill
 \end{figure}
 
