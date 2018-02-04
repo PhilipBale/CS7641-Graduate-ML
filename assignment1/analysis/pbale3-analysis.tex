@@ -436,7 +436,7 @@ Support Vector Machines were the fourth algorithm applied.
 \minipage{0.69\textwidth}
 \begin{tabular}{ | c | c  | c | c | c | c | c |} 
 \hline
-\textbf{Kernel} & \textbf{Learning Rate} & \textbf{Train \%} & \textbf{Train Time} & \textbf{Test \%} & \textbf{Test Time}   \\ \hline
+\textbf{Kernel} & \textbf{Gamma} & \textbf{Train \%} & \textbf{Train Time} & \textbf{Test \%} & \textbf{Test Time}   \\ \hline
 rbf & 0.01 & 0.8642 & 20.4459 & 0.8712 & 0.1536 \\ \hline
 rbf & 0.05 & 0.8646 & 29.0756 & 0.8712 & 0.1817 \\ \hline
 rbf & 1.0 & 0.8752 & 29.7723 & 0.8745 & 0.1805 \\ \hline
@@ -488,7 +488,7 @@ poly & 2.0 & 0.8349 & 19.5531 & 0.8355 & 0.0391 \\ \hline
 \minipage{0.69\textwidth}
 \begin{tabular}{ | c | c  | c | c | c | c | c |} 
 \hline
-\textbf{Kernel} & \textbf{Learning Rate} & \textbf{Train \%} & \textbf{Train Time} & \textbf{Test \%} & \textbf{Test Time}   \\ \hline
+\textbf{Kernel} & \textbf{Gamma} & \textbf{Train \%} & \textbf{Train Time} & \textbf{Test \%} & \textbf{Test Time}   \\ \hline
 rbf & 0.01 & 0.7487 & 0.2301 & 0.7603 & 0.0042 \\ \hline
 rbf & 0.05 & 0.7954 & 0.2031 & 0.8219 & 0.0086 \\ \hline
 rbf & 1.0 & 0.9226 & 0.5629 & 0.7740 & 0.0042 \\ \hline
@@ -544,7 +544,7 @@ K-nearest Neighbors was the fifth algorithm applied.
 \begin{tabular}{ | c | c  | c | c | c | c | c |} 
 \hline
 
-\textbf{Kernel} & \textbf{Learning Rate} & \textbf{Train \%} & \textbf{Train Time} & \textbf{Test \%} & \textbf{Test Time}   \\ \hline
+\textbf{Kernel} & \textbf{K} & \textbf{Train \%} & \textbf{Train Time} & \textbf{Test \%} & \textbf{Test Time}   \\ \hline
 uniform & 1 & 0.9708 & 0.3422 & 0.8158 & 0.0080 \\ \hline
 uniform & 2 & 0.8978 & 0.3619 & 0.7708 & 0.0094 \\ \hline
 uniform & 3 & 0.8989 & 0.3603 & 0.8394 & 0.0106 \\ \hline
@@ -603,6 +603,69 @@ distance & 50 & 0.9782 & 1.2837 & 0.8635 & 0.0397 \\ \hline
 \end{figure}
 
 \subsection*{Housing Price Data}
+
+\begin{figure}[H]
+\minipage{0.69\textwidth}
+\begin{tabular}{ | c | c  | c | c | c | c | c |} 
+\hline
+
+\textbf{Kernel} & \textbf{K} & \textbf{Train \%} & \textbf{Train Time} & \textbf{Test \%} & \textbf{Test Time}   \\ \hline
+uniform & 1 & 1.0000 & 0.0343 & 0.6507 & 0.0015 \\ \hline
+uniform & 2 & 0.8222 & 0.0304 & 0.6644 & 0.0011 \\ \hline
+uniform & 3 & 0.8130 & 0.0283 & 0.7055 & 0.0011 \\ \hline
+uniform & 4 & 0.7824 & 0.0379 & 0.6986 & 0.0012 \\ \hline
+uniform & 5 & 0.7602 & 0.0351 & 0.7260 & 0.0012 \\ \hline
+uniform & 10 & 0.7341 & 0.0324 & 0.7055 & 0.0019 \\ \hline
+uniform & 15 & 0.7218 & 0.0369 & 0.7192 & 0.0016 \\ \hline
+uniform & 20 & 0.7134 & 0.0466 & 0.7329 & 0.0013 \\ \hline
+uniform & 30 & 0.7004 & 0.0488 & 0.7055 & 0.0022 \\ \hline
+uniform & 50 & 0.6812 & 0.0635 & 0.6986 & 0.0020 \\ \hline
+distance & 1 & 1.0000 & 0.0244 & 0.6507 & 0.0009 \\ \hline
+distance & 2 & 1.0000 & 0.0261 & 0.6575 & 0.0010 \\ \hline
+distance & 3 & 1.0000 & 0.0293 & 0.7055 & 0.0010 \\ \hline
+distance & 4 & 1.0000 & 0.0282 & 0.6986 & 0.0010 \\ \hline
+distance & 5 & 1.0000 & 0.0346 & 0.7397 & 0.0011 \\ \hline
+distance & 10 & 1.0000 & 0.0356 & 0.7123 & 0.0012 \\ \hline
+distance & 15 & 1.0000 & 0.0385 & 0.7192 & 0.0017 \\ \hline
+distance & 20 & 1.0000 & 0.0468 & 0.7534 & 0.0021 \\ \hline
+distance & 30 & 1.0000 & 0.0501 & 0.7260 & 0.0016 \\ \hline
+distance & 50 & 1.0000 & 0.0742 & 0.7055 & 0.0021 \\ \hline
+
+\hline
+\end{tabular}
+\caption*{Permanent Visa Data}
+\endminipage\hfill
+\end{figure}
+ 
+
+\begin{figure}[H]
+  \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{2_knn_1_1.png} 
+      \caption*{Uniform KNN - 1} 
+   \endminipage\hfill
+   \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{2_knn_3_1.png} 
+      \caption*{Uniform KNN - 3} 
+   \endminipage\hfill
+   \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{2_knn_20_1.png} 
+      \caption*{Uniform KNN - 20} 
+   \endminipage\hfill
+\end{figure}
+\begin{figure}[H]
+  \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{2_knn_1_2.png} 
+      \caption*{Distance KNN - 1} 
+   \endminipage\hfill
+   \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{2_knn_3_2.png} 
+      \caption*{Distance KNN - 3} 
+   \endminipage\hfill
+   \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{2_knn_20_2.png} 
+      \caption*{Distance KNN - 20} 
+   \endminipage\hfill
+\end{figure}
  
 
 
