@@ -368,6 +368,58 @@ larger, ensemble classifier.  For example, the larger permanent visa dataset too
  \section*{#3) Neural Networks}
 
 
+\subsection*{US Permanent Visa Data}
+\begin{figure}[H]
+\minipage{0.69\textwidth}
+\begin{tabular}{ | c | c  | c | c | c | c | c |} 
+\hline
+\textbf{Alpha} & \textbf{Initial Learning Rate} & \textbf{Train \%} & \textbf{Train Time} & \textbf{Test \%} & \textbf{Test Time}   \\ 
+\hline
+0.0001 & 0.001 & 0.8665 & 7.1652 & 0.8745 & 0.0031 \\ \hline
+0.0001 & 0.01 & 0.8665 & 6.9166 & 0.8745 & 0.0032 \\ \hline
+0.0001 & 0.1 & 0.8665 & 7.3174 & 0.8745 & 0.0032 \\ \hline
+0.0001 & 0.2 & 0.8665 & 7.0390 & 0.8745 & 0.0031 \\ \hline
+0.005 & 0.001 & 0.8665 & 7.0153 & 0.8745 & 0.0030 \\ \hline
+0.005 & 0.01 & 0.8665 & 7.5287 & 0.8745 & 0.0031 \\ \hline
+
+
+learning on dataset Test
+training: constant learning-rate
+0.5382 & 0.8647
+Training set score: 0.864663
+Training set loss: 0.384361
+training: constant with momentum
+1.4991 & 0.8670
+Training set score: 0.866966
+Training set loss: 0.378901
+training: constant with Nesterov's momentum
+1.6309 & 0.8670
+Training set score: 0.867021
+Training set loss: 0.378474
+training: inv-scaling learning-rate
+0.2412 & 0.8646
+Training set score: 0.864608
+Training set loss: 0.390257
+training: inv-scaling with momentum
+0.4583 & 0.8646
+Training set score: 0.864608
+Training set loss: 0.384544
+training: inv-scaling with Nesterov's momentum
+0.4428 & 0.8646
+Training set score: 0.864608
+Training set loss: 0.384611
+training: adam
+1.0725 & 0.8660
+Training set score: 0.866034
+Training set loss: 0.376134
+
+
+
+\end{tabular}
+\caption*{Results at multiple depths for best learning rate/# estimators via grid search}
+\endminipage\hfill
+\end{figure}
+
 
 
 \end{document}
