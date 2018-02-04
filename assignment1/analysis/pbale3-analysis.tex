@@ -108,9 +108,11 @@ part of an ongoing Kaggle competition that does not have a winning solution yet.
     \caption*{Permanent Visa Decision Tree with max\_depth of 7} 
 \end{figure}
 
+\begin{figure}[H]
+\minipage{0.69\textwidth}
 \begin{tabular}{ | c | c  | c | c | c | c | c |} 
 \hline
-\textbf{Max Depth} & \textbf{Criterion} & \textbf{Tree Size} & \textbf{Train \%} & \textbf{Train runtime} & \textbf{Test \%} & \textbf{Test runtime}   \\
+\textbf{Depth} & \textbf{Criterion} & \textbf{Tree Size} & \textbf{Train \%} & \textbf{Train Time} & \textbf{Test \%} & \textbf{Test Time}   \\
 \hline
 1 & gini & 3 & 0.7657 & 0.1212 & 0.7680 & 0.0010 \\ \hline
 3 & gini & 15 & 0.6775 & 0.1417 & 0.6749 & 0.0009 \\ \hline
@@ -124,6 +126,22 @@ part of an ongoing Kaggle competition that does not have a winning solution yet.
 40 & entropy & 5277 & 0.9592 & 0.4522 & 0.8070 & 0.0009 \\ \hline
 50 & gini & 5493 & 0.9592 & 0.4631 & 0.8032 & 0.0010 \\ \hline
 \end{tabular}
+\caption*{Results at multiple depths for best criterion via grid search}
+\endminipage\hfill
+\minipage{0.29\textwidth}
+\begin{flushright}
+\begin{tabular}{ | c | c | c  | } 
+\hline
+ & Accepted & Denied  \\
+\hline
+Accepted & 96 & 135 \\ \hline
+Denied & 217 & 1376 \\ \hline
+\end{tabular}
+\caption*{Test Data Confusion matrix}
+\end{flushright}
+\endminipage\hfill
+
+\end{figure}
 
 \begin{figure}[H]
   \minipage{0.32\textwidth}
@@ -141,16 +159,12 @@ part of an ongoing Kaggle competition that does not have a winning solution yet.
 \end{figure}
 
 \subsection*{Home Sale Prices}
-\begin{tabular}{ | c | c | c | c | } 
+\begin{tabular}{ | c | c | c  | } 
 \hline
-\textbf{Max Depth} & \textbf{Train \%} & \textbf{Test \%} & \textbf{Runtime}  \\
+\textbf{X} & \textbf{Test \%} & \textbf{Runtime}  \\
 \hline
-cell1 dummy text dummy text dummy text& cell2 & cell3 \\ 
-\hline
-cell1 dummy text dummy text dummy text & cell5 & cell6 \\ 
-\hline
-cell7 & cell8 & cell9 \\ 
-\hline
+1 & 2 & 3 \\ \hline
+1 & 2 & 3 \\ \hline
 \end{tabular}
 
 
