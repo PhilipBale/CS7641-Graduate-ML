@@ -428,6 +428,36 @@ adam & 0.7795 & 0.5237 & 0.2093  \\ \hline
 \end{figure}
 
 \subsection*{Analysis for Neural Networks}
+The neural network model, while effective, performed slightly worse 
+than the boosted decision tree.  After preliminary exploration, it became 
+apparent that the wide variety of neural network configurations performed 
+differently depending on the given  dataset.
+
+In terms of training and testing, cross-validation was used to ensure a robust 
+sampling.  The housing price dataset started to converge slowly in regards to 
+the learning curve, whereas the permanent visa dataste convered very rapidly.  
+The permanent visa dataset, by converging rapidly, showed it's low variability.  
+The network model was able to very quickly learn the features--in less than 40--though its feature set is
+ smaller than those of the housing prices.  The housing price dataset, 
+ conversely, required many more iterations to learn.  
+ \\ \\
+ Various neural network configurations were used on the test data.  Configurations were created by 
+ varying learning-rate, momentum, and scaling.  While complete results achieved by the various networks are listed
+  above, below we will look at the top performing network for each dataset to try to 
+  understand why it was most effective.
+  \\ \\
+  For the permanent visa dataset, practically every algorithm performed the same.  At first, this perplexed me, 
+  as I expected that at least different learning rates and solvers would create 
+  different results.
+  same.  
+  \\ \\
+  For the housing price dataset, the 'adam' significantly performed the others.  
+  This was quite different than the Permanent Visa dataset, which performed 
+  rather homogenously.
+  
+
+ 
+
 
  \section*{#4) Support Vector Machines}
 Support Vector Machines were the fourth algorithm applied. 
