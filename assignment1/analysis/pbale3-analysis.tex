@@ -116,7 +116,6 @@ part of an ongoing Kaggle competition that does not have a winning solution yet.
 20 & gini & 4751 & 0.9299 & 0.4517 & 0.7917 & 0.0010 \\ \hline
 25 & gini & 5349 & 0.9545 & 0.5284 & 0.8032 & 0.0010 \\ \hline
 35 & entropy & 5349 & 0.9574 & 0.5116 & 0.8081 & 0.0010 \\ \hline
-50 & gini & 5493 & 0.9592 & 0.4631 & 0.8032 & 0.0010 \\ \hline
 \end{tabular}
 \caption*{Results at multiple depths for best criterion via grid search}
 \endminipage\hfill
@@ -165,6 +164,7 @@ Denied & 217 & 1376 \\ \hline
 20 & gini & 643 & 1.0000 & 0.0559 & 0.7603 & 0.0007 \\ \hline
 25 & gini & 639 & 1.0000 & 0.0550 & 0.7603 & 0.0006 \\ \hline
 35 & gini & 639 & 1.0000 & 0.0570 & 0.7603 & 0.0006 \\ \hline
+
 \end{tabular}
 \caption*{Results at multiple depths for best criterion via grid search}
 \endminipage\hfill
@@ -202,13 +202,65 @@ Denied & 217 & 1376 \\ \hline
 \end{figure}
 
 \subsection*{Analysis for Decision Tree}
-There were two main parameters tuned in our decision tree: depth and criterion.
+Overall the classifier worked quite well for both datasets, but was extremely prone to 
+overfitting.  Examining the results of the decision tree classifier on the two 
+datasets provides numerous observations and basis for analysis, which are provided below.
+
+\subsubsection*{Effects of dataset size & cross validation:}
+Above, learning curves are provided for both datasets.  It is immediately 
+apparent that the size of the dataset greatly affects the performance of the 
+algorithm--though diminishes over time. This makes sense for a few different 
+reasons.  The more data we have to train on, the more likely it is that 
+we see the full spectrum of possible variability.  Similarly, the broader the 
+set of examples, the less biased our algorithm will be.  This is because if we 
+only train on a few data samples, then our algorithm can only make decisions 
+based on the features learned from the small, simple sample size--thus generating a bias (and therefore 
+underfitting).
+\\ \\ 
+The learning curves for both datasets clearly level out as 
+dataset size increases, demonstrating less variance with a more informed model.  
+Similarly, cross-validation was used to normalize the training 
+samples and smooth the learnign curve.  Without cross-validationg, the model was 
+prone to unrepresentative, biased dataset samples during training and, in-turn, testing.
+\subsubsection*{Tuning Parameters:}
+The two main paremeters tuned were maximum tree depth and the split criterion.  
+The split criterion measures the quality of a tree split.  Both 'gini' and 
+'entropy' were tested and evaluated using a gridsearch.  For the large majority 
+of trials, especially with larger and more complex trees, 'gini' was the more 
+effective splitting criterion--though the results for the two were nearly 
+identical.  If anything, Gini was more performant due to it's mathematical 
+simplicity over the entropy formula.
+\\ \\
+Tree depth provided to be a singificant influencer over the performance of our 
+model--especially for the housing dataset.  By allowing for a greater tree 
+depth, we allow for a more complex tree with more possible decisions.  A problem 
+emerges when the tree becomes too deep, however.  Instead of becoming more 
+robust, the tree begins to overfit with very specific branches for very specific 
+data items.  By analyzing the test \% vs. depth tradeoff, we can prune 
+unnecessary tree depths for the optimal tree size.  This allowed for both a 
+fast, accurate tree with a reasonable footprint.
+
+\subsubsection*{Performance:}
+Peformance varied for the two datasets across a few different domains.  In terms of runtime, housing prices took 
+longer than the visa data to train (about 10x)--though both were extremely fast on a powerful laptop.
+  This was mainly due to a larger dataset size.  As 
+the depth of the tree increased, the training time also took longer for both datasets due to the
+increased tree size and complexity(as can be seen from the table above).
+\\ \\ 
+In terms of accuracy, the visa data started out somewhat high but was able to gain about 4\% through 
+optimizing the depth of the tree.  This is due to the fact that features like 
+'salary' and 'job type' proved to heavily influence the approval process.  The 
+housing data, however, saw more greater improvements as depth increased.    As a 
+more diverse and variable dataset, the model was able to gain a lot of accuracy 
+as the tree grew because it could accommodate more specific feature branches.  While the test data
+started out at \textless 10\%, it was able to grow to approximately 76\%.   
 
 \begin{figure}[H]
     \includegraphics[width=1.0\textwidth,keepaspectratio]{1_dtree.jpg} 
     \caption*{SampleDecision Tree: Permanent Visa with max\_depth of 7} 
 \end{figure}
 
+\section*{Boosted Tree}
 
 
 
