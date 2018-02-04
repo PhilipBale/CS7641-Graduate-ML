@@ -101,7 +101,7 @@ part of an ongoing Kaggle competition that does not have a winning solution yet.
  leaves.  Similarly, a grid search was used to test whether a 'gini' or 
  'entropy' criterion was more effective.
 
-\subsection*{US Permanent Visa}
+\subsection*{US Permanent Visa Data}
 \begin{figure}[H]
 \minipage{0.69\textwidth}
 \begin{tabular}{ | c | c  | c | c | c | c | c |} 
@@ -150,84 +150,66 @@ Denied & 217 & 1376 \\ \hline
    \endminipage\hfill
 \end{figure}
 
-\subsection*{Analysis for Permanent Visa Decision Tree}
+\subsection*{Housing Prices Data}
+\begin{figure}[H]
+\minipage{0.69\textwidth}
+\begin{tabular}{ | c | c  | c | c | c | c | c |} 
+\hline
+\textbf{Depth} & \textbf{Criterion} & \textbf{TreeSize} & \textbf{Train \%} & \textbf{Train Time} & \textbf{Test \%} & \textbf{Test Time}   \\
+\hline
+1 & gini & 3 & 0.0912 & 0.0355 & 0.0890 & 0.0006 \\ \hline
+3 & entropy & 15 & 0.5816 & 0.0401 & 0.5890 & 0.0003 \\ \hline
+6 & entropy & 91 & 0.6820 & 0.0442 & 0.6438 & 0.0003 \\ \hline
+10 & gini & 331 & 0.8575 & 0.0566 & 0.6918 & 0.0006 \\ \hline
+15 & gini & 593 & 0.9854 & 0.0695 & 0.7603 & 0.0003 \\ \hline
+20 & gini & 643 & 1.0000 & 0.0559 & 0.7603 & 0.0007 \\ \hline
+25 & gini & 639 & 1.0000 & 0.0550 & 0.7603 & 0.0006 \\ \hline
+35 & gini & 639 & 1.0000 & 0.0570 & 0.7603 & 0.0006 \\ \hline
+\end{tabular}
+\caption*{Results at multiple depths for best criterion via grid search}
+\endminipage\hfill
+\minipage{0.29\textwidth}
+\begin{flushright}
+\begin{tabular}{ | c | c | c  | c | c | c | } 
+\hline
+ & 0-1 & 1-2 & 2-3 & 3-4 & 4-5  \\
+\hline
+0-1 & 2 & 6 & 0 & 0 & 0 \\ \hline 
+1-2 & 4 & 87 & 7 & 0 & 0 \\ \hline 
+2-3 & 0 & 8 & 15 & 1 & 2 \\ \hline 
+3-4 & 0 & 0 & 6 & 3 & 0 \\ \hline 
+4-5 & 0 & 0 & 2 & 0 & 3 \\ \hline 
+\end{tabular}
+\caption*{  \ \ \  Test Data Confusion matrix  \\  \ \ \ \ \ \ (classes in 100ks)}
+\end{flushright}
+\endminipage\hfill
+
+\end{figure}
+
+\begin{figure}[H]
+  \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{2_curve_dtree3.png} 
+      \caption*{Learning Curve for max\_depth = 3} 
+   \endminipage\hfill
+   \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{2_curve_dtree10.png} 
+      \caption*{Learning Curve for max\_depth = 10} 
+   \endminipage\hfill
+   \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{2_curve_dtree20.png} 
+      \caption*{Learning Curve for max\_depth = 20} 
+   \endminipage\hfill
+\end{figure}
+
+\subsection*{Analysis for Decision Tree}
 There were two main parameters tuned in our decision tree: depth and criterion.
 
 \begin{figure}[H]
     \includegraphics[width=1.0\textwidth,keepaspectratio]{1_dtree.jpg} 
-    \caption*{Permanent Visa Decision Tree with max\_depth of 7} 
+    \caption*{SampleDecision Tree: Permanent Visa with max\_depth of 7} 
 \end{figure}
 
-\subsection*{Home Sale Prices}
-\begin{tabular}{ | c | c | c  | } 
-\hline
-\textbf{X} & \textbf{Test \%} & \textbf{Runtime}  \\
-\hline
-1 & 2 & 3 \\ \hline
-1 & 2 & 3 \\ \hline
-\end{tabular}
 
 
-%
-%\subsubsection*{Iteration 1}
-%Centers: \{1, 6\} \\
-%Cluster 1: \{1, 2, 3\} \\
-%Cluster 2: \{4, 9, 12, 6, 10, 9\}
-%\subsubsection*{Iteration 2}
-%Cluster 1 Center: $(1 + 2 + 3) / 3 = 2$ \\
-%Cluster 2 Center: $(4 + 9 + 12 + 6 + 10 + 9) / 6 = 8.33333333333$ \\ 
-%Avg: $(2 + 8.33333333333) / 2 = 5.1666666666$\\ \\
-%Centers: \{2, 8.33333333333\} \\
-%Cluster 1: \{1, 2, 3, 4\} \\
-%Cluster 2: \{9, 12, 6, 10, 9\}
-%\subsubsection*{Iteration 3}
-%Cluster 1 Center: $(1 + 2 + 3 + 4) / 4 = 2.5$ \\
-%Cluster 2 Center: $( 9 + 12 + 6 + 10 + 9) / 5 = 9.2$ \\ 
-%Avg: $(2.5 + 9.2) / 2 = 5.85$\\ \\
-%Centers: \{2.5, 9.2\} \\
-%Cluster 1: \{1, 2, 3, 4\} \\
-%Cluster 2: \{9, 12, 6, 10, 9\}
-%\subsection*{b)} 
-%Yes, the algorithms has converged.  If you continued doing more iterations, the clusters would not change.
-%
-%\section*{2 - K-Means and Variance}
-%\subsection*{a)}  
-%The variance of a partition would go down since the furthest data points would realign with new clusters, allowing for a cluster to remove its furthest (and highest variance contributing) data point.
-%\subsection*{b)} 
-%A value of $n$ for k would \textbf{always} yield a variance of 0 because each instance would be aligned its own cluster.
-%
-%\section*{3 - Reinforcement Learning I}
-%The reward function does not effectively communicate the goal to the agent.  By giving negative rewards per step taken and rewarding it for completion, you can train the agent to minimize the number of time spent in the maze and therefore have it complete the maze quicker.
-%
-%\section*{4 - Reinforcement Learning II}
-%\subsection*{a)}  Only the intervals between the rewards are important.
-%\subsection*{b)}
-%$R_t=\sum_{k=0}^{\infty}\gamma^kr_{t+k+1}$ \\
-%$V^\pi(s)=E_\pi[R_t \vert s_t = s]$\\
-%$V^\pi(s)=E_\pi[\sum_{k=0}^{\infty}\gamma^kr_{t+k+1} \vert s_t = s]$\\ \\
-%By adding constant C:\\
-% $R_{t,c}=\sum_{k=0}^{\infty}\gamma^k[r_{t+k+1} + C]$ \\
-% $=\sum_{k=0}^{\infty}\gamma^kr_{t+k+1} + \sum_{k=0}^{\infty}\gamma^kC$ \\
-% $=R_t + \sum_{k=0}^{\infty}\gamma^kC$ \\
-% $=R_t + \frac{C}{1-\gamma}$ \\
-% $=R_t + K$ by setting $K = \frac{C}{1-\gamma}$ 
-% 
-% 
-
-%\begin{figure}
-%  \centering
-%    \includegraphics[scale=.7]{skyscraper.jpg} 
-%    \caption*{Skyscraper Base Image} 
-%\end{figure}
-%\begin{figure}
-%  \centering
-%    \includegraphics[scale=.7]{skyscraper4.jpg} 
-%    \caption*{Skyscraper Segmented with K = 4} 
-%\end{figure}
-%\begin{figure}
-%  \centering
-%    \includegraphics[scale=.7]{skyscraper25.jpg} 
-%    \caption*{Skyscraper Segmented with K = 25} 
-%\end{figure}
 
 \end{document}
