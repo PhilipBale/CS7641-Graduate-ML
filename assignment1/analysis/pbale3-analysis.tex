@@ -23,9 +23,31 @@
 
 \section*{Classification Problems}
 \subsection*{1) US Permanent Visa Applications}  
+\subsubsection*{Overview}
 The first classification problem revolves around classifying whether or not a 
 person's US permanent visa application will be accepted or denied based on the parameters of 
-their application.
+their application.  Among the features used in the classifcation are:
+\begin{itemize}
+  \item Job features: Industry code, job class, wage rate, wage type
+  \item Geographic features: Country of citizen and employer location
+\end{itemize}
+The classes observed for this dataset are simply 'approved' and 'denied'.  The 
+dataset contains 374365 total samples.
+\subsubsection*{Why is the dataset interesting?}
+This dataset is interesting due to its potential to aid in the visa application 
+process from a cost and time savings potential.  It could also enable confidence in those 
+interested in applying for a US permanent visa but doubting their chances of 
+acceptance.  At the end of the day, the goal is it to try to determine the application result 
+before time, money, and other resources are spent.  As someone who has worked 
+with a large number of first-generation visa holders and immigrants, I am 
+extremely interested in building tools to help others to achieve the same.
+\\ \\
+From a machine learning perspective, the dataset is incredibly interesting due 
+to its wide variety of features and the variety of values those features can take. 
+ An immense number of job types, wage rates, and citizenships alone create an 
+ extremely diverse dataset.  Additionally, the number of samples available 
+ provide a comprehensive picture of historical data, lending towards greater 
+ cofidence in training and testing rates.
 
 \subsection*{2) Home Sale Price Predictions}  
 \subsubsection*{Overview}
@@ -57,7 +79,7 @@ part of an ongoing Kaggle competition that does not have a winning solution yet.
  excellent problem, full of depth and complexity, that is suitable for a machine 
  learning approach.
  
-
+ \section*{Decision Trees}
 
 
 
