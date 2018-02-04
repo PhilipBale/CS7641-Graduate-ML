@@ -501,7 +501,7 @@ poly & 2.0 & 0.9280 & 1.0244 & 0.6781 & 0.0019 \\ \hline
 
 \hline
 \end{tabular}
-\caption*{Permanent Visa Data}
+\caption*{Housing Price Data}
 \endminipage\hfill
 \end{figure}
 
@@ -519,7 +519,6 @@ poly & 2.0 & 0.9280 & 1.0244 & 0.6781 & 0.0019 \\ \hline
       \caption*{RBF SVM w/ 1.0 gamma} 
    \endminipage\hfill
 \end{figure}
-
 \begin{figure}[H]
   \minipage{0.32\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{2_svm_poly_01.png} 
@@ -537,6 +536,74 @@ poly & 2.0 & 0.9280 & 1.0244 & 0.6781 & 0.0019 \\ \hline
 
  \section*{#5) K-nearest Neighbors}
 K-nearest Neighbors was the fifth algorithm applied. 
+
+\subsection*{Permanent Visa Data}
+
+\begin{figure}[H]
+\minipage{0.69\textwidth}
+\begin{tabular}{ | c | c  | c | c | c | c | c |} 
+\hline
+
+\textbf{Kernel} & \textbf{Learning Rate} & \textbf{Train \%} & \textbf{Train Time} & \textbf{Test \%} & \textbf{Test Time}   \\ \hline
+uniform & 1 & 0.9708 & 0.3422 & 0.8158 & 0.0080 \\ \hline
+uniform & 2 & 0.8978 & 0.3619 & 0.7708 & 0.0094 \\ \hline
+uniform & 3 & 0.8989 & 0.3603 & 0.8394 & 0.0106 \\ \hline
+uniform & 4 & 0.8854 & 0.3836 & 0.8202 & 0.0103 \\ \hline
+uniform & 5 & 0.8892 & 0.3996 & 0.8503 & 0.0107 \\ \hline
+uniform & 10 & 0.8742 & 0.4736 & 0.8525 & 0.0126 \\ \hline
+uniform & 15 & 0.8739 & 0.5735 & 0.8640 & 0.0134 \\ \hline
+uniform & 20 & 0.8738 & 0.6083 & 0.8673 & 0.0168 \\ \hline
+uniform & 30 & 0.8696 & 0.8306 & 0.8662 & 0.0219 \\ \hline
+uniform & 50 & 0.8686 & 1.1392 & 0.8618 & 0.0315 \\ \hline
+distance & 1 & 0.9708 & 0.2706 & 0.8158 & 0.0071 \\ \hline
+distance & 2 & 0.9675 & 0.4111 & 0.8103 & 0.0113 \\ \hline
+distance & 3 & 0.9743 & 0.4050 & 0.8279 & 0.0096 \\ \hline
+distance & 4 & 0.9741 & 0.3766 & 0.8311 & 0.0092 \\ \hline
+distance & 5 & 0.9756 & 0.4084 & 0.8377 & 0.0157 \\ \hline
+distance & 10 & 0.9762 & 0.4899 & 0.8470 & 0.0142 \\ \hline
+distance & 15 & 0.9767 & 0.6011 & 0.8509 & 0.0169 \\ \hline
+distance & 20 & 0.9782 & 0.6799 & 0.8591 & 0.0290 \\ \hline
+distance & 30 & 0.9782 & 0.9327 & 0.8624 & 0.0255 \\ \hline
+distance & 50 & 0.9782 & 1.2837 & 0.8635 & 0.0397 \\ \hline
+
+\hline
+\end{tabular}
+\caption*{Permanent Visa Data}
+\endminipage\hfill
+\end{figure}
+ 
+
+\begin{figure}[H]
+  \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{1_knn_1_1.png} 
+      \caption*{Uniform KNN - 1} 
+   \endminipage\hfill
+   \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{1_knn_3_1.png} 
+      \caption*{Uniform KNN - 3} 
+   \endminipage\hfill
+   \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{1_knn_20_1.png} 
+      \caption*{Uniform KNN - 20} 
+   \endminipage\hfill
+\end{figure}
+\begin{figure}[H]
+  \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{1_knn_1_2.png} 
+      \caption*{Distance KNN - 1} 
+   \endminipage\hfill
+   \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{1_knn_3_2.png} 
+      \caption*{Distance KNN - 3} 
+   \endminipage\hfill
+   \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{1_knn_20_2.png} 
+      \caption*{Distance KNN - 20} 
+   \endminipage\hfill
+\end{figure}
+
+\subsection*{Housing Price Data}
+ 
 
 
 \end{document}
