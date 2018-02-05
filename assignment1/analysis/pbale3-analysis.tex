@@ -491,7 +491,7 @@ poly & 2.0 & 0.8349 & 19.5531 & 0.8355 & 0.0391 \\ \hline
 
 \hline
 \end{tabular}
-\caption*{Permanent Visa Data}
+\caption*{Permanent Visa Data for various kernel/gamma configurations}
 \endminipage\hfill
 \end{figure}
 
@@ -544,7 +544,7 @@ poly & 2.0 & 0.9280 & 1.0244 & 0.6781 & 0.0019 \\ \hline
 
 \hline
 \end{tabular}
-\caption*{Housing Price Data}
+\caption*{Housing Price Data for various kernel/gamma configurations}
 \endminipage\hfill
 \end{figure}
 
@@ -749,8 +749,60 @@ distance & 50 & 1.0000 & 0.0742 & 0.7055 & 0.0021 \\ \hline
 
 \subsection*{Analysis for k-Nearest Neighbors} k-Nearest neighbors was by far the simplest model employed, but it also 
 performed relatively poorly on the smaller housing dataset.  The primary reason for this was 
-overfitting.  Using a distance weight generally improved data quality for both datasets.
+overfitting.  Using a distance weight generally improved data quality for both datasets. 
+ In terms of training and testing time, it was extremely fast for both datasets, as there 
+ was very little calculation necessary.
 \\ \\
-k-Nearest neighbors
+Two different weight functions were used to measure the contribution of a k-Nearest 
+neighbor: uniform and distance.  While uniform treated each neighbor equally, 
+distance had closer neighbords take priority.  This worked well, as it 
+essentially treated more spatially similar results in testing as likely to be more 
+accurate.  While unfiform did not perform horrendously, it tended to underfit 
+the data--especially for the housing dataset, due to a high variance in the 
+features.
+\\ \\
+A k-value of approximately 20 performed best for both datasets, as can be seen 
+using the kNN comparison graphs. The housing price data, with a smaller dataset, 
+tended to perform worse using kNN due to the smaller number of items to train 
+on and the greater likelihood of values from a different class being taken into 
+account as a neighbor--whereas the permanent visa data, with a large dataset, 
+was more likely to have same-class values contribute as a neighbor. 
+
+\subsection*{Conclusion}
+In total, 5 different machine learning algorithms were applied to two datasets: 
+US Permanent Visa applications and Housing Prices for a small geographic region 
+in the US.  Each algorithm maintained its pros/cons that varied heavily on the 
+type of model and its parameters.  By consistantly using gridsearch and 
+cross-validation, various relatively robust models were trained for each 
+dataset.  All-in-all, Support Vector Machines performed the best on both 
+datasets, though did require a large amount of training relative to the other 
+models for that dataset.  The SVM, by using it's kernel to accurately relate features across training and test sets, 
+was able to set accurate decision boundaries for the data--performing well for 
+both datasets, but especially well for the larger visa dataset.
+\\ \\
+\begin{figure}[H]
+\minipage{0.6\textwidth}
+\begin{tabular}{ | c | c  | c | c | c | c | c |} 
+\hline
+
+\textbf{Dataset} & \textbf{Model} & \textbf{Specifications} & \textbf{Test \%} & \textbf{Train Time}   \\ \hline
+Visa & Decision Tree & criterion=gini, depth=25 &  80.32\% & 0.5284 \\ \hline
+Visa & Boosted DT & depth=10, learning rate=0.1 & 87.45\% & 82.2192 \\ \hline
+Visa & Neural Net & solver=adam, learning rate init = 0.01 & 86.77\% & 2.1166 \\ \hline
+Visa & SVM & kernel=rbf, gamma=1.0 & 87.45\% & 29.7723 \\ \hline
+Visa & kNN & weight=uniform, k=20 & 86.73\% & 0.6083  \\ \hline
+
+Housing & Decision Tree & criterion=gini, depth=15 & 76.03\% & 0.0695  \\ \hline
+Housing & Boosted DT & depth=15, learning rate=1 & 80.14\% & 8.75  \\ \hline
+Housing & Neural Net & solver=adam, learning rate init = 0.01 & 77.95\% & 0.2093 \\ \hline
+Housing & SVM & kernel=rbf, gamma=0.05 & 82.19\% & 0.2031  \\ \hline
+Housing & kNN & weight=distance, k=20 & 75.34\% & 0.0468  \\ \hline
+\hline
+\end{tabular}
+\caption*{Optimal configuration for each algorithms, by dataset}
+   \endminipage\hfill
+\end{figure}
+
+
 
 \end{document}
