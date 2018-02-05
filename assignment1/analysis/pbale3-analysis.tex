@@ -398,12 +398,12 @@ observe the functionality of the networks in regards to our dataset.
 \textbf{NN Config} & \textbf{Test Score} & \textbf{Loss} & \textbf{Train Time}   \\ 
 \hline
 constant learning-rate & 0.8642 & 0.3842 & 0.6121 \\ \hline
-constant with momentum & 0.8663 & 0.3823 & 0.7120 \\ \hline
-constant with Nesterov's momentum & 0.8668 & 0.3779 & 1.4836 \\ \hline
-inv-scaling learning-rate & 0.8646 & 0.3905 & 0.2435 \\ \hline
-inv-scaling with momentum & 0.8646 & 0.3842 & 0.3750 \\ \hline
-inv-scaling with Nesterov's momentum & 0.8646 & 0.3848 & 0.2740 \\ \hline
-adam & 0.8677 & 0.3650 & 2.1166 \\ \hline
+sgd constant  learning-rate with momentum & 0.8663 & 0.3823 & 0.7120 \\ \hline
+sgd constant  learning-rate with Nesterov's momentum & 0.8668 & 0.3779 & 1.4836 \\ \hline
+sgd inv-scaling learning-rate & 0.8646 & 0.3905 & 0.2435 \\ \hline
+sgd inv-scaling with momentum & 0.8646 & 0.3842 & 0.3750 \\ \hline
+sgd inv-scaling with Nesterov's momentum & 0.8646 & 0.3848 & 0.2740 \\ \hline
+adam constant  learning-rate & 0.8677 & 0.3650 & 2.1166 \\ \hline
 \end{tabular}
 \caption*{Permanent Visa results for various NN configs}
 \endminipage\hfill
@@ -415,24 +415,24 @@ adam & 0.8677 & 0.3650 & 2.1166 \\ \hline
 \hline
 \textbf{NN Config} & \textbf{Test Score} & \textbf{Loss} & \textbf{Train Time}   \\ 
 \hline
-constant learning-rate & 0.7664 & 0.6301 & 0.4272  \\ \hline
-constant with momentum & 0.7498 & 0.6058 & 0.0889 \\ \hline
-constant with Nesterov's momentum & 0.7595 & 0.5669 & 0.1286 \\ \hline
-inv-scaling learning-rate & 0.6278 & 1.0219 & 0.3932  \\ \hline
-inv-scaling with momentum & 0.7009 & 0.7936 & 1.9339  \\ \hline
-inv-scaling with Nesterov's momentum & 0.6278 & 1.2652 & 0.0205  \\ \hline
-adam & 0.7795 & 0.5237 & 0.2093  \\ \hline
+sgd constant learning-rate & 0.7664 & 0.6301 & 0.4272  \\ \hline
+sgd constant learning-rate with momentum & 0.7498 & 0.6058 & 0.0889 \\ \hline
+sgd constant  learning-ratewith Nesterov's momentum & 0.7595 & 0.5669 & 0.1286 \\ \hline
+sgd inv-scaling learning-rate & 0.6278 & 1.0219 & 0.3932  \\ \hline
+sgd inv-scaling with momentum & 0.7009 & 0.7936 & 1.9339  \\ \hline
+sgd inv-scaling with Nesterov's momentum & 0.6278 & 1.2652 & 0.0205  \\ \hline
+adam constant  learning-rate  & 0.7795 & 0.5237 & 0.2093  \\ \hline
 \end{tabular}
 \caption*{Housing Price results for various NN configs}
 \endminipage\hfill
 \end{figure}
 
 \subsection*{Analysis for Neural Networks}
-The neural network model, while effective, performed slightly worse 
+The neural network models, while effective, performed slightly worse 
 than the boosted decision tree.  After preliminary exploration, it became 
 apparent that the wide variety of neural network configurations performed 
 differently depending on the given  dataset.
-
+\\ \\
 In terms of training and testing, cross-validation was used to ensure a robust 
 sampling.  The housing price dataset started to converge slowly in regards to 
 the learning curve, whereas the permanent visa dataste convered very rapidly.  
@@ -442,22 +442,33 @@ The network model was able to very quickly learn the features--in less than 40--
  conversely, required many more iterations to learn.  
  \\ \\
  Various neural network configurations were used on the test data.  Configurations were created by 
- varying learning-rate, momentum, and scaling.  While complete results achieved by the various networks are listed
+ varying the weight optimizer, learning-rate, momentum, and scaling.  To aid 
+ with speed and peformance, a pre-process Scaler was applied to the datasets.
+ Additionally, a gridsearch approach was applied with various alpha, learning 
+ rate, solver, and hidden layer conigurations.  While complete results achieved by the various networks are listed
   above, below we will look at the top performing network for each dataset to try to 
   understand why it was most effective.
   \\ \\
   For the permanent visa dataset, practically every algorithm performed the same.  At first, this perplexed me, 
   as I expected that at least different learning rates and solvers would create 
-  different results.
-  same.  
+  different results.  It turns out, however, for a dataset that is more easily 
+  learnable and converges on fewer iterations, this makes sense.  It takes less 
+  effort and hyperparemeterization to find functional solutions.  To verify that 
+  my results were accurate, I also ran a gridsearched neural network with a 2000 
+  iteration limit and various values of solver, learning\_rate, and hidden 
+  layers.
   \\ \\
-  For the housing price dataset, the 'adam' significantly performed the others.  
+  For the housing price dataset, the 'adam' weight optimizer significantly outperformed the others.  
   This was quite different than the Permanent Visa dataset, which performed 
-  rather homogenously.
-  
-
- 
-
+  rather homogenously.  The 'adam' optimizer, or solver, is a 'stochastic 
+  gradient-based optimizer.' (From SciKit learn manual)  It is noted to work 
+  especially well for large datasets.  The learning rate was slightly smaller 
+  for this configuration, starting with an initial value of 0.01.   Since the 
+  housing price network took longer to converge and performed quite differently 
+  for the various configuration, it is reasonable to believe that with a larger 
+  dataset, a more complex and accurate network could be trained.  While this 
+  would increase training time, the trade off of increased accuracy and lower 
+  variance would likely be possible.
 
  \section*{#4) Support Vector Machines}
 Support Vector Machines were the fourth algorithm applied. 
@@ -568,6 +579,32 @@ poly & 2.0 & 0.9280 & 1.0244 & 0.6781 & 0.0019 \\ \hline
 
 
 \subsection*{Analysis for Support Vector Machines}
+The Support Vector Machines peformed well compared to the other algorithms, 
+though, on-average, took significantly longer to train.  Overall, the optimal configurations yieled a testing rate of 87.5\% for the 
+permanent visa data and 77.4\% for the housing price data.     As there were a lot of 
+parameters to tune, a gridsearch was used yet again along with cross-validation 
+to ensure a robust and effective model.  The primary parameters were kernel and 
+gamma.
+\\ \\
+To begin, two different  kernels were used for each dataset: 'rbf' and 'poly'.  
+For both datasets, the rbf kernel proved more effective.  The gaussian rbf 
+kernel essentially calculates squared distance between feature vectors and is 
+scaled by gamma.  While the poly kernel tends to overfit the training data, rbf 
+does a much better job at securing a robust fit.  To tune Gamma, values on a 
+spectrum from 0.01 to 2.0 were used (and results detailed above).
+\\ \\
+Training time increased signficantly, especially for larger datasets.  Since a 
+SVMs require a large amount of iterations and  recalculation to converge to an 
+optimal solution, this made sense.  It was especially apparent for the larger 
+dataset of permanent visa data.  The training time took approximately 30 seconds 
+for the various configurations where as the smaller housing price dataset took 
+less than a second on average.
+\\ \\
+From the learning curves, we see that a highly succesful training rate leads to 
+greater overfitting.  This makes sense, as the SVM becomes too rigid to the 
+input data, and is not robust.  Similarly, when the kernel has too low of a 
+gamma and does not accomodate feature relations properly, the model underfits 
+and performs poorly on both training and test data.
 
  \section*{#5) K-nearest Neighbors}
 K-nearest Neighbors was the fifth algorithm applied. 
@@ -579,7 +616,7 @@ K-nearest Neighbors was the fifth algorithm applied.
 \begin{tabular}{ | c | c  | c | c | c | c | c |} 
 \hline
 
-\textbf{Kernel} & \textbf{K} & \textbf{Train \%} & \textbf{Train Time} & \textbf{Test \%} & \textbf{Test Time}   \\ \hline
+\textbf{Weight} & \textbf{K} & \textbf{Train \%} & \textbf{Train Time} & \textbf{Test \%} & \textbf{Test Time}   \\ \hline
 uniform & 1 & 0.9708 & 0.3422 & 0.8158 & 0.0080 \\ \hline
 uniform & 2 & 0.8978 & 0.3619 & 0.7708 & 0.0094 \\ \hline
 uniform & 3 & 0.8989 & 0.3603 & 0.8394 & 0.0106 \\ \hline
@@ -648,7 +685,7 @@ distance & 50 & 0.9782 & 1.2837 & 0.8635 & 0.0397 \\ \hline
 \begin{tabular}{ | c | c  | c | c | c | c | c |} 
 \hline
 
-\textbf{Kernel} & \textbf{K} & \textbf{Train \%} & \textbf{Train Time} & \textbf{Test \%} & \textbf{Test Time}   \\ \hline
+\textbf{Weight} & \textbf{K} & \textbf{Train \%} & \textbf{Train Time} & \textbf{Test \%} & \textbf{Test Time}   \\ \hline
 uniform & 1 & 1.0000 & 0.0343 & 0.6507 & 0.0015 \\ \hline
 uniform & 2 & 0.8222 & 0.0304 & 0.6644 & 0.0011 \\ \hline
 uniform & 3 & 0.8130 & 0.0283 & 0.7055 & 0.0011 \\ \hline
@@ -710,7 +747,10 @@ distance & 50 & 1.0000 & 0.0742 & 0.7055 & 0.0021 \\ \hline
    \endminipage\hfill
 \end{figure}
 
-\subsection*{Analysis for k-Nearest Neighbors} 
-
+\subsection*{Analysis for k-Nearest Neighbors} k-Nearest neighbors was by far the simplest model employed, but it also 
+performed relatively poorly on the smaller housing dataset.  The primary reason for this was 
+overfitting.  Using a distance weight generally improved data quality for both datasets.
+\\ \\
+k-Nearest neighbors
 
 \end{document}
