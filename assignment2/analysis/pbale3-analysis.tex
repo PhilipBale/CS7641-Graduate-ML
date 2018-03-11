@@ -209,6 +209,22 @@ allows for a wide variety of local maximums.  This algorithm is particularly int
 number of local maximums.  It is especially difficult for an algorithm that cannot escape 
 local peaks to perform well.
 
+ \begin{figure}[H]
+  \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{continous_peaks_fitness.jpg} 
+      \caption*{Permanent Visa Applicant NN Learning Curve} 
+   \endminipage\hfill
+   \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{continous_peaks_fitness_evals.jpg} 
+      \caption*{Permanent Visa Applicant NN Learning Curve} 
+   \endminipage\hfill
+   \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{continous_peaks_fitness_time.jpg} 
+      \caption*{Permanent Visa Applicant NN Learning Curve} 
+   \endminipage\hfill
+\end{figure}
+
+
 \subsection*{2) Traveling Salesman}  
 \subsubsection*{Overview}
 The traveling salesman problem is a commonly used, old problem that focuses on a 
@@ -228,79 +244,79 @@ and maximums.
 \subsection*{ Conclusion}  
 asdf
 
-\begin{itemize}
-  \item Job features: Industry code, job class, wage rate, wage type
-  \item Geographic features: Country of citizen and employer location
-\end{itemize}
-The classes observed for this dataset are simply 'approved' and 'denied'.  The 
-dataset contains 374365 total samples.
-\subsubsection*{Why is the dataset interesting?}
-This dataset is interesting due to its potential to aid in the visa application 
-process from a cost and time savings potential.  It could also enable confidence in those 
-interested in applying for a US permanent visa but doubting their chances of 
-acceptance.  At the end of the day, the goal is it to try to determine the application result 
-before time, money, and other resources are spent.  As someone who has worked 
-with a large number of first-generation visa holders and immigrants, I am 
-extremely interested in building tools to help others to achieve the same.
-\\ \\
-From a machine learning perspective, the dataset is incredibly interesting due 
-to its wide variety of features and the variety of values those features can take. 
- An immense number of job types, wage rates, and citizenships alone create an 
- extremely diverse dataset.  Additionally, the number of samples available 
- provide a comprehensive picture of historical data, lending towards greater 
- cofidence in training and testing rates.
-
-\subsection*{2) Home Sale Price Predictions}  
-\subsubsection*{Overview}
-The second classification problem revolves around classifying a home's price 
-bracket based upon the various characteristics of the home.  Among the features 
-used in the classification are :
-\begin{itemize}
-  \item Subjective measurements: Exterior condition, house style, overall quality rating, and overall condition
-  \item Objective measurements: Type of dwelling, building type, lot size, neighborhood, year built, and year sold
-\end{itemize}
-After an initial review of the dataset, the classes were defined as pricing 
-brackets divided into 100k groups.  I.e: 0-100k, 100k-200k, 200k-300k, etc.  The 
-dataset contains 1451 samples.  An additional dataset containing another 1400 
-testing samples exists but was not used as it contains unclassified sale 
-prices.  It will, however, prove useful for unsupervised learning. \subsubsection*{Why is the dataset interesting?}
-This dataset is interesting for two primary reasons: real-world applicability 
-and participating in a Kaggle challenge.  First, modeling home prices is both a 
-difficult and lucrative task.  If one can succesfully model home sale prices on 
-large sets of data, he/she can make large amounts of money investing in real 
-estate when he/she detects outliers in listed price vs. what it is expected to sell for.  
-This applies to flipping, investing, and remodeling.  Second, the dataset is 
-part of an ongoing Kaggle competition that does not have a winning solution yet. 
- By taking part of the competition, the dataset presents the opportunity to work 
- towards a winning solution and advance ones algorithms over time. 
- \\ \\
- Houses can have a very large amount of features--with a large amount of variety 
- in the individual features.  Similarly, housing is prone to personal taste and 
- frequent need for upgrades/modernization.  In such, I believe price estimation is an 
- excellent problem, full of depth and complexity, that is suitable for a machine 
- learning approach.
- 
-  \section*{General Data Processing}
-  The datasets I used were both relatively clean to begin with.  One small 
-  problem, however, was that a lot of my features on both datasets were 
-  text-based.  To transform the features into numeric values suitable for the 
-  machine learning algorithms, I used a label encoder built into ScikitLearn.
-  \\ \\
-  I also did a small amount of preprocessing of the data to make it more 
-  suitable for classification.  I dropped all unnecessary columns to help 
-  speed up with data processing in general--which proved immensely helpful when 
-  dealing with the more computationall intensive algorithms.  In the 
-  case of home prices, I precalculated the brackets based on the 'sale price' data label.  
-  In the case of visa applications, I pregrouped the case outcome so that 
-  results such as 'certified' and 'certified withdrawn' are both concerned as 
-  'approved' conditions whereas 'denied', 'invalidated', and 'rejected' all 
-  resolve to 'denied'.
-  
- \section*{#1: Decision Trees}
- A decision tree classifier was the first algorithm applied to the datasets.  
- Various values of max\_depth were tested as a means of pruning unnecessary 
- leaves.  Similarly, a grid search was used to test whether a 'gini' or 
- 'entropy' criterion was more effective.
+%\begin{itemize}
+%  \item Job features: Industry code, job class, wage rate, wage type
+%  \item Geographic features: Country of citizen and employer location
+%\end{itemize}
+%The classes observed for this dataset are simply 'approved' and 'denied'.  The 
+%dataset contains 374365 total samples.
+%\subsubsection*{Why is the dataset interesting?}
+%This dataset is interesting due to its potential to aid in the visa application 
+%process from a cost and time savings potential.  It could also enable confidence in those 
+%interested in applying for a US permanent visa but doubting their chances of 
+%acceptance.  At the end of the day, the goal is it to try to determine the application result 
+%before time, money, and other resources are spent.  As someone who has worked 
+%with a large number of first-generation visa holders and immigrants, I am 
+%extremely interested in building tools to help others to achieve the same.
+%\\ \\
+%From a machine learning perspective, the dataset is incredibly interesting due 
+%to its wide variety of features and the variety of values those features can take. 
+% An immense number of job types, wage rates, and citizenships alone create an 
+% extremely diverse dataset.  Additionally, the number of samples available 
+% provide a comprehensive picture of historical data, lending towards greater 
+% cofidence in training and testing rates.
+%
+%\subsection*{2) Home Sale Price Predictions}  
+%\subsubsection*{Overview}
+%The second classification problem revolves around classifying a home's price 
+%bracket based upon the various characteristics of the home.  Among the features 
+%used in the classification are :
+%\begin{itemize}
+%  \item Subjective measurements: Exterior condition, house style, overall quality rating, and overall condition
+%  \item Objective measurements: Type of dwelling, building type, lot size, neighborhood, year built, and year sold
+%\end{itemize}
+%After an initial review of the dataset, the classes were defined as pricing 
+%brackets divided into 100k groups.  I.e: 0-100k, 100k-200k, 200k-300k, etc.  The 
+%dataset contains 1451 samples.  An additional dataset containing another 1400 
+%testing samples exists but was not used as it contains unclassified sale 
+%prices.  It will, however, prove useful for unsupervised learning. %\subsubsection*{Why is the dataset interesting?}
+%This dataset is interesting for two primary reasons: real-world applicability 
+%and participating in a Kaggle challenge.  First, modeling home prices is both a 
+%difficult and lucrative task.  If one can succesfully model home sale prices on 
+%large sets of data, he/she can make large amounts of money investing in real 
+%estate when he/she detects outliers in listed price vs. what it is expected to sell for.  
+%This applies to flipping, investing, and remodeling.  Second, the dataset is 
+%part of an ongoing Kaggle competition that does not have a winning solution yet. 
+% By taking part of the competition, the dataset presents the opportunity to work 
+% towards a winning solution and advance ones algorithms over time. 
+% \\ \\
+% Houses can have a very large amount of features--with a large amount of variety 
+% in the individual features.  Similarly, housing is prone to personal taste and 
+% frequent need for upgrades/modernization.  In such, I believe price estimation is an 
+% excellent problem, full of depth and complexity, that is suitable for a machine 
+% learning approach.
+% 
+%  \section*{General Data Processing}
+%  The datasets I used were both relatively clean to begin with.  One small 
+%  problem, however, was that a lot of my features on both datasets were 
+%  text-based.  To transform the features into numeric values suitable for the 
+%  machine learning algorithms, I used a label encoder built into ScikitLearn.
+%  \\ \\
+%  I also did a small amount of preprocessing of the data to make it more 
+%  suitable for classification.  I dropped all unnecessary columns to help 
+%  speed up with data processing in general--which proved immensely helpful when 
+%  dealing with the more computationall intensive algorithms.  In the 
+%  case of home prices, I precalculated the brackets based on the 'sale price' data label.  
+%  In the case of visa applications, I pregrouped the case outcome so that 
+%  results such as 'certified' and 'certified withdrawn' are both concerned as 
+%  'approved' conditions whereas 'denied', 'invalidated', and 'rejected' all 
+%  resolve to 'denied'.
+%  
+% \section*{#1: Decision Trees}
+% A decision tree classifier was the first algorithm applied to the datasets.  
+% Various values of max\_depth were tested as a means of pruning unnecessary 
+% leaves.  Similarly, a grid search was used to test whether a 'gini' or 
+% 'entropy' criterion was more effective.
 %
 %\subsection*{US Permanent Visa Data}
 %\begin{figure}[H]
