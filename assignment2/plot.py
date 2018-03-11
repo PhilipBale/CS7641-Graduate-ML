@@ -52,9 +52,9 @@ def plot_timing_curve(iterations, timeDuration, title):
 def plot(dataset_path, title):
     df = pandas.read_csv('./jtay-code/' + dataset_path)
     plot = plot_learning_curve(df['iteration'], df['acc_tst'], df['acc_trg'], title)
-    plot.savefig('analysis/plots/' + title.replace(' ', '_').lower() + '.jpg')
+    plot.savefig('analysis/plots/' + title.replace(' ', '_').replace('.', 'pt').lower() + '.jpg')
     plot = plot_timing_curve(df['iteration'], df['elapsed'], title + ' Training Time')
-    plot.savefig('analysis/plots/' + title.replace(' ', '_').lower() + '_time.jpg')
+    plot.savefig('analysis/plots/' + title.replace(' ', '_').replace('.', 'pt').lower() + '_time.jpg')
     # plot.show()
 
 

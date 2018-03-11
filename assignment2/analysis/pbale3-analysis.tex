@@ -84,6 +84,7 @@ climbing.  In such, the algorithm is prone to getting caught in local optimizati
       \caption*{Permanent Visa Applicant NN Learning Curve} 
    \endminipage\hfill
 \end{figure}
+
 High accuracy results are achieved right around 125 iterations+.  
 While this is subject to randomness, by looking at the results it is shown to 
 become rather consistant.  By looking at the score results, one can see various 
@@ -99,7 +100,35 @@ Similar to backpropogation, training time scales linearly with the number of
  
 \subsection*{3) Simulated Annealing}  
 \subsubsection*{Overview}
-The third weight-finding algorithm used was simulated annealilng.
+The third weight-finding algorithm used was simulated annealing.  Simulated 
+annealing works by taking a random solution and then samples nearby 
+alternatives.  By comparing the alternatives to the original solution, the 
+optimizer decides to either stick with the original solution or move to the new 
+one.  Using a temperature and cooling parameter, the algorithm is more open to 
+worse solutions at first but gradually moves towards only accepting better 
+solutions.
+
+ \begin{figure}[H]
+  \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{simulated_annealing_cooling_pt15_nn.jpg} 
+      \caption*{Permanent Visa Applicant NN Learning Curve} 
+   \endminipage\hfill
+   \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{simulated_annealing_cooling_pt35_nn.jpg} 
+      \caption*{Permanent Visa Applicant NN Learning Curve} 
+   \endminipage\hfill
+\end{figure}
+
+ \begin{figure}[H]
+  \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{simulated_annealing_cooling_pt7_nn.jpg} 
+      \caption*{Permanent Visa Applicant NN Learning Curve} 
+   \endminipage\hfill
+   \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{simulated_annealing_cooling_pt7_nn_time.jpg} 
+      \caption*{Permanent Visa Applicant NN Learning Curve} 
+   \endminipage\hfill
+\end{figure}
 
 \subsection*{4) Genetic Algorithms}  
 \subsubsection*{Overview}
