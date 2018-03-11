@@ -27,6 +27,27 @@ def plot_learning_curve(iterations, train_scores, test_scores, title):
     plt.legend(loc="best")
     return plt
 
+def plot_many_curves(iterations, valLabels, valIndex, title, yLabel):
+    plt.figure()
+    plt.title(title)
+
+    plt.xlabel("# Iterations")
+    plt.ylabel(yLabel)
+    
+    plt.grid()
+
+    colors = ['r', 'b', 'g', 'k', 'm', 'c', 'y']
+    for i in range(len(valLabels)):
+        val = valLabels[i][valIndex]
+        label = valLabels[i][-1]
+        color = colors[i]
+
+        plt.plot(iterations, val, 'o-', color=color,
+             label=label)
+
+    plt.legend(loc="best")
+    return plt
+
 def plot_timing_curve(iterations, timeDuration, title):
 #     _, _, test_scores_base = base_curve
 
@@ -48,15 +69,45 @@ def plot_timing_curve(iterations, timeDuration, title):
     plt.legend(loc="best")
     return plt
 
-
 def plot(dataset_path, title):
     df = pandas.read_csv('./jtay-code/' + dataset_path)
     plot = plot_learning_curve(df['iteration'], df['acc_tst'], df['acc_trg'], title)
     plot.savefig('analysis/plots/' + title.replace(' ', '_').replace('.', 'pt').lower() + '.jpg')
+    plot.close()
+
     plot = plot_timing_curve(df['iteration'], df['elapsed'], title + ' Training Time')
     plot.savefig('analysis/plots/' + title.replace(' ', '_').replace('.', 'pt').lower() + '_time.jpg')
+    plot.close()
     # plot.show()
 
+def get_df(path):
+    return pandas.read_csv('./jtay-code/' + path)
+
+def plot_peaks(title):
+    valLabels = []
+
+    df1 = get_df('CONTPEAKS/CONTPEAKS_RHC_1_LOG.txt')
+    valLabels.append((df1['fitness'], df1['time'], df1['fevals'], 'Randomized Hill Climbing'))
+
+    df2 = get_df('CONTPEAKS/CONTPEAKS_SA0.15_1_LOG.txt')
+    valLabels.append((df2['fitness'], df2['time'], df2['fevals'], 'Simulated Annealing'))
+
+    df3 = get_df('CONTPEAKS/CONTPEAKS_GA100_30_30_1_LOG.txt')
+    valLabels.append((df3['fitness'], df3['time'], df3['fevals'], 'Genetic Algorithm'))
+
+    df4 = get_df('CONTPEAKS/CONTPEAKS_MIMIC100_50_0.5_1_LOG.txt')
+    valLabels.append((df4['fitness'], df4['time'], df4['fevals'], 'MIMIC'))
+
+    plot = plot_many_curves(df1['iterations'], valLabels, 0, title, 'Fitness Function')
+    plot.savefig('analysis/plots/' + title.replace(' ', '_').replace('.', 'pt').lower() + '.jpg')
+
+    plot = plot_many_curves(df1['iterations'], valLabels, 1, title + ' Time', 'Training Time (s)')
+    plot.savefig('analysis/plots/' + title.replace(' ', '_').replace('.', 'pt').lower() + '_time.jpg')
+
+    plot = plot_many_curves(df1['iterations'], valLabels, 2, title + ' Evals', 'Function Evals')
+    plot.savefig('analysis/plots/' + title.replace(' ', '_').replace('.', 'pt').lower() + '_evals.jpg')
+
+    plot.close()
 
 plot('NN_OUTPUT/BACKPROP_LOG.txt', 'Backprop NN')
 
@@ -72,6 +123,8 @@ plot('NN_OUTPUT/GA_50_10_10_LOG.txt', 'Genetic 10 Mate, 10 Mutate NN')
 plot('NN_OUTPUT/GA_50_10_20_LOG.txt', 'Genetic 10 Mate, 20 Mutate NN')
 plot('NN_OUTPUT/GA_50_20_10_LOG.txt', 'Genetic 20 Mate, 10 Mutate NN')
 plot('NN_OUTPUT/GA_50_20_20_LOG.txt', 'Genetic 20 Mate, 20 Mutate NN')
+
+plot_peaks('Continous Peaks Fitness')
 
 
 # iteration,MSE_trg,MSE_val,MSE_tst,acc_trg,acc_val,acc_tst,elapsed
