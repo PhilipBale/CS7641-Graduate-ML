@@ -59,12 +59,19 @@ def plot(dataset_path, title):
 
 
 plot('NN_OUTPUT/BACKPROP_LOG.txt', 'Backprop NN')
+
 plot('NN_OUTPUT/RHC_LOG.txt', 'Randomized Hill Climbing NN')
+
 plot('NN_OUTPUT/SA0.15_LOG.txt', 'Simulated Annealing Cooling .15 NN')
 plot('NN_OUTPUT/SA0.35_LOG.txt', 'Simulated Annealing Cooling .35 NN')
 plot('NN_OUTPUT/SA0.55_LOG.txt', 'Simulated Annealing Cooling .55 NN')
 plot('NN_OUTPUT/SA0.7_LOG.txt', 'Simulated Annealing Cooling .7 NN')
 plot('NN_OUTPUT/SA0.95_LOG.txt', 'Simulated Annealing Cooling .95 NN')
+
+plot('NN_OUTPUT/GA_50_10_10_LOG.txt', 'Genetic 10 Mate, 10 Mutate NN')
+plot('NN_OUTPUT/GA_50_10_20_LOG.txt', 'Genetic 10 Mate, 20 Mutate NN')
+plot('NN_OUTPUT/GA_50_20_10_LOG.txt', 'Genetic 20 Mate, 10 Mutate NN')
+plot('NN_OUTPUT/GA_50_20_20_LOG.txt', 'Genetic 20 Mate, 20 Mutate NN')
 
 
 # iteration,MSE_trg,MSE_val,MSE_tst,acc_trg,acc_val,acc_tst,elapsed

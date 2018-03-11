@@ -44,11 +44,11 @@ the error at the end of a network, and then working backwards to minimize that e
  
  \begin{figure}[H]
   \minipage{0.49\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{backprop_nn.jpg} 
+      \includegraphics[width=1\textwidth,keepaspectratio]{backprop_nn_1.jpg} 
       \caption*{Permanent Visa Applicant NN Learning Curve} 
    \endminipage\hfill
    \minipage{0.49\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{backprop_nn_time.jpg} 
+      \includegraphics[width=1\textwidth,keepaspectratio]{backprop_nn_time_1.jpg} 
       \caption*{Permanent Visa Applicant NN Learning Curve} 
    \endminipage\hfill
 \end{figure}
@@ -132,24 +132,90 @@ solutions.
 
 \subsection*{4) Genetic Algorithms}  
 \subsubsection*{Overview}
-The fourth weight-finding algorithm used was genetic algorithm..
+The fourth weight-finding algorithm used was a genetic algorithm.  Genetic 
+algorithms works by starting with an initial solution and then making 
+modifications in an attempt to improve the solution.  The modifications 
+generally allowed are mutation (changing random parts of the solution), crossover (taking specific sections
+ from various solutions and combining them), and selection (selecting certain sections from a solution to use again). 
+  In the context of a neural network, we can use genetic algorithms to make 
+  modifications to our network's weights.
+ \\ \\ 
+ In our testing, a population size of 50 was used in order to get a diverse 
+ initial sampling of possible solutions.  The number of instances to mate and to 
+ mutate was varied throughout the trials.
+ 
+  \begin{figure}[H]
+  \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{genetic_10_mate,_10_mutate_nn.jpg} 
+      \caption*{Permanent Visa Applicant NN Learning Curve} 
+   \endminipage\hfill
+   \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{genetic_10_mate,_20_mutate_nn.jpg} 
+      \caption*{Permanent Visa Applicant NN Learning Curve} 
+   \endminipage\hfill
+\end{figure}
+
+ \begin{figure}[H]
+  \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{genetic_20_mate,_10_mutate_nn.jpg} 
+      \caption*{Permanent Visa Applicant NN Learning Curve} 
+   \endminipage\hfill
+   \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{genetic_20_mate,_20_mutate_nn.jpg} 
+      \caption*{Permanent Visa Applicant NN Learning Curve} 
+   \endminipage\hfill
+\end{figure}
+
+More discussion
+
+ \begin{figure}[H]
+  \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{genetic_10_mate,_10_mutate_nn_time.jpg} 
+      \caption*{Permanent Visa Applicant NN Learning Curve} 
+   \endminipage\hfill
+   \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{genetic_20_mate,_20_mutate_nn_time.jpg} 
+      \caption*{Permanent Visa Applicant NN Learning Curve} 
+   \endminipage\hfill
+\end{figure}
+
 
 \subsection*{ Conclusion}  
-asdf
+The optimization algorithms used all inevitably produced similar results.  What 
+differed, however, was the amount of training time required, the tuning of 
+parameters, and how many iterations were required to achieve a consisent, 
+optimal solution.  All-in-all, the genetic algorithm approach consistantly produced 
+the best results for our network.  This makes sense, as the data was rather 
+homogenous and there appeared to be very few outliers.  By learning the training 
+data well, the learner was able to perform similarly well on the (nearly identical) 
+test data.
 
 \section*{Part 2: Optimization Problem Domains}
 \subsection*{ Introduction}  
-asdf
+For this part of the assignment, three different optimization problems are 
+examined: continous peaks, the traveling salesman, and flip flop.  The three
+optimization techniques from above are used (randomized hill climbing, simulated annealing, and genetic algorithms) 
+as well as another algorithm, MIMIC.
 
-\subsection*{1) TSP}  
+MIMIC, similar to the other algorithms, works to find the globally optimal 
+solution.  Unlike the other algorithms, however, it retains knowledge of previous 
+iterations and uses this information to more efficiently find better solutions.  MIMIC is particularly strong in regards to 
+problems that maintain patterns between subsets of thier parameters.
+
+\subsection*{1) Continous Peaks}  
 \subsubsection*{Overview}
-Asdf
+The continous peaks problem is an extension of the four peaks problem that 
+allows for a wide variety of local maximums.  This algorithm is particularly interesting due to the potentially large 
+number of local maximums.  It is especially difficult for an algorithm that cannot escape 
+local peaks to perform well.
 
-\subsection*{2) TSP}  
+\subsection*{2) Traveling Salesman}  
 \subsubsection*{Overview}
-Asdf
+The traveling salesman problem is a commonly used, old problem that focuses on a 
+salesperson trying to minimize their round-trip distance between any number of cities.  This problem is particularly 
+interesting  due to it's 
 
-\subsection*{3) TSP}  
+\subsection*{3) Flip flop}  
 \subsubsection*{Overview}
 Asdf
 
