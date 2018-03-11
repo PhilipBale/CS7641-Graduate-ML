@@ -107,6 +107,15 @@ optimizer decides to either stick with the original solution or move to the new
 one.  Using a temperature and cooling parameter, the algorithm is more open to 
 worse solutions at first but gradually moves towards only accepting better 
 solutions.
+\\ \\
+Various coolng parameters were used to try to determine the best simulate 
+annealing approach.  Below, success rates by number of iterations are showed for 
+simulated annealing approaches with cooling parameters of .15, .35, and .7.  The 
+parameter of .15 and .35 take significantly longer to converge to the optimal 
+solution than did a higher parameter.  While part of this can be attribute to 
+luck (the algorithm could have randomly found itself in an optimal solution earlier 
+on)--part of this too is the way the algorithm operates by its parameters.  The 
+.7 cooling temperature here proved most effective.
 
  \begin{figure}[H]
   \minipage{0.49\textwidth}
@@ -141,7 +150,7 @@ generally allowed are mutation (changing random parts of the solution), crossove
   modifications to our network's weights.
  \\ \\ 
  In our testing, a population size of 50 was used in order to get a diverse 
- initial sampling of possible solutions.  The number of instances to mate and to 
+ initial sampling of possible solutions.  The number of instances to mate (aka crossover) and to 
  mutate was varied throughout the trials.
  
   \begin{figure}[H]
@@ -166,7 +175,17 @@ generally allowed are mutation (changing random parts of the solution), crossove
    \endminipage\hfill
 \end{figure}
 
-More discussion
+Trials were run with the following mate/mutate combinations:  10/10, 10/20, 
+/20/10, and 20/20.  All trials were run with a population size of 50.  As can be 
+observed from the graphs, both mating and mutating appeared to be highly 
+effective in finding the optimal solution.  In fact, the optimal solution 
+converged quite quickly--in under 30 iterations for each trial.  This is partly 
+due to the fact that the data is easily learnable and does not appear to 
+maintain very many trapping local maximums.
+\\ \\
+Training times scaled roughly linearly with the number of iterations ran.  This 
+makese sense because, from a performance perspective, the number of mutation 
+calculations from iteration to iteration is more or less the same.
 
  \begin{figure}[H]
   \minipage{0.49\textwidth}
@@ -227,7 +246,7 @@ local peaks to perform well.
 
 \subsection*{2) Traveling Salesman}  
 \subsubsection*{Overview}
-The traveling salesman problem is a commonly used, old problem that focuses on a 
+The traveling salesman problem is a frequently used, classic problem that focuses on a 
 salesperson trying to minimize their round-trip distance between any number of cities.  This problem is particularly 
 interesting  due to it's real-world implications, such as route planing for 
 delivery trucks and everyday errands--it also has no known polynomial time 
