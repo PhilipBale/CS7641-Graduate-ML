@@ -45,11 +45,11 @@ the error at the end of a network, and then working backwards to minimize that e
  \begin{figure}[H]
   \minipage{0.49\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{backprop_nn_1.jpg} 
-      \caption*{Permanent Visa Applicant NN Learning Curve} 
+      \caption*{Backprop NN Success Rate vs. Iterations} 
    \endminipage\hfill
    \minipage{0.49\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{backprop_nn_time_1.jpg} 
-      \caption*{Permanent Visa Applicant NN Learning Curve} 
+      \caption*{Backprop NN Training Time} 
    \endminipage\hfill
 \end{figure}
 
@@ -77,11 +77,11 @@ climbing.  In such, the algorithm is prone to getting caught in local optimizati
  \begin{figure}[H]
   \minipage{0.49\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{randomized_hill_climbing_nn.jpg} 
-      \caption*{Permanent Visa Applicant NN Learning Curve} 
+      \caption*{Randomized Hill Climbing NN Success Rate vs. Iterations} 
    \endminipage\hfill
    \minipage{0.49\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{randomized_hill_climbing_nn_time.jpg} 
-      \caption*{Permanent Visa Applicant NN Learning Curve} 
+      \caption*{Randomized Hill Climging NN Training Time} 
    \endminipage\hfill
 \end{figure}
 
@@ -120,22 +120,22 @@ on)--part of this too is the way the algorithm operates by its parameters.  The
  \begin{figure}[H]
   \minipage{0.49\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{simulated_annealing_cooling_pt15_nn.jpg} 
-      \caption*{Permanent Visa Applicant NN Learning Curve} 
+      \caption*{Simulated Annealing NN Success Rate vs. Iterations w/ .15 Cooling} 
    \endminipage\hfill
    \minipage{0.49\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{simulated_annealing_cooling_pt35_nn.jpg} 
-      \caption*{Permanent Visa Applicant NN Learning Curve} 
+      \caption*{Simulated Annealing NN Success Rate vs. Iterations w/ .35 Cooling} 
    \endminipage\hfill
 \end{figure}
 
  \begin{figure}[H]
   \minipage{0.49\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{simulated_annealing_cooling_pt7_nn.jpg} 
-      \caption*{Permanent Visa Applicant NN Learning Curve} 
+      \caption*{Simulated Annealing NN Success Rate vs. Iterations w/ .7 Cooling} 
    \endminipage\hfill
    \minipage{0.49\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{simulated_annealing_cooling_pt7_nn_time.jpg} 
-      \caption*{Permanent Visa Applicant NN Learning Curve} 
+      \caption*{Simulated Annealing NN Training Time w/ .7 Cooling} 
    \endminipage\hfill
 \end{figure}
 
@@ -156,22 +156,22 @@ generally allowed are mutation (changing random parts of the solution), crossove
   \begin{figure}[H]
   \minipage{0.49\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{genetic_10_mate,_10_mutate_nn.jpg} 
-      \caption*{Permanent Visa Applicant NN Learning Curve} 
+      \caption*{Genetic Algorithm Success Rate v. Iterations w/ 10 Mate, 10 Mutate,  50 population} 
    \endminipage\hfill
    \minipage{0.49\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{genetic_10_mate,_20_mutate_nn.jpg} 
-      \caption*{Permanent Visa Applicant NN Learning Curve} 
+      \caption*{Genetic Algorithm Success Rate v. Iterations w/ 10 Mate, 20 Mutate,  50 population} 
    \endminipage\hfill
 \end{figure}
 
  \begin{figure}[H]
   \minipage{0.49\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{genetic_20_mate,_10_mutate_nn.jpg} 
-      \caption*{Permanent Visa Applicant NN Learning Curve} 
+      \caption*{Genetic Algorithm Success Rate v. Iterations w/ 20 Mate, 10 Mutate,  50 population} 
    \endminipage\hfill
    \minipage{0.49\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{genetic_20_mate,_20_mutate_nn.jpg} 
-      \caption*{Permanent Visa Applicant NN Learning Curve} 
+      \caption*{Genetic Algorithm Success Rate v. Iterations w/ 20 Mate, 20 Mutate, 50 population} 
    \endminipage\hfill
 \end{figure}
 
@@ -190,11 +190,11 @@ calculations from iteration to iteration is more or less the same.
  \begin{figure}[H]
   \minipage{0.49\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{genetic_10_mate,_10_mutate_nn_time.jpg} 
-      \caption*{Permanent Visa Applicant NN Learning Curve} 
+      \caption*{Genetic Algorithm Training Time w/ 10 Mate, 10 Mutate, 50 population} 
    \endminipage\hfill
    \minipage{0.49\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{genetic_20_mate,_20_mutate_nn_time.jpg} 
-      \caption*{Permanent Visa Applicant NN Learning Curve} 
+      \caption*{Genetic Algorithm Training Time w/ 20 Mate, 20 Mutate, 50 population} 
    \endminipage\hfill
 \end{figure}
 
@@ -215,11 +215,15 @@ For this part of the assignment, three different optimization problems are
 examined: continous peaks, the traveling salesman, and flip flop.  The three
 optimization techniques from above are used (randomized hill climbing, simulated annealing, and genetic algorithms) 
 as well as another algorithm, MIMIC.
-
+\\ \\
 MIMIC, similar to the other algorithms, works to find the globally optimal 
 solution.  Unlike the other algorithms, however, it retains knowledge of previous 
 iterations and uses this information to more efficiently find better solutions.  MIMIC is particularly strong in regards to 
 problems that maintain patterns between subsets of thier parameters.
+\\ \\
+Below, we apply each of the optimization algorithms to each of the three optimization 
+problems.  We then look at how each optimization problem's characteristics may 
+favor one algorithm to another, as well as evaluate the efficiency of each.
 
 \subsection*{1) Continous Peaks}  
 \subsubsection*{Overview}
@@ -231,17 +235,59 @@ local peaks to perform well.
  \begin{figure}[H]
   \minipage{0.32\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{continous_peaks_fitness.jpg} 
-      \caption*{Permanent Visa Applicant NN Learning Curve} 
+      \caption*{Fitness vs # Iterations of 4 Optimization Strategies} 
    \endminipage\hfill
    \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{continous_peaks_fitness_evals.jpg} 
-      \caption*{Permanent Visa Applicant NN Learning Curve} 
+      \includegraphics[width=1\textwidth,keepaspectratio]{continous_peaks_evals.jpg} 
+      \caption*{Function Evals vs # Iterations of 4 Optimization Strategies} 
    \endminipage\hfill
    \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{continous_peaks_fitness_time.jpg} 
-      \caption*{Permanent Visa Applicant NN Learning Curve} 
+      \includegraphics[width=1\textwidth,keepaspectratio]{continous_peaks_time.jpg} 
+      \caption*{Training Time vs # Iterations of 4 Optimization Strategies} 
    \endminipage\hfill
 \end{figure}
+
+In order to ensure accuracy and a fair distribution, 5 different trials were 
+used of 5000 iterations each.  Each optimization strategy was also allowed to evaluate over 
+a parameter range in an attempt to find the optimal parameters for that 
+strategy.
+\\ \\
+For randomized hill climbing, there were no other parameters to tune.  The 
+algoritm was simply run for various iterations (multiples of 10) in a set of 5 
+trials.  In terms of fitness function performance, it actually performed quite 
+well and required no significant function evaluations. It was similarly fast to train due to the extreme simplicity 
+of the algorithm itself. 
+\\ \\
+Simulated annealing was slightly more complex, where cooling efficients of 0.15, 
+0.35, 0.55, 0.75, and 0.95 were used.  It was found that the efficient 0.15 was 
+the most effective here.  This low cooling rate was effective because it helped to slowly overcome any local
+ maximums but not work too aggressively to skip any optimal solution.  By 
+ iteration 3k, Simulated Annealing took a clear lead over the other solutions in 
+ terms of fitness performance.  Similar to randomized hill climbing, its number 
+ of function evals and training time was extremely low.
+\\ \\
+The genetic algorithm employed used a population size of 100 and various 
+configurations of 50, 30, and 10 mutations/mate combinations.  The graph above 
+depicts the succes rates when using 30 mutation and 30 matings.  As can be seen, 
+it's performance was rather simular to randomized hill climbing--which roughly 
+makes sense due to the random nature of both algorithms.  The number of function 
+evaluations was higher for the genetic algorithm due to the amount of attempts 
+at mutating and mating--whereas the training time was practically irrelevant.
+\\ \\
+Mimic's parameters were set to 100 samples and a 'to-keep' number of 50.  
+The threshold for the discrete dependency tree mimic used was sampled from the 
+range 0.1, 0.3, 0.5, 0.7, and 0.9.  While MIMIC started off relatively string in 
+terms of fitness performance, it thrashed around the 60-80 range for the most 
+part.  I had suspected that MIMIC would have difficulty on the continous peaks 
+due to the large amount of randomness in the data.  The number of functional 
+evaluations required for MIMIC was significnatly higher than the other 
+algorithms, as was its training time.  This was primarily due to the fact that 
+MIMIC is signifciantly more complex to operate than the other algorithms.
+\\ \\
+Overall, Simulated Annealing proved to be the best strategy for the continous 
+peaks problem, largely due to it's ability to handle large amounts of randomness 
+well and to avoid getting caught in such local maximums.  It's low training time 
+and number of function evaluations further aided its case.
 
 
 \subsection*{2) Traveling Salesman}  
@@ -252,6 +298,68 @@ interesting  due to it's real-world implications, such as route planing for
 delivery trucks and everyday errands--it also has no known polynomial time 
 solution!
 
+ \begin{figure}[H]
+  \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{traveling_salesman_fitness.jpg} 
+      \caption*{Fitness vs # Iterations of 4 Optimization Strategies} 
+   \endminipage\hfill
+   \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{traveling_salesman_evals.jpg} 
+      \caption*{Function Evals vs # Iterations of 4 Optimization Strategies} 
+   \endminipage\hfill
+   \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{traveling_salesman_time.jpg} 
+      \caption*{Training Time vs # Iterations of 4 Optimization Strategies} 
+   \endminipage\hfill
+\end{figure}
+
+For this optimization problem, in order to ensure accuracy and a fair distribution, 5 different trials were 
+used of 3000 iterations each.  50 Random points were generated and used as the destinations for our faux salesman.
+Each optimization strategy was also allowed to evaluate over 
+a parameter range in an attempt to find the optimal parameters for that 
+strategy.
+\\ \\
+For randomized hill climbing, there were no other parameters to tune.  The 
+algoritm was simply run for various iterations in a set of 5 
+trials.  In terms of fitness function performance, it performed mediocrely and required no significant function evaluations. It was similarly fast to train due to the extreme simplicity 
+of the algorithm itself.  The reason for the stragegy's mediocrity can easily be 
+attributed to the fact that random guessing does not perform well when trying to 
+develop the most optimal path due to the large number of possibilities and low 
+number of optimums.
+\\ \\
+Similar to the last problem, simulated annealing was slightly more complex, where cooling efficients of 0.15, 
+0.35, 0.55, 0.75, and 0.95 were used.  It was found that the efficient 0.55 was 
+the most effective here.  Interestingly enough, the simulated annealing approach very closely tracked the randomized hill climbing results. 
+ This was pretty cool, and clearly demonstrated the effect of the problem on the 
+ ability of a solution to perform well.  As both were prone to picking random 
+ solutions and making marginal improvements on those solutions, they shared the 
+ same strenghts and weaknesses for trying to plan an optimal path.  Similar to randomized hill climbing, simulated annealings' number 
+ of function evals and training time was extremely low.
+\\ \\
+The genetic algorithm employed used a population size of 100 and various 
+configurations of 50, 30, and 10 mutations/mate combinations.  The graph above 
+depicts the succes rates when using 30 mutation and 30 matings.  As can be seen, 
+it's performance was exceeding better than the other algorithms.  The mutations and matings were able to successfully 
+identify the most optimal paths and plan extremelly well for the hypothetical salesman.  This can be attributed to 
+the fact that traveling salesman can be broken into various subjourneys that the 
+genetic algorithm can learn and then attempt to combine for an optimal journey.  The number of function  evaluations was higher for the genetic algorithm due to the amount of attempts 
+at mutating and mating--whereas the training time was practically irrelevant.  
+The genetic algorithm was the clear winner in terms of performance for the TSP.
+\\ \\
+Mimic's parameters were set to 100 samples and a 'to-keep' number of 50.  
+The threshold for the discrete dependency tree mimic used was sampled from the 
+range 0.1, 0.3, 0.5, 0.7, and 0.9.  MIMIC performed rather poorly on this problem.  This was very likely due to the fact that pattern finding is of almost no use in this 
+problem domain and that previous knowledge also is mostly unnecessary when trying to find optimal paths.  The number of functional 
+evaluations required for MIMIC was also significnatly higher than the other 
+algorithms, as was its training time.  This was primarily due to the fact that 
+MIMIC is signifciantly more complex to operate than the other algorithms.  
+Overall, MIMIC was a very poor candidate for the traveling salesman problem.
+\\ \\
+Overall, the genetic algorithm proved to be the best strategy for the traveling salesman problem.  It's ability to combine 
+sub-journeys and paths into an optimal route was strongly advantageous.  The results showed the strong benefit of mutations on this 
+problem.  Similarly, it's speed an relative simplicity were also very 
+beneficial.
+
 \subsection*{3) Flip flop}  
 \subsubsection*{Overview}
 The flipflop problem is another common optimization, where one attempts to 
@@ -259,6 +367,21 @@ count the number of bits that alternate with its next neighbor in a bit string.
 This problem is particularly interesting because, since the strings are 
 randomized, there is significant potential for a large number of local mimimum 
 and maximums.
+
+ \begin{figure}[H]
+  \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{flip_flop_fitness.jpg} 
+      \caption*{Fitness vs # Iterations of 4 Optimization Strategies} 
+   \endminipage\hfill
+   \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{flip_flop_evals.jpg} 
+      \caption*{Function Evals vs # Iterations of 4 Optimization Strategies} 
+   \endminipage\hfill
+   \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{flip_flop_time.jpg} 
+      \caption*{Training Time vs # Iterations of 4 Optimization Strategies} 
+   \endminipage\hfill
+\end{figure}
 
 \subsection*{ Conclusion}  
 asdf

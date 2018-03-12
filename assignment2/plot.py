@@ -86,7 +86,7 @@ def get_df(path):
 def plot_peaks(title):
     valLabels = []
 
-    df1 = get_df('CONTPEAKS/CONTPEAKS_RHC_1_LOG.txt')
+    df1 = get_df('CONTPEAKS/CONTPEAKS_RHC_4_LOG.txt')
     valLabels.append((df1['fitness'], df1['time'], df1['fevals'], 'Randomized Hill Climbing'))
 
     df2 = get_df('CONTPEAKS/CONTPEAKS_SA0.15_1_LOG.txt')
@@ -98,8 +98,60 @@ def plot_peaks(title):
     df4 = get_df('CONTPEAKS/CONTPEAKS_MIMIC100_50_0.5_1_LOG.txt')
     valLabels.append((df4['fitness'], df4['time'], df4['fevals'], 'MIMIC'))
 
-    plot = plot_many_curves(df1['iterations'], valLabels, 0, title, 'Fitness Function')
-    plot.savefig('analysis/plots/' + title.replace(' ', '_').replace('.', 'pt').lower() + '.jpg')
+    plot = plot_many_curves(df1['iterations'], valLabels, 0, title + ' Fitness', 'Fitness Function')
+    plot.savefig('analysis/plots/' + title.replace(' ', '_').replace('.', 'pt').lower() + '_fitness.jpg')
+
+    plot = plot_many_curves(df1['iterations'], valLabels, 1, title + ' Time', 'Training Time (s)')
+    plot.savefig('analysis/plots/' + title.replace(' ', '_').replace('.', 'pt').lower() + '_time.jpg')
+
+    plot = plot_many_curves(df1['iterations'], valLabels, 2, title + ' Evals', 'Function Evals')
+    plot.savefig('analysis/plots/' + title.replace(' ', '_').replace('.', 'pt').lower() + '_evals.jpg')
+
+    plot.close()
+
+def plot_tsp(title):
+    valLabels = []
+
+    df1 = get_df('TSP/TSP_RHC_1_LOG.txt')
+    valLabels.append((df1['fitness'], df1['time'], df1['fevals'], 'Randomized Hill Climbing'))
+
+    df2 = get_df('TSP/TSP_SA0.55_1_LOG.txt')
+    valLabels.append((df2['fitness'], df2['time'], df2['fevals'], 'Simulated Annealing'))
+
+    df3 = get_df('TSP/TSP_GA100_30_30_1_LOG.txt')
+    valLabels.append((df3['fitness'], df3['time'], df3['fevals'], 'Genetic Algorithm'))
+
+    df4 = get_df('TSP/TSP_MIMIC100_50_0.5_1_LOG.txt')
+    valLabels.append((df4['fitness'], df4['time'], df4['fevals'], 'MIMIC'))
+
+    plot = plot_many_curves(df1['iterations'], valLabels, 0, title + ' Fitness', 'Fitness Function')
+    plot.savefig('analysis/plots/' + title.replace(' ', '_').replace('.', 'pt').lower() + '_fitness.jpg')
+
+    plot = plot_many_curves(df1['iterations'], valLabels, 1, title + ' Time', 'Training Time (s)')
+    plot.savefig('analysis/plots/' + title.replace(' ', '_').replace('.', 'pt').lower() + '_time.jpg')
+
+    plot = plot_many_curves(df1['iterations'], valLabels, 2, title + ' Evals', 'Function Evals')
+    plot.savefig('analysis/plots/' + title.replace(' ', '_').replace('.', 'pt').lower() + '_evals.jpg')
+
+    plot.close()
+
+def plot_flipflop(title):
+    valLabels = []
+
+    df1 = get_df('FLIPFLOP/FLIPFLOP_RHC_1_LOG.txt')
+    valLabels.append((df1['fitness'], df1['time'], df1['fevals'], 'Randomized Hill Climbing'))
+
+    df2 = get_df('FLIPFLOP/FLIPFLOP_SA0.15_1_LOG.txt')
+    valLabels.append((df2['fitness'], df2['time'], df2['fevals'], 'Simulated Annealing'))
+
+    df3 = get_df('FLIPFLOP/FLIPFLOP_GA100_30_30_1_LOG.txt')
+    valLabels.append((df3['fitness'], df3['time'], df3['fevals'], 'Genetic Algorithm'))
+
+    df4 = get_df('FLIPFLOP/FLIPFLOP_MIMIC100_50_0.5_1_LOG.txt')
+    valLabels.append((df4['fitness'], df4['time'], df4['fevals'], 'MIMIC'))
+
+    plot = plot_many_curves(df1['iterations'], valLabels, 0, title + ' Fitness', 'Fitness Function')
+    plot.savefig('analysis/plots/' + title.replace(' ', '_').replace('.', 'pt').lower() + '_fitness.jpg')
 
     plot = plot_many_curves(df1['iterations'], valLabels, 1, title + ' Time', 'Training Time (s)')
     plot.savefig('analysis/plots/' + title.replace(' ', '_').replace('.', 'pt').lower() + '_time.jpg')
@@ -124,7 +176,9 @@ plot('NN_OUTPUT/GA_50_10_20_LOG.txt', 'Genetic 10 Mate, 20 Mutate NN')
 plot('NN_OUTPUT/GA_50_20_10_LOG.txt', 'Genetic 20 Mate, 10 Mutate NN')
 plot('NN_OUTPUT/GA_50_20_20_LOG.txt', 'Genetic 20 Mate, 20 Mutate NN')
 
-plot_peaks('Continous Peaks Fitness')
+plot_peaks('Continous Peaks')
+plot_tsp('Traveling Salesman')
+plot_flipflop('Flip Flop')
 
 
 # iteration,MSE_trg,MSE_val,MSE_tst,acc_trg,acc_val,acc_tst,elapsed
