@@ -33,12 +33,15 @@ one output node, and about 500 iterations.
 For assignment 2, three other optimization strategies are employed to find 
 optimal weights: randomized hill climbing, simulated annealing, and genetic 
 algorithms.  The details of each are discussed in-depth further in this section 
-and an analysis is performed for each strategy to evaluate it's results.
+and an analysis is performed for each strategy to evaluate its results.  It is 
+important to note that this network does tend to converge quite quickly due to  
+its size and consistant distribution.
 \\ \\ 
 I primarily chose this problem domain because, as someone who has worked 
 with a large number of first-generation visa holders and immigrants, I am 
 extremely interested in building tools to help others to achieve the same.  At the end of the day, the goal is it to try to determine the application result 
 before time, money, and other resources are spent.
+\\ \\
 
 \subsection*{1) Backpropogation (Assignment 1)}  
 \subsubsection*{Overview}
@@ -504,7 +507,29 @@ algorithms, as was its training time, but its performance also far outweighed th
 Overall, MIMIC proved incredibly succesful at the flip flop problem.
 
 \subsection*{ Conclusion}  
-asdf
-
+Above, four different machine learning optimization strategies were applied to 3 
+different optimization problems.  Interestingly enough, each optimization 
+problem had its own inherit properties that proved more suitable for solving for 
+differnet optimization strategies. 
+\\ \\
+The continous peaks problem, with its high amount of randomness and lack of 
+predictable behaviour, proved to be optimized exceptionally well by simulated 
+annealing.  Simulated annealings ability to randomly sample nearby solutions 
+with effective cooling thresholds were very helpful for this problem in that it avoided getting trapped in local 
+optimums but reduced the change of skipping over more significant nearby optimums.
+\\ \\
+The traveling salesman problem, which, in my opinion, proved to be the most 
+interesting, was most aptly solved by a genetic algorithm.  Travelling salesman 
+required various subjourneys to be optimized and combined to find an optimal 
+path about various points.  Whereas random and pattern solutions failed badly, 
+the genetic algorithm was able to mutate and combine to form optimal solutions 
+quite well.
+\\ \\
+The final problem, flip flop, had an input that was highly repetetive and tended to follow 
+a patterned distribution.  In such, optimization strategies that sought to solve 
+based on subgroups of parameters or previous knowledge performed rather well, 
+whereas strategies that were left to chance or random combinations performed 
+poorly.  MIMIC, with it's ability to solve patterns and repetition well, as well 
+as its ability to retain prior experiences, proved to be far and away the most optimal solution for this problem. 
 
 \end{document}
