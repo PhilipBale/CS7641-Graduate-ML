@@ -2,7 +2,7 @@
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
-from helpers import load_data, nn_layers, nn_reg, nn_iter, cluster_acc, myGMM, clusters, dims
+from helpers import load_data, nn_layers, nn_reg, nn_iter, cluster_acc, myGMM, clusters, dims, run_clustering
 from matplotlib import cm
 from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import GridSearchCV
@@ -28,9 +28,6 @@ pca.fit(housing_x)
 tmp = pd.Series(data = pca.explained_variance_,index = range(1,13))
 tmp.to_csv(out+'housing scree.csv')
 
-
-#3 TODO
-
 #4
 
 grid ={'pca__n_components':dims,'NN__alpha':nn_reg,'NN__hidden_layer_sizes':nn_layers}
@@ -54,23 +51,14 @@ gs.fit(housing_x,housing_y)
 tmp = pd.DataFrame(gs.cv_results_)
 tmp.to_csv(out+'housing dim red.csv')
 
-# #%% data for 3
-# # Set this from chart 2 and dump, use clustering script to finish up
-# dim = 5
-# pca = PCA(n_components=dim,random_state=10)
+#%% data for #3
+# Set this from chart 2 and dump, use clustering script to finish up
+dim = 7
+pca = PCA(n_components=dim,random_state=10)
+perm_x2 = pca.fit_transform(perm_x)
 
-# perm_x2 = pca.fit_transform(perm_x)
-# perm2 = pd.DataFrame(np.hstack((perm_x2,np.atleast_2d(perm_y).T)))
-# cols = list(range(perm2.shape[1]))
-# cols[-1] = 'Class'
-# perm2.columns = cols
-# perm2.to_hdf(out+'datasets.hdf','perm',complib='blosc',complevel=9)
+dim = 12
+pca = PCA(n_components=dim,random_state=10)
+housing_x2 = pca.fit_transform(housing_x)
 
-# dim = 60
-# pca = PCA(n_components=dim,random_state=10)
-# housing_x2 = pca.fit_transform(housing_x)
-# housing2 = pd.DataFrame(np.hstack((housing_x2,np.atleast_2d(housing_y).T)))
-# cols = list(range(housing2.shape[1]))
-# cols[-1] = 'Class'
-# housing2.columns = cols
-# housing2.to_hdf(out+'datasets.hdf','housing',complib='blosc',complevel=9)
+run_clustering(out, perm_x2, perm_y, housing_x2, housing_y)
