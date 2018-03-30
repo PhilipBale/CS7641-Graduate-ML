@@ -51,7 +51,7 @@ gs.fit(housing_x,housing_y)
 tmp = pd.DataFrame(gs.cv_results_)
 tmp.to_csv(out+'housing dim red.csv')
 
-#%% data for #3
+# 3
 # Set this from chart 2 and dump, use clustering script to finish up
 dim = 7
 pca = PCA(n_components=dim,random_state=10)
