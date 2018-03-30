@@ -16,6 +16,9 @@ nn_layers = [(100,), (50,), (50, 50)]
 nn_reg = [10**-x for x in range(1,5)]
 nn_iter = 1500
 
+clusters =  [2,5,10,15,20,25,30,35,40, 50]
+dims = [2,5,10,15,20,25,30,35,40,45,50,55,60]
+
 def load_data():
   np.random.seed(0)
 

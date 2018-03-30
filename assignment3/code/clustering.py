@@ -7,7 +7,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.cluster import KMeans as kmeans
 from sklearn.mixture import GaussianMixture as GMM
 from collections import defaultdict
-from helpers import load_data, nn_layers, nn_reg, nn_iter, cluster_acc, myGMM
+from helpers import load_data, nn_layers, nn_reg, nn_iter, cluster_acc, myGMM, clusters
 from sklearn.metrics import adjusted_mutual_info_score as ami
 from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import GridSearchCV
@@ -15,9 +15,6 @@ import sys
 
 out = './results/clustering/'
 perm_x, perm_y, housing_x, housing_y = load_data() # perm, housing
-
-clusters =  [2,5,10,15,20,25,30,35,40, 50]
-
 
 SSE = defaultdict(dict)
 ll = defaultdict(dict)
@@ -66,7 +63,7 @@ adjMI.ix[:,:,'housing'].to_csv(out+'Housing adjMI.csv')
 adjMI.ix[:,:,'perm'].to_csv(out+'Perm adjMI.csv')
 
 
-#%% NN fit data (2,3)
+#5 in assingment is below
 
 print(1)
 
