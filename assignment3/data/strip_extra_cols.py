@@ -98,6 +98,7 @@ for bracket in range(0, 15):
 df = df.apply(lambda x: pandas.to_numeric(x.astype(str).str.replace(',',''), errors='coerce'))
 
 df = df.dropna()  
+df = df.drop('SalePrice', 1)
 # sample = df.sample(n=10000)
 
 # Shuffle
