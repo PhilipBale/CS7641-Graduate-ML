@@ -19,13 +19,13 @@ perm_x, perm_y, housing_x, housing_y = load_data() # perm, housing
 
 pca = PCA(random_state=5)
 pca.fit(perm_x)
-tmp = pd.Series(data = pca.explained_variance_,index = range(1,501))
+tmp = pd.Series(data = pca.explained_variance_,index = range(1,8))
 tmp.to_csv(out+'perm scree.csv')
 
 
 pca = PCA(random_state=5)
 pca.fit(housing_x)
-tmp = pd.Series(data = pca.explained_variance_,index = range(1,65))
+tmp = pd.Series(data = pca.explained_variance_,index = range(1,13))
 tmp.to_csv(out+'housing scree.csv')
 
 
@@ -33,7 +33,7 @@ tmp.to_csv(out+'housing scree.csv')
 
 #4
 
-grid ={'pca__n_components':dims,'NN__alpha':nn_reg,'NN__hidden_layer_sizes':nn_arch}
+grid ={'pca__n_components':dims,'NN__alpha':nn_reg,'NN__hidden_layer_sizes':nn_layers}
 pca = PCA(random_state=5)       
 mlp = MLPClassifier(activation='relu',max_iter=nn_iter,early_stopping=True,random_state=5)
 pipe = Pipeline([('pca',pca),('NN',mlp)])
@@ -44,7 +44,7 @@ tmp = pd.DataFrame(gs.cv_results_)
 tmp.to_csv(out+'perm dim red.csv')
 
 
-grid ={'pca__n_components':dims,'NN__alpha':nn_reg,'NN__hidden_layer_sizes':nn_arch}
+grid ={'pca__n_components':dims,'NN__alpha':nn_reg,'NN__hidden_layer_sizes':nn_layers}
 pca = PCA(random_state=5)       
 mlp = MLPClassifier(activation='relu',max_iter=nn_iter,early_stopping=True,random_state=5)
 pipe = Pipeline([('pca',pca),('NN',mlp)])
