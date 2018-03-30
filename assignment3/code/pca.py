@@ -1,4 +1,4 @@
-import pandas as pd
+
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
@@ -7,6 +7,8 @@ from matplotlib import cm
 from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.decomposition import PCA
+
+import pandas as pd
 
 out = './results/pca/'
 
