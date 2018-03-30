@@ -8,801 +8,528 @@
 \usepackage{subcaption}
 \usepackage{float} 
 \usepackage{flafter}
-\graphicspath{ {../images/} }
+\graphicspath{ {./plots/} }
 \usepackage{adjustbox}
 
 
 \newcommand{\cent}{\textcent \hspace{4pt}}
-\title{CS 7641 Machine Learning \\ Assignment 1}
-\date{Due February 4th, 2018 11:59pm}
+\title{CS 7641 Machine Learning \\ Assignment 2}
+\date{Due Sunday March 11th, 2018 11:59pm}
 \author{Philip Bale \\ pbale3}
 
 \begin{document}
 
 \maketitle
 
-\section*{Classification Problems}
-\subsection*{1) US Permanent Visa Applications}  
-\subsubsection*{Overview}
-The first classification problem revolves around classifying whether or not a 
-person's US permanent visa application will be accepted or denied based on the parameters of 
-their application.  Among the features used in the classifcation are:
-\begin{itemize}
-  \item Job features: Industry code, job class, wage rate, wage type
-  \item Geographic features: Country of citizen and employer location
-\end{itemize}
-The classes observed for this dataset are simply 'approved' and 'denied'.  The 
-dataset contains 374365 total samples.
-\subsubsection*{Why is the dataset interesting?}
-This dataset is interesting due to its potential to aid in the visa application 
-process from a cost and time savings potential.  It could also enable confidence in those 
-interested in applying for a US permanent visa but doubting their chances of 
-acceptance.  At the end of the day, the goal is it to try to determine the application result 
-before time, money, and other resources are spent.  As someone who has worked 
+\section*{Part 1: Neural Network Optimization}
+\subsection*{ Introduction}  
+Part 1 of the assignment surrounds using randomized optimization to find the 
+best possible weights for a specific neural network.  In assignment 1, backpropogation 
+was used to find optimal parameters for a neural network.  This neural network 
+took in various input features for US permanent visa applicants and then 
+attempted to predict the outcome of an application.  After various tests, I found the optimal parameters of: 6-node input layer, one hidden layer with 100 nodes, 
+one output node, and about 500 iterations.
+\\ \\
+For assignment 2, three other optimization strategies are employed to find 
+optimal weights: randomized hill climbing, simulated annealing, and genetic 
+algorithms.  The details of each are discussed in-depth further in this section 
+and an analysis is performed for each strategy to evaluate its results.  It is 
+important to note that this network does tend to converge quite quickly due to  
+its size and consistant distribution.
+\\ \\ 
+I primarily chose this problem domain because, as someone who has worked 
 with a large number of first-generation visa holders and immigrants, I am 
-extremely interested in building tools to help others to achieve the same.
+extremely interested in building tools to help others to achieve the same.  At the end of the day, the goal is it to try to determine the application result 
+before time, money, and other resources are spent.
 \\ \\
-From a machine learning perspective, the dataset is incredibly interesting due 
-to its wide variety of features and the variety of values those features can take. 
- An immense number of job types, wage rates, and citizenships alone create an 
- extremely diverse dataset.  Additionally, the number of samples available 
- provide a comprehensive picture of historical data, lending towards greater 
- cofidence in training and testing rates.
 
-\subsection*{2) Home Sale Price Predictions}  
+\subsection*{1) Backpropogation (Assignment 1)}  
 \subsubsection*{Overview}
-The second classification problem revolves around classifying a home's price 
-bracket based upon the various characteristics of the home.  Among the features 
-used in the classification are :
-\begin{itemize}
-  \item Subjective measurements: Exterior condition, house style, overall quality rating, and overall condition
-  \item Objective measurements: Type of dwelling, building type, lot size, neighborhood, year built, and year sold
-\end{itemize}
-After an initial review of the dataset, the classes were defined as pricing 
-brackets divided into 100k groups.  I.e: 0-100k, 100k-200k, 200k-300k, etc.  The 
-dataset contains 1451 samples.  An additional dataset containing another 1400 
-testing samples exists but was not used as it contains unclassified sale 
-prices.  It will, however, prove useful for unsupervised learning. \subsubsection*{Why is the dataset interesting?}
-This dataset is interesting for two primary reasons: real-world applicability 
-and participating in a Kaggle challenge.  First, modeling home prices is both a 
-difficult and lucrative task.  If one can succesfully model home sale prices on 
-large sets of data, he/she can make large amounts of money investing in real 
-estate when he/she detects outliers in listed price vs. what it is expected to sell for.  
-This applies to flipping, investing, and remodeling.  Second, the dataset is 
-part of an ongoing Kaggle competition that does not have a winning solution yet. 
- By taking part of the competition, the dataset presents the opportunity to work 
- towards a winning solution and advance ones algorithms over time. 
- \\ \\
- Houses can have a very large amount of features--with a large amount of variety 
- in the individual features.  Similarly, housing is prone to personal taste and 
- frequent need for upgrades/modernization.  In such, I believe price estimation is an 
- excellent problem, full of depth and complexity, that is suitable for a machine 
- learning approach.
+The first weight-finding algorithm used was backpropogation.  Backpropogation works by essentially calculating 
+the error at the end of a network, and then working backwards to minimize that error over various iterations. 
+ An error (or loss) function is effectively minimized over time using this backpropogation technique.   As discussed in assignment 1, the permanent 
+ visa is rather large and robust.  It is quickly learnable by various different 
+ learners and in such backpropogation found significant success.
  
-  \section*{General Data Processing}
-  The datasets I used were both relatively clean to begin with.  One small 
-  problem, however, was that a lot of my features on both datasets were 
-  text-based.  To transform the features into numeric values suitable for the 
-  machine learning algorithms, I used a label encoder built into ScikitLearn.
-  \\ \\
-  I also did a small amount of preprocessing of the data to make it more 
-  suitable for classification.  I dropped all unnecessary columns to help 
-  speed up with data processing in general--which proved immensely helpful when 
-  dealing with the more computationall intensive algorithms.  In the 
-  case of home prices, I precalculated the brackets based on the 'sale price' data label.  
-  In the case of visa applications, I pregrouped the case outcome so that 
-  results such as 'certified' and 'certified withdrawn' are both concerned as 
-  'approved' conditions whereas 'denied', 'invalidated', and 'rejected' all 
-  resolve to 'denied'.
-  
- \section*{#1: Decision Trees}
- A decision tree classifier was the first algorithm applied to the datasets.  
- Various values of max\_depth were tested as a means of pruning unnecessary 
- leaves.  Similarly, a grid search was used to test whether a 'gini' or 
- 'entropy' criterion was more effective.
-
-\subsection*{US Permanent Visa Data}
-\begin{figure}[H]
-\minipage{0.69\textwidth}
-\begin{tabular}{ | c | c  | c | c | c | c | c |} 
-\hline
-\textbf{Depth} & \textbf{Criterion} & \textbf{Tree Size} & \textbf{Train \%} & \textbf{Train Time} & \textbf{Test \%} & \textbf{Test Time}   \\
-\hline
-1 & gini & 3 & 0.7657 & 0.1212 & 0.7680 & 0.0010 \\ \hline
-3 & gini & 15 & 0.6775 & 0.1417 & 0.6749 & 0.0009 \\ \hline
-6 & entropy & 105 & 0.7121 & 0.2605 & 0.6924 & 0.0011 \\ \hline
-10 & gini & 889 & 0.7584 & 0.3192 & 0.7072 & 0.0011 \\ \hline
-15 & gini & 3013 & 0.8628 & 0.4199 & 0.7582 & 0.0014 \\ \hline
-20 & gini & 4751 & 0.9299 & 0.4517 & 0.7917 & 0.0010 \\ \hline
-25 & gini & 5349 & 0.9545 & 0.5284 & 0.8032 & 0.0010 \\ \hline
-35 & entropy & 5349 & 0.9574 & 0.5116 & 0.8081 & 0.0010 \\ \hline
-\end{tabular}
-\caption*{Results at multiple depths for best criterion via grid search}
-\endminipage\hfill
-\minipage{0.29\textwidth}
-\begin{flushright}
-\begin{tabular}{ | c | c | c  | } 
-\hline
- & Accepted & Denied  \\
-\hline
-Accepted & 96 & 135 \\ \hline
-Denied & 217 & 1376 \\ \hline
-\end{tabular}
-\caption*{Test Data Confusion matrix}
-\end{flushright}
-\endminipage\hfill
-
-\end{figure}
-
-\begin{figure}[H]
-  \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{1_curve_dtree3.png} 
-      \caption*{Learning Curve for max\_depth = 3} 
-   \endminipage\hfill
-   \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{1_curve_dtree10.png} 
-      \caption*{Learning Curve for max\_depth = 10} 
-   \endminipage\hfill
-   \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{1_curve_dtree20.png} 
-      \caption*{Learning Curve for max\_depth = 20} 
-   \endminipage\hfill
-\end{figure}
-
-\subsection*{Housing Prices Data}
-\begin{figure}[H]
-\minipage{0.69\textwidth}
-\begin{tabular}{ | c | c  | c | c | c | c | c |} 
-\hline
-\textbf{Depth} & \textbf{Criterion} & \textbf{TreeSize} & \textbf{Train \%} & \textbf{Train Time} & \textbf{Test \%} & \textbf{Test Time}   \\
-\hline
-1 & gini & 3 & 0.0912 & 0.0355 & 0.0890 & 0.0006 \\ \hline
-3 & entropy & 15 & 0.5816 & 0.0401 & 0.5890 & 0.0003 \\ \hline
-6 & entropy & 91 & 0.6820 & 0.0442 & 0.6438 & 0.0003 \\ \hline
-10 & gini & 331 & 0.8575 & 0.0566 & 0.6918 & 0.0006 \\ \hline
-15 & gini & 593 & 0.9854 & 0.0695 & 0.7603 & 0.0003 \\ \hline
-20 & gini & 643 & 1.0000 & 0.0559 & 0.7603 & 0.0007 \\ \hline
-25 & gini & 639 & 1.0000 & 0.0550 & 0.7603 & 0.0006 \\ \hline
-35 & gini & 639 & 1.0000 & 0.0570 & 0.7603 & 0.0006 \\ \hline
-
-\end{tabular}
-\caption*{Results at multiple depths for best criterion via grid search}
-\endminipage\hfill
-\minipage{0.29\textwidth}
-\begin{flushright}
-\begin{tabular}{ | c | c | c  | c | c | c | } 
-\hline
- & 0-1 & 1-2 & 2-3 & 3-4 & 4-5  \\
-\hline
-0-1 & 2 & 6 & 0 & 0 & 0 \\ \hline 
-1-2 & 4 & 87 & 7 & 0 & 0 \\ \hline 
-2-3 & 0 & 8 & 15 & 1 & 2 \\ \hline 
-3-4 & 0 & 0 & 6 & 3 & 0 \\ \hline 
-4-5 & 0 & 0 & 2 & 0 & 3 \\ \hline 
-\end{tabular}
-\caption*{  \ \ \  Test Data Confusion matrix  \\  \ \ \ \ \ \ (classes in 100ks)}
-\end{flushright}
-\endminipage\hfill
-
-\end{figure}
-
-\begin{figure}[H]
-  \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{2_curve_dtree3.png} 
-      \caption*{Learning Curve for max\_depth = 3} 
-   \endminipage\hfill
-   \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{2_curve_dtree10.png} 
-      \caption*{Learning Curve for max\_depth = 10} 
-   \endminipage\hfill
-   \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{2_curve_dtree20.png} 
-      \caption*{Learning Curve for max\_depth = 20} 
-   \endminipage\hfill
-\end{figure}
-
-\subsection*{Analysis for Decision Tree}
-Overall the classifier worked quite well for both datasets, but was extremely prone to 
-overfitting.  Examining the results of the decision tree classifier on the two 
-datasets provides numerous observations and basis for analysis, which are provided below.
-
-\subsubsection*{Effects of dataset size & cross validation:}
-Above, learning curves are provided for both datasets.  It is immediately 
-apparent that the size of the dataset greatly affects the performance of the 
-algorithm--though diminishes over time. This makes sense for a few different 
-reasons.  The more data we have to train on, the more likely it is that 
-we see the full spectrum of possible variability.  Similarly, the broader the 
-set of examples, the less biased our algorithm will be.  This is because if we 
-only train on a few data samples, then our algorithm can only make decisions 
-based on the features learned from the small, simple sample size--thus generating a bias (and therefore 
-underfitting).
-\\ \\ 
-The learning curves for both datasets clearly level out as 
-dataset size increases, demonstrating less variance with a more informed model.  
-Similarly, cross-validation was used to normalize the training 
-samples and smooth the learnign curve.  Without cross-validationg, the model was 
-prone to unrepresentative, biased dataset samples during training and, in-turn, testing.
-\subsubsection*{Tuning Parameters:}
-The two main paremeters tuned were maximum tree depth and the split criterion.  
-The split criterion measures the quality of a tree split.  Both 'gini' and 
-'entropy' were tested and evaluated using a gridsearch.  For the large majority 
-of trials, especially with larger and more complex trees, 'gini' was the more 
-effective splitting criterion--though the results for the two were nearly 
-identical.  If anything, Gini was more performant due to it's mathematical 
-simplicity over the entropy formula.
-\\ \\
-Tree depth provided to be a singificant influencer over the performance of our 
-model--especially for the housing dataset.  By allowing for a greater tree 
-depth, we allow for a more complex tree with more possible decisions.  A problem 
-emerges when the tree becomes too deep, however.  Instead of becoming more 
-robust, the tree begins to overfit with very specific branches for very specific 
-data items.  By analyzing the test \% vs. depth tradeoff, we can prune 
-unnecessary tree depths for the optimal tree size.  This allowed for both a 
-fast, accurate tree with a reasonable footprint.
-
-\subsubsection*{Performance:}
-Peformance varied for the two datasets across a few different domains.  In terms of runtime, housing prices took 
-longer than the visa data to train (about 10x)--though both were extremely fast on a powerful laptop.
-  This was mainly due to a larger dataset size.  As 
-the depth of the tree increased, the training time also took longer for both datasets due to the
-increased tree size and complexity(as can be seen from the table above).
-\\ \\ 
-In terms of accuracy, the visa data started out somewhat high but was able to gain about 4\% through 
-optimizing the depth of the tree.  This is due to the fact that features like 
-'salary' and 'job type' proved to heavily influence the approval process.  The 
-housing data, however, saw more greater improvements as depth increased.    As a 
-more diverse and variable dataset, the model was able to gain a lot of accuracy 
-as the tree grew because it could accommodate more specific feature branches.  While the test data
-started out at \textless 10\%, it was able to grow to approximately 76\%.   
-
-\begin{figure}[H]
-    \includegraphics[width=1.0\textwidth,keepaspectratio]{1_dtree.jpg} 
-    \caption*{SampleDecision Tree: Permanent Visa with max\_depth of 7} 
-\end{figure}
-
-\section*{#2) AdaBoost - Boosted Trees}
-A boosted decision tree classifer, Adaboost, was the second algorithm applied.  It used the same 
-base decision tree as the first model algorithm.  Based on the results of the 
-first model, we decided to stick with 'gini' as the criterion for faster 
-training.
-
-\subsection*{US Permanent Visa Data}
-\begin{figure}[H]
-\minipage{0.69\textwidth}
-\begin{tabular}{ | c | c  | c | c | c | c | c |} 
-\hline
-\textbf{Depth} & \textbf{Learning Rate} & \textbf{\# Estimators} & \textbf{Train \%} & \textbf{Train Time} & \textbf{Test \%} & \textbf{Test Time}   \\
-1 & 0.1 & 150 & 0.8705 & 24.1484 & 0.8662 & 0.0327 \\ \hline
-3 & 0.1 & 100 & 0.8770 & 39.7266 & 0.8679 & 0.0216 \\ \hline
-5 & 0.1 & 5 & 0.8761 & 53.8227 & 0.8706 & 0.0021 \\ \hline
-10 & 0.1 & 150 & 0.9775 & 82.2192 & 0.8745 & 0.0504 \\ \hline
-15 & 1 & 150 & 0.9775 & 94.5996 & 0.8701 & 0.0420 \\ \hline
-20 & 1 & 150 & 0.9775 & 107.0742 & 0.8618 & 0.0452 \\ \hline
-\hline
-\end{tabular}
-\caption*{Results at multiple depths for best learning rate/# estimators via grid search}
-\endminipage\hfill
-\end{figure}
-
-\begin{figure}[H]
-  \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{1_curve_boost3.png} 
-      \caption*{Learning Curve for max\_depth = 3} 
-   \endminipage\hfill
-   \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{1_curve_boost10.png} 
-      \caption*{Learning Curve for max\_depth = 10} 
-   \endminipage\hfill
-   \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{1_curve_boost20.png} 
-      \caption*{Learning Curve for max\_depth = 20} 
-   \endminipage\hfill
-\end{figure}
-
-\subsection*{Housing Prices Data}
-\begin{figure}[H]
-\minipage{0.69\textwidth}
-\begin{tabular}{ | c | c  | c | c | c | c | c |} 
-\hline
-\textbf{Depth} & \textbf{Learning Rate} & \textbf{\# Estimators} & \textbf{Train \%} & \textbf{Train Time} & \textbf{Test \%} & \textbf{Test Time}   \\
-\hline
-1 & 0.1 & 15 & 0.6881 & 6.9413 & 0.6918 & 0.0018 \\ \hline
-3 & 0.1 & 5 & 0.7724 & 8.2909 & 0.7945 & 0.0013 \\ \hline
-5 & 0.1 & 3 & 0.8291 & 10.8559 & 0.7740 & 0.0011 \\ \hline
-10 & 1 & 50 & 1.0000 & 13.6713 & 0.7945 & 0.0057 \\ \hline
-15 & 1 & 100 & 1.0000 & 8.7526 & 0.8014 & 0.0145 \\ \hline
-20 & 0.1 & 15 & 1.0000 & 0.6862 & 0.6781 & 0.0009 \\ \hline
-
-\end{tabular}
-\caption*{Results at multiple depths for best learning rate/# estimators via grid search}
-\endminipage\hfill
-
-\end{figure}
-
-\begin{figure}[H]
-  \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{2_curve_boost3.png} 
-      \caption*{Learning Curve for max\_depth = 3} 
-   \endminipage\hfill
-   \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{2_curve_boost10.png} 
-      \caption*{Learning Curve for max\_depth = 10} 
-   \endminipage\hfill
-   \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{2_curve_boost20.png} 
-      \caption*{Learning Curve for max\_depth = 20} 
-   \endminipage\hfill
-\end{figure}
-
-\subsection*{Analysis for AdaBoost Boosted Tree}
-The AdaBoost boosted tree relates significantly to the original decision tree 
-classifier.  It even uses the decision tree as its base classifier.  The main 
-difference, however, exists in the boosting.  As discussed in class, a boosted 
-tree is essentially an ensemble of weaker trees.  This ensemble works to 
-classify with greater accuracy than the original, simplified tree. 
-\\ \\
-Evaluating the performance in the chart and graphs above, it is quickly noticed that the AdaBoost tree works
-significantly better for both datasets.  For visa applications, it is approximately 7\% better in the optimal 
-configuration.  For housing prices, it i approximately 4\% better.  Training 
-times take signifcantly longer, which makes sense as the algorithm trains a much 
-larger, ensemble classifier.  For example, the larger permanent visa dataset took more than a minute to
- train for depths greater than 5--compared to less than a second for a normal 
- tree classifier.
- \\ \\
- In terms of parameters, learning rate, depth, and # of estimators were all 
- tuned using a gridsearch to find an optimal model.  As # of estimators 
- increased, optimal learning rate tended to increase too.  For a deeper tree, 
- fewer estimators were needed because the optimal learning rate was achieved 
- sooner.  The learning rate, which effects the rate of contribution for each 
- classifier, was optimized between 0.1 and 1, where the learning rate trended 
- higher for deeper trees.
- \\ \\
- While both types of trees peformed well on the datasets, AdaBoost performed 
- exceptionally well.  I believe this is due to the rich set of features and logically 
- classifiable outcomes.  The AdaBoosted tree still overclassified at 
- increased depth.  By pruning depth to approximately 10 to 15, we were able to achieve 
- an optimal tree.
- 
- \section*{#3) Neural Networks}
-A neural network (using ScikitLearn's multi-layer perceptron classifier) was the third algorithm applied.  
-A combination of different solvers, learning rates, and scaling was used to 
-observe the functionality of the networks in regards to our dataset.
-
-
-\begin{figure}[H]
+ \begin{figure}[H]
   \minipage{0.49\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{1_nn.png} 
-      \caption*{Permanent Visa Applicant NN Learning Curve} 
+      \includegraphics[width=1\textwidth,keepaspectratio]{backprop_nn_1.jpg} 
+      \caption*{Backprop NN Success Rate vs. Iterations} 
    \endminipage\hfill
    \minipage{0.49\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{2_nn.png} 
-      \caption*{Housing Price NN Learning Curve} 
+      \includegraphics[width=1\textwidth,keepaspectratio]{backprop_nn_time_1.jpg} 
+      \caption*{Backprop NN Training Time} 
    \endminipage\hfill
 \end{figure}
 
-\begin{figure}[H]
-  \minipage{1\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{1_nn_together.png} 
-      \caption*{Permanent Visa Applicant NN Configurations Loss Curve} 
+Right around 50 iterations, the network begins to converge at around an 80\% 
+successs rate.  Seeing as the training and test score track either rather 
+closely, it is apparent that the dataset is rather robust and consistent.  One 
+thing to note is that the training time scales linearly with the number of 
+iterations--which makes sense since the same amount of calculations with similar 
+complexity are performed on each iteration of backpropogation.  
+
+\subsection*{2) Randomized Hill Climbiing}  
+\subsubsection*{Overview}
+The second weight-finding algorithm used was randomized hill climbing.  
+Randomized hill climbing works by taking a random starting point and then 
+incrementally attempting to improve on that point.  In the context of a neural 
+network trying to find weights,  randomized hill climbing selects random weights 
+and then moves in a direction so as to try to find a better result for that 
+weight--akin to trying to move up an optimization 'success hill'.
+\\ \\ 
+One thing to 
+note is that we are using randomized hill climbing, not random restart hill 
+climbing.  In such, the algorithm is prone to getting caught in local optimizations, or local maximums. 
+
+
+ \begin{figure}[H]
+  \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{randomized_hill_climbing_nn.jpg} 
+      \caption*{Randomized Hill Climbing NN Success Rate vs. Iterations} 
    \endminipage\hfill
-   \minipage{1\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{2_nn_together.png} 
-      \caption*{Housing Price NN Configurations Loss Curve} 
+   \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{randomized_hill_climbing_nn_time.jpg} 
+      \caption*{Randomized Hill Climging NN Training Time} 
    \endminipage\hfill
 \end{figure}
 
-\begin{figure}[H]
-\minipage{0.69\textwidth}
-\begin{tabular}{ | c | c  | c | c | c | c | c |} 
-\hline
-\textbf{NN Config} & \textbf{Test Score} & \textbf{Loss} & \textbf{Train Time}   \\ 
-\hline
-constant learning-rate & 0.8642 & 0.3842 & 0.6121 \\ \hline
-sgd constant  learning-rate with momentum & 0.8663 & 0.3823 & 0.7120 \\ \hline
-sgd constant  learning-rate with Nesterov's momentum & 0.8668 & 0.3779 & 1.4836 \\ \hline
-sgd inv-scaling learning-rate & 0.8646 & 0.3905 & 0.2435 \\ \hline
-sgd inv-scaling with momentum & 0.8646 & 0.3842 & 0.3750 \\ \hline
-sgd inv-scaling with Nesterov's momentum & 0.8646 & 0.3848 & 0.2740 \\ \hline
-adam constant  learning-rate & 0.8677 & 0.3650 & 2.1166 \\ \hline
-\end{tabular}
-\caption*{Permanent Visa results for various NN configs}
-\endminipage\hfill
-\end{figure}
-
-\begin{figure}[H]
-\minipage{0.69\textwidth}
-\begin{tabular}{ | c | c  | c | c | c | c | c |} 
-\hline
-\textbf{NN Config} & \textbf{Test Score} & \textbf{Loss} & \textbf{Train Time}   \\ 
-\hline
-sgd constant learning-rate & 0.7664 & 0.6301 & 0.4272  \\ \hline
-sgd constant learning-rate with momentum & 0.7498 & 0.6058 & 0.0889 \\ \hline
-sgd constant  learning-ratewith Nesterov's momentum & 0.7595 & 0.5669 & 0.1286 \\ \hline
-sgd inv-scaling learning-rate & 0.6278 & 1.0219 & 0.3932  \\ \hline
-sgd inv-scaling with momentum & 0.7009 & 0.7936 & 1.9339  \\ \hline
-sgd inv-scaling with Nesterov's momentum & 0.6278 & 1.2652 & 0.0205  \\ \hline
-adam constant  learning-rate  & 0.7795 & 0.5237 & 0.2093  \\ \hline
-\end{tabular}
-\caption*{Housing Price results for various NN configs}
-\endminipage\hfill
-\end{figure}
-
-\subsection*{Analysis for Neural Networks}
-The neural network models, while effective, performed slightly worse 
-than the boosted decision tree.  After preliminary exploration, it became 
-apparent that the wide variety of neural network configurations performed 
-differently depending on the given  dataset.
+High accuracy results are achieved right around 125 iterations+.  
+While this is subject to randomness, by looking at the results it is shown to 
+become rather consistant.  By looking at the score results, one can see various 
+instances of the randomized hill climbing getting caught in local optimas and 
+being unable to escape.  Such is the case around 220, 320, and 350 iterations.
 \\ \\
-In terms of training and testing, cross-validation was used to ensure a robust 
-sampling.  The housing price dataset started to converge slowly in regards to 
-the learning curve, whereas the permanent visa dataste convered very rapidly.  
-The permanent visa dataset, by converging rapidly, showed it's low variability.  
-The network model was able to very quickly learn the features--in less than 40--though its feature set is
- smaller than those of the housing prices.  The housing price dataset, 
- conversely, required many more iterations to learn.  
- \\ \\
- Various neural network configurations were used on the test data.  Configurations were created by 
- varying the weight optimizer, learning-rate, momentum, and scaling.  To aid 
- with speed and peformance, a pre-process Scaler was applied to the datasets.
- Additionally, a gridsearch approach was applied with various alpha, learning 
- rate, solver, and hidden layer conigurations.  While complete results achieved by the various networks are listed
-  above, below we will look at the top performing network for each dataset to try to 
-  understand why it was most effective.
-  \\ \\
-  For the permanent visa dataset, practically every algorithm performed the same.  At first, this perplexed me, 
-  as I expected that at least different learning rates and solvers would create 
-  different results.  It turns out, however, for a dataset that is more easily 
-  learnable and converges on fewer iterations, this makes sense.  It takes less 
-  effort and hyperparemeterization to find functional solutions.  To verify that 
-  my results were accurate, I also ran a gridsearched neural network with a 2000 
-  iteration limit and various values of solver, learning\_rate, and hidden 
-  layers.
-  \\ \\
-  For the housing price dataset, the 'adam' weight optimizer significantly outperformed the others.  
-  This was quite different than the Permanent Visa dataset, which performed 
-  rather homogenously.  The 'adam' optimizer, or solver, is a 'stochastic 
-  gradient-based optimizer.' (From SciKit learn manual)  It is noted to work 
-  especially well for large datasets.  The learning rate was slightly smaller 
-  for this configuration, starting with an initial value of 0.01.   Since the 
-  housing price network took longer to converge and performed quite differently 
-  for the various configuration, it is reasonable to believe that with a larger 
-  dataset, a more complex and accurate network could be trained.  While this 
-  would increase training time, the trade off of increased accuracy and lower 
-  variance would likely be possible.
-
- \section*{#4) Support Vector Machines}
-Support Vector Machines were the fourth algorithm applied. 
-
-\subsection*{US Permanent Visa Data}
-
-\begin{figure}[H]
-\minipage{0.69\textwidth}
-\begin{tabular}{ | c | c  | c | c | c | c | c |} 
-\hline
-\textbf{Kernel} & \textbf{Gamma} & \textbf{Train \%} & \textbf{Train Time} & \textbf{Test \%} & \textbf{Test Time}   \\ \hline
-rbf & 0.01 & 0.8642 & 20.4459 & 0.8712 & 0.1536 \\ \hline
-rbf & 0.05 & 0.8646 & 29.0756 & 0.8712 & 0.1817 \\ \hline
-rbf & 1.0 & 0.8752 & 29.7723 & 0.8745 & 0.1805 \\ \hline
-rbf & 2.0 & 0.8798 & 28.6184 & 0.8728 & 0.1914 \\ \hline
-poly & 0.01 & 0.8642 & 9.3467 & 0.8712 & 0.0884 \\ \hline
-poly & 0.05 & 0.8645 & 20.6110 & 0.8712 & 0.0857 \\ \hline
-poly & 1.0 & 0.8301 & 24.1879 & 0.8262 & 0.1198 \\ \hline
-poly & 2.0 & 0.8349 & 19.5531 & 0.8355 & 0.0391 \\ \hline
-
-\hline
-\end{tabular}
-\caption*{Permanent Visa Data for various kernel/gamma configurations}
-\endminipage\hfill
-\end{figure}
-
-\begin{figure}[H]
-  \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{1_svm_rbf_05.png} 
-      \caption*{RBF SVM w/ 0.05 gamma} 
-   \endminipage\hfill
-   \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{1_svm_rbf_1.png} 
-      \caption*{RBF SVM w/ 1.0 gamma} 
-   \endminipage\hfill
-   \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{1_svm_rbf_2.png} 
-      \caption*{RBF SVM w/ 2.0 gamma} 
-   \endminipage\hfill
-\end{figure}
-
-\begin{figure}[H]
-  \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{1_svm_poly_05.png} 
-      \caption*{Poly SVM w/ 0.05 gamma} 
-   \endminipage\hfill
-   \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{1_svm_poly_1.png} 
-      \caption*{Poly SVM w/ 1.0 gamma} 
-   \endminipage\hfill
-   \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{1_svm_poly_2.png} 
-      \caption*{Poly SVM w/ 2.0 gamma} 
-   \endminipage\hfill
-\end{figure}
-
-\subsection*{Housing Price Data}
-
-\begin{figure}[H]
-\minipage{0.69\textwidth}
-\begin{tabular}{ | c | c  | c | c | c | c | c |} 
-\hline
-\textbf{Kernel} & \textbf{Gamma} & \textbf{Train \%} & \textbf{Train Time} & \textbf{Test \%} & \textbf{Test Time}   \\ \hline
-rbf & 0.01 & 0.7487 & 0.2301 & 0.7603 & 0.0042 \\ \hline
-rbf & 0.05 & 0.7954 & 0.2031 & 0.8219 & 0.0086 \\ \hline
-rbf & 1.0 & 0.9226 & 0.5629 & 0.7740 & 0.0042 \\ \hline
-rbf & 2.0 & 0.9502 & 0.5996 & 0.7397 & 0.0051 \\ \hline
-poly & 0.01 & 0.6276 & 0.1581 & 0.6438 & 0.0024 \\ \hline
-poly & 0.05 & 0.7333 & 0.1733 & 0.7534 & 0.0028 \\ \hline
-poly & 1.0 & 0.9333 & 0.7254 & 0.7192 & 0.0019 \\ \hline
-poly & 2.0 & 0.9280 & 1.0244 & 0.6781 & 0.0019 \\ \hline
-
-
-\hline
-\end{tabular}
-\caption*{Housing Price Data for various kernel/gamma configurations}
-\endminipage\hfill
-\end{figure}
-
-\begin{figure}[H]
-  \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{2_svm_rbf_01.png} 
-      \caption*{RBF SVM w/ 0.01 gamma} 
-   \endminipage\hfill
-   \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{2_svm_rbf_05.png} 
-      \caption*{RBF SVM w/ 0.05 gamma} 
-   \endminipage\hfill
-   \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{2_svm_rbf_1.png} 
-      \caption*{RBF SVM w/ 1.0 gamma} 
-   \endminipage\hfill
-\end{figure}
-\begin{figure}[H]
-  \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{2_svm_poly_01.png} 
-      \caption*{Poly SVM w/ 0.01 gamma} 
-   \endminipage\hfill
-   \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{2_svm_poly_05.png} 
-      \caption*{Poly SVM w/ 0.05 gamma} 
-   \endminipage\hfill
-   \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{2_svm_poly_1.png} 
-      \caption*{Poly SVM w/ 1.0 gamma} 
-   \endminipage\hfill
-\end{figure}
-
-
-\subsection*{Analysis for Support Vector Machines}
-The Support Vector Machines peformed well compared to the other algorithms, 
-though, on-average, took significantly longer to train.  Overall, the optimal configurations yieled a testing rate of 87.5\% for the 
-permanent visa data and 77.4\% for the housing price data.     As there were a lot of 
-parameters to tune, a gridsearch was used yet again along with cross-validation 
-to ensure a robust and effective model.  The primary parameters were kernel and 
-gamma.
-\\ \\
-To begin, two different  kernels were used for each dataset: 'rbf' and 'poly'.  
-For both datasets, the rbf kernel proved more effective.  The gaussian rbf 
-kernel essentially calculates squared distance between feature vectors and is 
-scaled by gamma.  While the poly kernel tends to overfit the training data, rbf 
-does a much better job at securing a robust fit.  To tune Gamma, values on a 
-spectrum from 0.01 to 2.0 were used (and results detailed above).
-\\ \\
-Training time increased signficantly, especially for larger datasets.  Since a 
-SVMs require a large amount of iterations and  recalculation to converge to an 
-optimal solution, this made sense.  It was especially apparent for the larger 
-dataset of permanent visa data.  The training time took approximately 30 seconds 
-for the various configurations where as the smaller housing price dataset took 
-less than a second on average.
-\\ \\
-From the learning curves, we see that a highly succesful training rate leads to 
-greater overfitting.  This makes sense, as the SVM becomes too rigid to the 
-input data, and is not robust.  Similarly, when the kernel has too low of a 
-gamma and does not accomodate feature relations properly, the model underfits 
-and performs poorly on both training and test data.
-
- \section*{#5) K-nearest Neighbors}
-K-nearest Neighbors was the fifth algorithm applied. 
-
-\subsection*{Permanent Visa Data}
-
-\begin{figure}[H]
-\minipage{0.6\textwidth}
-\begin{tabular}{ | c | c  | c | c | c | c | c |} 
-\hline
-
-\textbf{Weight} & \textbf{K} & \textbf{Train \%} & \textbf{Train Time} & \textbf{Test \%} & \textbf{Test Time}   \\ \hline
-uniform & 1 & 0.9708 & 0.3422 & 0.8158 & 0.0080 \\ \hline
-uniform & 2 & 0.8978 & 0.3619 & 0.7708 & 0.0094 \\ \hline
-uniform & 3 & 0.8989 & 0.3603 & 0.8394 & 0.0106 \\ \hline
-uniform & 4 & 0.8854 & 0.3836 & 0.8202 & 0.0103 \\ \hline
-uniform & 5 & 0.8892 & 0.3996 & 0.8503 & 0.0107 \\ \hline
-uniform & 10 & 0.8742 & 0.4736 & 0.8525 & 0.0126 \\ \hline
-uniform & 15 & 0.8739 & 0.5735 & 0.8640 & 0.0134 \\ \hline
-uniform & 20 & 0.8738 & 0.6083 & 0.8673 & 0.0168 \\ \hline
-uniform & 30 & 0.8696 & 0.8306 & 0.8662 & 0.0219 \\ \hline
-uniform & 50 & 0.8686 & 1.1392 & 0.8618 & 0.0315 \\ \hline
-distance & 1 & 0.9708 & 0.2706 & 0.8158 & 0.0071 \\ \hline
-distance & 2 & 0.9675 & 0.4111 & 0.8103 & 0.0113 \\ \hline
-distance & 3 & 0.9743 & 0.4050 & 0.8279 & 0.0096 \\ \hline
-distance & 4 & 0.9741 & 0.3766 & 0.8311 & 0.0092 \\ \hline
-distance & 5 & 0.9756 & 0.4084 & 0.8377 & 0.0157 \\ \hline
-distance & 10 & 0.9762 & 0.4899 & 0.8470 & 0.0142 \\ \hline
-distance & 15 & 0.9767 & 0.6011 & 0.8509 & 0.0169 \\ \hline
-distance & 20 & 0.9782 & 0.6799 & 0.8591 & 0.0290 \\ \hline
-distance & 30 & 0.9782 & 0.9327 & 0.8624 & 0.0255 \\ \hline
-distance & 50 & 0.9782 & 1.2837 & 0.8635 & 0.0397 \\ \hline
-
-\hline
-\end{tabular}
-\caption*{Permanent Visa Data}
-\endminipage\hfill
-  \minipage{0.45\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{1_knn_compare.png} 
-      \caption*{KNN Comparision} 
-   \endminipage\hfill
-\end{figure}
+Similar to backpropogation, training time scales linearly with the number of 
+ iterations run. Training time tends to be a bit faster using randomized hill 
+ climbing because of a reducation in calculations necessary.  Whereas 
+ backpropogation needed to do calcluations to minimize error moving backwards 
+ through the network, randomized hill climbing simply needs to move in one 
+ direction and determine if the new weights are better.
  
+\subsection*{3) Simulated Annealing}  
+\subsubsection*{Overview}
+The third weight-finding algorithm used was simulated annealing.  Simulated 
+annealing works by taking a random solution and then samples nearby 
+alternatives.  By comparing the alternatives to the original solution, the 
+optimizer decides to either stick with the original solution or move to the new 
+one.  Using a temperature and cooling parameter, the algorithm is more open to 
+worse solutions at first but gradually moves towards only accepting better 
+solutions.
+\\ \\
+Various coolng parameters were used to try to determine the best simulate 
+annealing approach.  Below, success rates by number of iterations are showed for 
+simulated annealing approaches with cooling parameters of .15, .35, and .7.  The 
+parameter of .15 and .35 take significantly longer to converge to the optimal 
+solution than did a higher parameter.  While part of this can be attribute to 
+luck (the algorithm could have randomly found itself in an optimal solution earlier 
+on)--part of this too is the way the algorithm operates by its parameters.  The 
+.7 cooling temperature here proved most effective.
 
-\begin{figure}[H]
-  \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{1_knn_1_1.png} 
-      \caption*{Uniform KNN - 1} 
+ \begin{figure}[H]
+  \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{simulated_annealing_cooling_pt15_nn.jpg} 
+      \caption*{Simulated Annealing NN Success Rate vs. Iterations w/ .15 Cooling} 
    \endminipage\hfill
-   \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{1_knn_3_1.png} 
-      \caption*{Uniform KNN - 3} 
-   \endminipage\hfill
-   \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{1_knn_20_1.png} 
-      \caption*{Uniform KNN - 20} 
+   \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{simulated_annealing_cooling_pt35_nn.jpg} 
+      \caption*{Simulated Annealing NN Success Rate vs. Iterations w/ .35 Cooling} 
    \endminipage\hfill
 \end{figure}
-\begin{figure}[H]
-  \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{1_knn_1_2.png} 
-      \caption*{Distance KNN - 1} 
+
+ \begin{figure}[H]
+  \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{simulated_annealing_cooling_pt7_nn.jpg} 
+      \caption*{Simulated Annealing NN Success Rate vs. Iterations w/ .7 Cooling} 
    \endminipage\hfill
-   \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{1_knn_3_2.png} 
-      \caption*{Distance KNN - 3} 
-   \endminipage\hfill
-   \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{1_knn_20_2.png} 
-      \caption*{Distance KNN - 20} 
+   \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{simulated_annealing_cooling_pt7_nn_time.jpg} 
+      \caption*{Simulated Annealing NN Training Time w/ .7 Cooling} 
    \endminipage\hfill
 \end{figure}
 
-\subsection*{Housing Price Data}
-
-\begin{figure}[H]
-\minipage{0.6\textwidth}
-\begin{tabular}{ | c | c  | c | c | c | c | c |} 
-\hline
-
-\textbf{Weight} & \textbf{K} & \textbf{Train \%} & \textbf{Train Time} & \textbf{Test \%} & \textbf{Test Time}   \\ \hline
-uniform & 1 & 1.0000 & 0.0343 & 0.6507 & 0.0015 \\ \hline
-uniform & 2 & 0.8222 & 0.0304 & 0.6644 & 0.0011 \\ \hline
-uniform & 3 & 0.8130 & 0.0283 & 0.7055 & 0.0011 \\ \hline
-uniform & 4 & 0.7824 & 0.0379 & 0.6986 & 0.0012 \\ \hline
-uniform & 5 & 0.7602 & 0.0351 & 0.7260 & 0.0012 \\ \hline
-uniform & 10 & 0.7341 & 0.0324 & 0.7055 & 0.0019 \\ \hline
-uniform & 15 & 0.7218 & 0.0369 & 0.7192 & 0.0016 \\ \hline
-uniform & 20 & 0.7134 & 0.0466 & 0.7329 & 0.0013 \\ \hline
-uniform & 30 & 0.7004 & 0.0488 & 0.7055 & 0.0022 \\ \hline
-uniform & 50 & 0.6812 & 0.0635 & 0.6986 & 0.0020 \\ \hline
-distance & 1 & 1.0000 & 0.0244 & 0.6507 & 0.0009 \\ \hline
-distance & 2 & 1.0000 & 0.0261 & 0.6575 & 0.0010 \\ \hline
-distance & 3 & 1.0000 & 0.0293 & 0.7055 & 0.0010 \\ \hline
-distance & 4 & 1.0000 & 0.0282 & 0.6986 & 0.0010 \\ \hline
-distance & 5 & 1.0000 & 0.0346 & 0.7397 & 0.0011 \\ \hline
-distance & 10 & 1.0000 & 0.0356 & 0.7123 & 0.0012 \\ \hline
-distance & 15 & 1.0000 & 0.0385 & 0.7192 & 0.0017 \\ \hline
-distance & 20 & 1.0000 & 0.0468 & 0.7534 & 0.0021 \\ \hline
-distance & 30 & 1.0000 & 0.0501 & 0.7260 & 0.0016 \\ \hline
-distance & 50 & 1.0000 & 0.0742 & 0.7055 & 0.0021 \\ \hline
-
-\hline
-\end{tabular}
-\caption*{Housing Price Data}
-\endminipage\hfill
-  \minipage{0.45\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{2_knn_compare.png} 
-      \caption*{KNN Comparision} 
-   \endminipage\hfill
-\end{figure}
+\subsection*{4) Genetic Algorithms}  
+\subsubsection*{Overview}
+The fourth weight-finding algorithm used was a genetic algorithm.  Genetic 
+algorithms works by starting with an initial solution and then making 
+modifications in an attempt to improve the solution.  The modifications 
+generally allowed are mutation (changing random parts of the solution), crossover (taking specific sections
+ from various solutions and combining them), and selection (selecting certain sections from a solution to use again). 
+  In the context of a neural network, we can use genetic algorithms to make 
+  modifications to our network's weights.
+ \\ \\ 
+ In our testing, a population size of 50 was used in order to get a diverse 
+ initial sampling of possible solutions.  The number of instances to mate (aka crossover) and to 
+ mutate was varied throughout the trials.
  
-
-\begin{figure}[H]
-  \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{2_knn_1_1.png} 
-      \caption*{Uniform KNN - 1} 
+  \begin{figure}[H]
+  \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{genetic_10_mate,_10_mutate_nn.jpg} 
+      \caption*{Genetic Algorithm Success Rate v. Iterations w/ 10 Mate, 10 Mutate,  50 population} 
    \endminipage\hfill
-   \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{2_knn_3_1.png} 
-      \caption*{Uniform KNN - 3} 
-   \endminipage\hfill
-   \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{2_knn_20_1.png} 
-      \caption*{Uniform KNN - 20} 
-   \endminipage\hfill
-\end{figure}
-\begin{figure}[H]
-  \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{2_knn_1_2.png} 
-      \caption*{Distance KNN - 1} 
-   \endminipage\hfill
-   \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{2_knn_3_2.png} 
-      \caption*{Distance KNN - 3} 
-   \endminipage\hfill
-   \minipage{0.32\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{2_knn_20_2.png} 
-      \caption*{Distance KNN - 20} 
+   \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{genetic_10_mate,_20_mutate_nn.jpg} 
+      \caption*{Genetic Algorithm Success Rate v. Iterations w/ 10 Mate, 20 Mutate,  50 population} 
    \endminipage\hfill
 \end{figure}
 
-\subsection*{Analysis for k-Nearest Neighbors} k-Nearest neighbors was by far the simplest model employed, but it also 
-performed relatively poorly on the smaller housing dataset.  The primary reason for this was 
-overfitting.  Using a distance weight generally improved data quality for both datasets. 
- In terms of training and testing time, it was extremely fast for both datasets, as there 
- was very little calculation necessary.
-\\ \\
-Two different weight functions were used to measure the contribution of a k-Nearest 
-neighbor: uniform and distance.  While uniform treated each neighbor equally, 
-distance had closer neighbords take priority.  This worked well, as it 
-essentially treated more spatially similar results in testing as likely to be more 
-accurate.  While unfiform did not perform horrendously, it tended to underfit 
-the data--especially for the housing dataset, due to a high variance in the 
-features.
-\\ \\
-A k-value of approximately 20 performed best for both datasets, as can be seen 
-using the kNN comparison graphs. The housing price data, with a smaller dataset, 
-tended to perform worse using kNN due to the smaller number of items to train 
-on and the greater likelihood of values from a different class being taken into 
-account as a neighbor--whereas the permanent visa data, with a large dataset, 
-was more likely to have same-class values contribute as a neighbor. 
+ \begin{figure}[H]
+  \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{genetic_20_mate,_10_mutate_nn.jpg} 
+      \caption*{Genetic Algorithm Success Rate v. Iterations w/ 20 Mate, 10 Mutate,  50 population} 
+   \endminipage\hfill
+   \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{genetic_20_mate,_20_mutate_nn.jpg} 
+      \caption*{Genetic Algorithm Success Rate v. Iterations w/ 20 Mate, 20 Mutate, 50 population} 
+   \endminipage\hfill
+\end{figure}
 
-\subsection*{Conclusion}
-In total, 5 different machine learning algorithms were applied to two datasets: 
-US Permanent Visa applications and Housing Prices for a small geographic region 
-in the US.  Each algorithm maintained its pros/cons that varied heavily on the 
-type of model and its parameters.  By consistantly using gridsearch and 
-cross-validation, various relatively robust models were trained for each 
-dataset.  All-in-all, Support Vector Machines performed the best on both 
-datasets in terms of testing accuracy, though did require a large amount of training relative to the other 
-models for that dataset.  The SVM, by using it's kernel to accurately relate features across training and test sets, 
-was able to set accurate decision boundaries for the data--performing well for 
-both datasets, but especially well for the larger visa dataset.
+Trials were run with the following mate/mutate combinations:  10/10, 10/20, 
+/20/10, and 20/20.  All trials were run with a population size of 50.  As can be 
+observed from the graphs, both mating and mutating appeared to be highly 
+effective in finding the optimal solution.  In fact, the optimal solution 
+converged quite quickly--in under 30 iterations for each trial.  This is partly 
+due to the fact that the data is easily learnable and does not appear to 
+maintain very many trapping local maximums.
 \\ \\
-\begin{figure}[H]
-\minipage{0.6\textwidth}
+Training times scaled roughly linearly with the number of iterations ran.  This 
+makese sense because, from a performance perspective, the number of mutation 
+calculations from iteration to iteration is more or less the same.
+
+ \begin{figure}[H]
+  \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{genetic_10_mate,_10_mutate_nn_time.jpg} 
+      \caption*{Genetic Algorithm Training Time w/ 10 Mate, 10 Mutate, 50 population} 
+   \endminipage\hfill
+   \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{genetic_20_mate,_20_mutate_nn_time.jpg} 
+      \caption*{Genetic Algorithm Training Time w/ 20 Mate, 20 Mutate, 50 population} 
+   \endminipage\hfill
+\end{figure}
+
+
+\subsection*{ Conclusion}  
+The optimization algorithms used all inevitably produced similar results.  What 
+differed, however, was the amount of training time required, the tuning of 
+parameters, and how many iterations were required to achieve a consisent, 
+optimal solution.  All-in-all, the genetic algorithm approach consistantly produced 
+the best results for our network.  This makes sense, as the data was rather 
+homogenous and there appeared to be very few outliers.  By learning the training 
+data well, the learner was able to perform similarly well on the (nearly identical) 
+test data.
+
+\section*{Part 2: Optimization Problem Domains}
+\subsection*{ Introduction}  
+For this part of the assignment, three different optimization problems are 
+examined: continous peaks, the traveling salesman, and flip flop.  The three
+optimization techniques from above are used (randomized hill climbing, simulated annealing, and genetic algorithms) 
+as well as another algorithm, MIMIC.
+\\ \\
+MIMIC, similar to the other algorithms, works to find the globally optimal 
+solution.  Unlike the other algorithms, however, it retains knowledge of previous 
+iterations and uses this information to more efficiently find better solutions.  MIMIC is particularly strong in regards to 
+problems that maintain patterns between subsets of thier parameters.
+\\ \\
+Below, we apply each of the optimization algorithms to each of the three optimization 
+problems.  We then look at how each optimization problem's characteristics may 
+favor one algorithm to another, as well as evaluate the efficiency of each.
+
+\subsection*{1) Continous Peaks}  
+\subsubsection*{Overview}
+The continous peaks problem is an extension of the four peaks problem that 
+allows for a wide variety of local maximums.  This algorithm is particularly interesting due to the potentially large 
+number of local maximums.  It is especially difficult for an algorithm that cannot escape 
+local peaks to perform well.
+
+ \begin{figure}[H]
+  \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{continous_peaks_fitness.jpg} 
+      \caption*{Fitness vs # Iterations of 4 Optimization Strategies} 
+   \endminipage\hfill
+   \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{continous_peaks_evals.jpg} 
+      \caption*{Function Evals vs # Iterations of 4 Optimization Strategies} 
+   \endminipage\hfill
+   \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{continous_peaks_time.jpg} 
+      \caption*{Training Time vs # Iterations of 4 Optimization Strategies} 
+   \endminipage\hfill
+\end{figure}
+
+\subsubsection*{Analysis}
+
+In order to ensure accuracy and a fair distribution, 5 different trials were 
+used of 5000 iterations each.  Each optimization strategy was also allowed to evaluate over 
+a parameter range in an attempt to find the optimal parameters for that 
+strategy.
+\\ \\
+For randomized hill climbing, there were no other parameters to tune.  The 
+algoritm was simply run for various iterations (multiples of 10) in a set of 5 
+trials.  In terms of fitness function performance, it actually performed quite 
+well and required no significant function evaluations. It was similarly fast to train due to the extreme simplicity 
+of the algorithm itself. 
+\\ \\
+\begin{figure}[H] 
 \begin{tabular}{ | c | c  | c | c | c | c | c |} 
 \hline
-
-\textbf{Dataset} & \textbf{Model} & \textbf{Specifications} & \textbf{Test \%} & \textbf{Train Time}   \\ \hline
-Visa & Decision Tree & criterion=gini, depth=25 &  80.32\% & 0.5284 \\ \hline
-Visa & Boosted DT & depth=10, learning rate=0.1 & 87.45\% & 82.2192 \\ \hline
-Visa & Neural Net & solver=adam, learning rate init = 0.01 & 86.77\% & 2.1166 \\ \hline
-Visa & SVM & kernel=rbf, gamma=1.0 & 87.45\% & 29.7723 \\ \hline
-Visa & kNN & weight=uniform, k=20 & 86.73\% & 0.6083  \\ \hline
-
-Housing & Decision Tree & criterion=gini, depth=15 & 76.03\% & 0.0695  \\ \hline
-Housing & Boosted DT & depth=15, learning rate=1 & 80.14\% & 8.75  \\ \hline
-Housing & Neural Net & solver=adam, learning rate init = 0.01 & 77.95\% & 0.2093 \\ \hline
-Housing & SVM & kernel=rbf, gamma=0.05 & 82.19\% & 0.2031  \\ \hline
-Housing & kNN & weight=distance, k=20 & 75.34\% & 0.0468  \\ \hline
+\textbf{Iterations} & \textbf{Fitness} & \textbf{Training Time} & \textbf{Function Evals}   \\
 \hline
+0 & 16.0 & 5.5038e-05 & 11 \\ \hline 
+10 & 16.0 & 7.64649999999e-05 & 21 \\ \hline 
+50 & 22.0 & 0.000212433 & 61 \\ \hline 
+100 & 22.0 & 0.000370814 & 111 \\ \hline 
+200 & 23.0 & 0.000717487 & 211 \\ \hline 
+300 & 23.0 & 0.001094822 & 311 \\ \hline 
+500 & 26.0 & 0.001666152 & 511 \\ \hline 
+750 & 31.0 & 0.002682947 & 761 \\ \hline 
+1000 & 51.0 & 0.003609291 & 1011 \\ \hline 
+1500 & 62.0 & 0.005517988 & 1511 \\ \hline 
+2000 & 74.0 & 0.007139624 & 2011 \\ \hline 
+2500 & 84.0 & 0.008715217 & 2511 \\ \hline 
+3000 & 90.0 & 0.010594833 & 3011 \\ \hline 
+3500 & 95.0 & 0.012718942 & 3511 \\ \hline 
+4000 & 99.0 & 0.014618306 & 4011 \\ \hline 
+5000 & 99.0 & 0.018770859 & 5011 \\ \hline 
+
 \end{tabular}
-\caption*{Optimal configuration for each algorithms, by dataset}
+\caption*{Simulated Annealing Results w/ .15 Cooling} 
+\end{figure}
+
+Simulated annealing was slightly more complex, where cooling efficients of 0.15, 
+0.35, 0.55, 0.75, and 0.95 were used.  It was found that the efficient 0.15 was 
+the most effective here.  This low cooling rate was effective because it helped to slowly overcome any local
+ maximums but not work too aggressively to skip any optimal solution.  By 
+ iteration 3k, Simulated Annealing took a clear lead over the other solutions in 
+ terms of fitness performance.  Similar to randomized hill climbing, its number 
+ of function evals and training time was extremely low.
+\\ \\
+The genetic algorithm employed used a population size of 100 and various 
+configurations of 50, 30, and 10 mutations/mate combinations.  The graph above 
+depicts the succes rates when using 30 mutation and 30 matings.  As can be seen, 
+it's performance was rather simular to randomized hill climbing--which roughly 
+makes sense due to the random nature of both algorithms.  The number of function 
+evaluations was higher for the genetic algorithm due to the amount of attempts 
+at mutating and mating--whereas the training time was practically irrelevant.
+\\ \\
+Mimic's parameters were set to 100 samples and a 'to-keep' number of 50.  
+The threshold for the discrete dependency tree mimic used was sampled from the 
+range 0.1, 0.3, 0.5, 0.7, and 0.9.  While MIMIC started off relatively string in 
+terms of fitness performance, it thrashed around the 60-80 range for the most 
+part.  I had suspected that MIMIC would have difficulty on the continous peaks 
+due to the large amount of randomness in the data.  The number of functional 
+evaluations required for MIMIC was significnatly higher than the other 
+algorithms, as was its training time.  This was primarily due to the fact that 
+MIMIC is signifciantly more complex to operate than the other algorithms.
+\\ \\
+Overall, Simulated Annealing proved to be the best strategy for the continous 
+peaks problem, largely due to it's ability to handle large amounts of randomness 
+well and to avoid getting caught in such local maximums.  It's low training time 
+and number of function evaluations further aided its case.
+
+
+\subsection*{2) Traveling Salesman}  
+\subsubsection*{Overview}
+The traveling salesman problem is a frequently used, classic problem that focuses on a 
+salesperson trying to minimize their round-trip distance between any number of cities.  This problem is particularly 
+interesting  due to it's real-world implications, such as route planing for 
+delivery trucks and everyday errands--it also has no known polynomial time 
+solution!
+
+ \begin{figure}[H]
+  \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{traveling_salesman_fitness.jpg} 
+      \caption*{Fitness vs # Iterations of 4 Optimization Strategies} 
+   \endminipage\hfill
+   \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{traveling_salesman_evals.jpg} 
+      \caption*{Function Evals vs # Iterations of 4 Optimization Strategies} 
+   \endminipage\hfill
+   \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{traveling_salesman_time.jpg} 
+      \caption*{Training Time vs # Iterations of 4 Optimization Strategies} 
    \endminipage\hfill
 \end{figure}
 
+\subsubsection*{Analysis}
 
+For this optimization problem, in order to ensure accuracy and a fair distribution, 5 different trials were 
+used of 3000 iterations each.  50 Random points were generated and used as the destinations for our faux salesman.
+Each optimization strategy was also allowed to evaluate over 
+a parameter range in an attempt to find the optimal parameters for that 
+strategy.
+\\ \\
+For randomized hill climbing, there were no other parameters to tune.  The 
+algoritm was simply run for various iterations in a set of 5 
+trials.  In terms of fitness function performance, it performed mediocrely and required no significant function evaluations. It was similarly fast to train due to the extreme simplicity 
+of the algorithm itself.  The reason for the stragegy's mediocrity can easily be 
+attributed to the fact that random guessing does not perform well when trying to 
+develop the most optimal path due to the large number of possibilities and low 
+number of optimums.
+\\ \\
+Similar to the last problem, simulated annealing was slightly more complex, where cooling efficients of 0.15, 
+0.35, 0.55, 0.75, and 0.95 were used.  It was found that the efficient 0.55 was 
+the most effective here.  Interestingly enough, the simulated annealing approach very closely tracked the randomized hill climbing results. 
+ This was pretty cool, and clearly demonstrated the effect of the problem on the 
+ ability of a solution to perform well.  As both were prone to picking random 
+ solutions and making marginal improvements on those solutions, they shared the 
+ same strenghts and weaknesses for trying to plan an optimal path.  Similar to randomized hill climbing, simulated annealings' number 
+ of function evals and training time was extremely low.
+\\ \\
+\begin{figure}[H] 
+\begin{tabular}{ | c | c  | c | c | c | c | c |} 
+\hline
+\textbf{Iterations} & \textbf{Fitness} & \textbf{Training Time} & \textbf{Function Evals}   \\
+\hline
+0 & 0.0305500487733 & 0.011139866001 & 573 \\ \hline 
+50 & 0.0535358597005 & 0.0619086620027 & 2984 \\ \hline 
+100 & 0.0670653896105 & 0.106549986003 & 5404 \\ \hline 
+200 & 0.0754973396223 & 0.190760427002 & 10194 \\ \hline 
+300 & 0.0843530928911 & 0.276369227002 & 15021 \\ \hline 
+500 & 0.0847430696768 & 0.430181398007 & 24690 \\ \hline 
+750 & 0.0824751535861 & 0.62021527501 & 36716 \\ \hline 
+1000 & 0.097111513149 & 0.799495104007 & 48778 \\ \hline 
+1500 & 0.100315033444 & 1.153653522 & 72921 \\ \hline 
+2000 & 0.0908447200981 & 1.51476069201 & 97068 \\ \hline 
+2500 & 0.111066212921 & 1.875438519 & 121202 \\ \hline 
+3000 & 0.0986916191186 & 2.27946003001 & 145282 \\ \hline 
+\end{tabular}
+\caption*{Genetic Algorithm Results w/ population 100, 30 mutations, 30 matings} 
+\end{figure}
+
+The genetic algorithm employed used a population size of 100 and various 
+configurations of 50, 30, and 10 mutations/mate combinations.  The graph above 
+depicts the succes rates when using 30 mutation and 30 matings.  As can be seen, 
+it's performance was exceeding better than the other algorithms.  The mutations and matings were able to successfully 
+identify the most optimal paths and plan extremelly well for the hypothetical salesman.  This can be attributed to 
+the fact that traveling salesman can be broken into various subjourneys that the 
+genetic algorithm can learn and then attempt to combine for an optimal journey.  The number of function  evaluations was higher for the genetic algorithm due to the amount of attempts 
+at mutating and mating--whereas the training time was practically irrelevant.  
+The genetic algorithm was the clear winner in terms of performance for the TSP.
+\\ \\
+Mimic's parameters were set to 100 samples and a 'to-keep' number of 50.  
+The threshold for the discrete dependency tree mimic used was sampled from the 
+range 0.1, 0.3, 0.5, 0.7, and 0.9.  MIMIC performed rather poorly on this problem.  This was very likely due to the fact that pattern finding is of almost no use in this 
+problem domain and that previous knowledge also is mostly unnecessary when trying to find optimal paths.  The number of functional 
+evaluations required for MIMIC was also significnatly higher than the other 
+algorithms, as was its training time.  This was primarily due to the fact that 
+MIMIC is signifciantly more complex to operate than the other algorithms.  
+Overall, MIMIC was a very poor candidate for the traveling salesman problem.
+\\ \\
+Overall, the genetic algorithm proved to be the best strategy for the traveling salesman problem.  It's ability to combine 
+sub-journeys and paths into an optimal route was strongly advantageous.  The results showed the strong benefit of mutations on this 
+problem.  Similarly, it's speed an relative simplicity were also very 
+beneficial.
+
+\subsection*{3) Flip flop}  
+\subsubsection*{Overview}
+The flipflop problem is another common optimization, where one attempts to 
+count the number of bits that alternate with its next neighbor in a bit string.  
+This problem is particularly interesting because, since the strings are 
+randomized, there is significant potential for a large number of local mimimum 
+and maximums.  It is also particularly well suited for algorithms that can 
+handle pattern matching  and previous knowledge well.  
+\\ \\
+
+ \begin{figure}[H]
+  \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{flip_flop_fitness.jpg} 
+      \caption*{Fitness vs # Iterations of 4 Optimization Strategies} 
+   \endminipage\hfill
+   \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{flip_flop_evals.jpg} 
+      \caption*{Function Evals vs # Iterations of 4 Optimization Strategies} 
+   \endminipage\hfill
+   \minipage{0.32\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{flip_flop_time.jpg} 
+      \caption*{Training Time vs # Iterations of 4 Optimization Strategies} 
+   \endminipage\hfill
+\end{figure}
+
+\subsubsection*{Analysis}
+For this optimization problem, in order to ensure accuracy and a fair distribution, 5 different trials were 
+used of 3000 iterations each.  A bit string of length 1000 was used, where each 
+bit was randomized as either 1 or 0.  Each optimization strategy was allowed to evaluate over 
+a parameter range in an attempt to find the optimal parameters for that 
+strategy.  The results are then summarized below.
+\\ \\
+For randomized hill climbing, there were no other parameters to tune.  The 
+algoritm was simply run for various iterations in a set of 5 
+trials.  In terms of fitness function performance, it actually performed rather well--with it's performance increasing over time. Randomized 
+hill climbing required very limited function evaluations and it trained quickly due to its simplicity.  The reason for the stragegy's success can  be 
+attributed to the fact that random guessing is somewhat akin to the distribution 
+of the input bit string in that the distribution fo the next neighbor should, on 
+average, change.
+\\ \\
+Similar to the last problem, simulated annealing was very similar to randomized hill climbing.  Cooling efficients of 0.15, 
+0.35, 0.55, 0.75, and 0.95 were used.  It was found that the efficient 0.15 was 
+the most effective in this case.  Simulated annealing approach closely tracked the randomized hill climbing results yet again. 
+ Similar to hill climbing, the random variations of simulated annealing can roughly identify to the variations of the distribution of the input.  Over time, as with 
+ randomized hill climbing, the performance of the strategy signficantly increased.  Also Similar to randomized hill climbing, its' 
+ function evals count and training time were extremely low.
+\\ \\
+
+The genetic algorithm employed used a population size of 100 and various 
+configurations of 50, 30, and 10 mutations/mate combinations.  The graph above 
+depicts the succes rates when using 30 mutation and 30 matings.  The approach performed singificantly worse than the others.
+  The genetic algorithm had a very tough time recognizing the pattern that the 
+  input tended to follow and the mutations and matings had very little effect on 
+  finding an optimal solution.  While t number of  evals was higher for the this strategy due to the amount of attempts 
+at mutating and mating--it did not help to achieve a better result.
+\\ \\
+
+\begin{figure}[H] 
+\begin{tabular}{ | c | c  | c | c | c | c | c |} 
+\hline
+\textbf{Iterations} & \textbf{Fitness} & \textbf{Training Time} & \textbf{Function Evals}   \\
+\hline
+0 & 548.0 & 10.292430561 & 1000 \\ \hline 
+50 & 713.0 & 54.323489845 & 6500 \\ \hline 
+100 & 745.0 & 89.781651075 & 12000  \\ \hline 
+200 & 753.0 & 159.161412402 & 23000  \\ \hline 
+300 & 755.0 & 227.402023603 & 34000  \\ \hline 
+500 & 761.0 & 364.872433042 & 56000 \\ \hline 
+750 & 771.0 & 741.847804258 & 83500 \\ \hline 
+1000 & 771.0 & 1186.13889593 & 111000 \\ \hline 
+1500 & 785.0 & 2107.83467502 & 166000 \\ \hline 
+2000 & 789.0 & 3107.1784734 & 221000 \\ \hline 
+2500 & 799.0 & 3557.31754274 & 276000 \\ \hline 
+3000 & 805.0 & 3916.14983514 & 331000 \\ \hline 
+\end{tabular}
+\caption*{MIMIC Results w/ .5 threshold} 
+\end{figure}
+
+Mimic's parameters were set to 100 samples and a 'to-keep' number of 50.  
+The threshold for the discrete dependency tree mimic used was sampled from the 
+range 0.1, 0.3, 0.5, 0.7, and 0.9.  MIMIC performed incredbly on this problem--mainly due to its ability to handle patterns very well and to keep track of historical 
+knowledge.  The number of 
+evaluations required for MIMIC was definitely higher than the other 
+algorithms, as was its training time, but its performance also far outweighed the other strategies.  
+Overall, MIMIC proved incredibly succesful at the flip flop problem.
+
+\subsection*{ Conclusion}  
+Above, four different machine learning optimization strategies were applied to 3 
+different optimization problems.  Interestingly enough, each optimization 
+problem had its own inherit properties that proved more suitable for solving for 
+differnet optimization strategies. 
+\\ \\
+The continous peaks problem, with its high amount of randomness and lack of 
+predictable behaviour, proved to be optimized exceptionally well by simulated 
+annealing.  Simulated annealings ability to randomly sample nearby solutions 
+with effective cooling thresholds were very helpful for this problem in that it avoided getting trapped in local 
+optimums but reduced the change of skipping over more significant nearby optimums.
+\\ \\
+The traveling salesman problem, which, in my opinion, proved to be the most 
+interesting, was most aptly solved by a genetic algorithm.  Travelling salesman 
+required various subjourneys to be optimized and combined to find an optimal 
+path about various points.  Whereas random and pattern solutions failed badly, 
+the genetic algorithm was able to mutate and combine to form optimal solutions 
+quite well.
+\\ \\
+The final problem, flip flop, had an input that was highly repetetive and tended to follow 
+a patterned distribution.  In such, optimization strategies that sought to solve 
+based on subgroups of parameters or previous knowledge performed rather well, 
+whereas strategies that were left to chance or random combinations performed 
+poorly.  MIMIC, with it's ability to solve patterns and repetition well, as well 
+as its ability to retain prior experiences, proved to be far and away the most optimal solution for this problem. 
 
 \end{document}
