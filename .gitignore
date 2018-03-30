@@ -100,5 +100,9 @@ ENV/
 # mypy
 .mypy_cache/
 
-*.csv
+assignment1/data/*.csv
+assignment2/data/*.csv
+assignment3/data/*.csv
+assignment4/data/*.csv
+
 *.zip
