@@ -113,3 +113,25 @@ def run_clustering(out, perm_x, perm_y, housing_x, housing_y):
   acc.ix[:,:,'perm'].to_csv(out+'Perm acc.csv')
   adjMI.ix[:,:,'housing'].to_csv(out+'Housing adjMI.csv')
   adjMI.ix[:,:,'perm'].to_csv(out+'Perm adjMI.csv')
+
+def pairwiseDistCorr(X1,X2):
+    assert X1.shape[0] == X2.shape[0]
+    
+    d1 = pairwise_distances(X1)
+    d2 = pairwise_distances(X2)
+    return np.corrcoef(d1.ravel(),d2.ravel())[0,1]
+
+    
+def aveMI(X,Y):    
+    MI = MIC(X,Y) 
+    return np.nanmean(MI)
+    
+  
+def reconstructionError(projections,X):
+    W = projections.components_
+    if sps.issparse(W):
+        W = W.todense()
+    p = pinv(W)
+    reconstructed = ((p@W)@(X.T)).T # Unproject projected data
+    errors = np.square(X-reconstructed)
+    return np.nanmean(errors)
