@@ -64,48 +64,56 @@ K-means works by clustering n instances into k-clusters of similarity using leas
  possible.
  
  \begin{figure}[H]
-  \minipage{0.49\textwidth}
+  \minipage{0.33\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{housing_sse.jpg} 
-      \caption*{Sum of Square Errors for Clusters vs. # Clusters} 
+      \caption*{Housing Sum of Square Errors for Clusters vs. \# Clusters} 
    \endminipage\hfill
-   \minipage{0.49\textwidth}
+   \minipage{0.33\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{housing_clustering_scoring.jpg} 
-      \caption*{Scoring for k-means and expectation maximization} 
+      \caption*{Housing Scoring for k-means and expectation maximization} 
    \endminipage\hfill
 \end{figure}
-
+\begin{figure}[H]
+  \minipage{0.33\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{perm_visa_sse.jpg} 
+      \caption*{Perm Visa Sum of Square Errors for Clusters vs. \# Clusters} 
+   \endminipage\hfill
+   \minipage{0.33\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{permanent_visa_clustering_scoring.jpg} 
+      \caption*{Perm Visa Scoring for k-means and expectation maximization} 
+   \endminipage\hfill
+\end{figure}
 
 \begin{figure}[H] 
-\begin{tabular}{ | c | c  | c | c | c | c | c | c| c| c| c| c|} 
+\begin{tabular}{ | c | c  | c | c | c | c | c | c| c| c| c| c| c | } 
 \hline
-\textbf{ # Clusters } & \textbf{2} & \textbf{5} & \textbf{10} & \textbf{15} & \textbf{20} & \textbf{25} & \textbf{30} & \textbf{35} & \textbf{40} & \textbf{50}   \\
+\textbf{ # Clusters } & \textbf{2} & \textbf{5} & \textbf{10} & \textbf{15} & \textbf{20} & \textbf{25} & \textbf{30} & \textbf{35} & \textbf{40} & \textbf{50} & \textbf{60} & \textbf{70}   \\
 \hline
-\textbf{SSE} &  108717 & 71834 & 47453 & 37701 & 31090 & 27611 & 25517 & 23874 & 22410 & 20267 \\ \hline
-\textbf{k-Means AMI} & 0.105 & 0.134 & 0.120 & 0.103 & 0.091 & 0.080 & 0.086 & 0.090 & 0.086 & 0.081 \\ \hline
-\textbf{k-Means ACC} & 0.628 & 0.634 & 0.695 & 0.702 & 0.694 & 0.688 & 0.695 & 0.704 & 0.705 & 0.715 \\ \hline 
-\textbf{EM AMI} & 0.010 & 0.065 & 0.073 & 0.073 & 0.078 & 0.073 & 0.081 & 0.085 & 0.077 & 0.078 \\ \hline
-\textbf{EM ACC} & 0.628 & 0.631 & 0.631 & 0.644 & 0.657 & 0.666 & 0.682 & 0.688 & 0.686 & 0.677 \\ \hline
 
+\textbf{PERM VISA} \\ \hline
+\textbf{SSE} &  108717 & 71834 & 47453 & 37701 & 31090 & 27611 & 25517 & 23874 & 22410 & 20267 & 18532 & 17331 \\ \hline
+\textbf{k-Means AMI} & 0.022 & 0.008 & 0.005 & 0.005 & 0.004 & 0.005 & 0.004 & 0.004 & 0.004 & 0.004 & 0.004 & 0.004 \\ \hline
+\textbf{k-Means ACC} & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 \\ \hline
+\textbf{EM AMI} & 0.022 & 0.007 & 0.005 & 0.005 & 0.006 & 0.005 & 0.006 & 0.007 & 0.006 & 0.006 & 0.007 & 0.007 \\ \hline
+\textbf{EM ACC} & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 \\ \hline
+
+\textbf{HOUSING} \\ \hline
+\textbf{SSE} & 14840 & 10217 & 8265 & 7256 & 6589 & 6106 & 5687 & 5339 & 5063 & 4589 & 4276 & 4024 \\ \hline
+\textbf{k-Means AMI} & 0.105 & 0.134 & 0.120 & 0.103 & 0.091 & 0.080 & 0.086 & 0.090 & 0.086 & 0.081 & 0.083 & 0.081 \\ \hline
+\textbf{k-Means ACC} & 0.628 & 0.634 & 0.695 & 0.702 & 0.694 & 0.688 & 0.695 & 0.704 & 0.705 & 0.715 & 0.719 & 0.726 \\ \hline
+\textbf{EM AMI} & 0.010 & 0.065 & 0.073 & 0.073 & 0.078 & 0.073 & 0.081 & 0.085 & 0.077 & 0.078 & 0.065 & 0.064 \\ \hline
+\textbf{EM ACC} & 0.628 & 0.631 & 0.631 & 0.644 & 0.657 & 0.666 & 0.682 & 0.688 & 0.686 & 0.677 & 0.673 & 0.679 \\ \hline
 \end{tabular}
-\caption*{Simulated Annealing Results w/ .15 Cooling} 
+\caption*{Table of Housing Data Results for Cluster } 
 \end{figure}
 
+\subsubsection*{Analysis}
 Text
 
 \subsection*{2) Expectation Maximization}  
 \subsubsection*{Overview}
 Text
 
- \begin{figure}[H]
-  \minipage{0.49\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{perm_visa_sse.jpg} 
-      \caption*{Sum of Square Errors for Clusters vs. # Clusters} 
-   \endminipage\hfill
-   \minipage{0.49\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{permanent_visa_clustering_scoring.jpg} 
-      \caption*{Scoring for k-means and expectation maximization} 
-   \endminipage\hfill
-\end{figure}
 
  
 \section*{Part 2: Dimensionality Reduction Algorithms}

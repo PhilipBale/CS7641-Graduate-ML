@@ -80,26 +80,29 @@ def print_latex_row(vals, sig=3):
 def save_plot(plot, title):
     plot.savefig('analysis/plots/' + title.replace(' ', '_').replace('.', 'pt').lower() + '.jpg')
 
-def plot_sse(df, valName, title):
+def plot_item(df, valName, title, yLabel, lineLabel, latexVal = 3):
     clusters = df[df.columns[0]]
     vals = df[valName]
-    print_latex_row(vals, 0)
+    print_latex_row(vals, latexVal)
 
     plt.figure()
     plt.title(title) 
 
     plt.xlabel("Number of Clusters")
-    plt.ylabel("Inner Cluster Sum of Squared Errors")
+    plt.ylabel(yLabel)
     
     plt.grid()
     
     plt.plot(clusters, vals, 'o-', color="r",
-             label="Sum of Squared Errors")
+             label=lineLabel)
 
     plt.legend(loc="best")
 
     save_plot(plt, title)
     plt.close()
+
+def plot_sse(df, valName, title):
+    plot_item(df, valName, title, 'Inner Cluster Sum of Squared Errors', "Sum of Squared Errors")
 
 def plot_clustering_accuracy(folderFile, title): 
     ami = get_df(folderFile + ' adjMI.csv')
@@ -136,6 +139,9 @@ def plot_clustering_accuracy(folderFile, title):
     save_plot(plt, newTitle)
     plt.close()
 
+def plot_log_liklihood(folder, valName, title):
+    df = get_df(folder + '/logliklihood.csv')
+    plot_item(df, valName, title, 'Log Likelihood', 'Log Likelihood', 4)
 
 def plot_clustering():
     sse = get_df('clustering/SSE.csv')
@@ -145,6 +151,9 @@ def plot_clustering():
 
     plot_clustering_accuracy('clustering/Housing', 'Housing Clustering')
     plot_clustering_accuracy('clustering/Perm', 'Permanent Visa Clustering')
+
+    plot_log_liklihood('clustering', 'housing log-likelihood', 'Housing Logliklihood')
+    plot_log_liklihood('clustering', 'perm log-likelihood', 'Permanent Visa Logliklihood')
 
 
 plot_clustering()
