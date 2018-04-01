@@ -369,7 +369,29 @@ reduction and all clustering algorithms from above are used.
   \end{figure}
   
 \subsubsection*{Analysis}
-Text
+Above, graphs were computed showing the baseline clustering from Part 1, as well 
+as clustering after each of the dimensionality reductions.  Based on the results of part 2, 
+a dimension of 5 was used for the permanent visa dataset and 9 for the housing 
+dataset.
+\\ \\ 
+As is immediately apparent, the types of clusters generated vary greatly based on the 
+dimensionality reduction algorithm used.  A great way of seeing this is the 
+sum of squared errors for each number of clusters.  Each algorithm calculated a 
+different SSE--while part of this can be attributed to the random start of the 
+cluster centers, they do not converge to the same error rates (and thus 
+locations for the testing data).
+\\ \\
+When looking at the scoring graph, it is observed that k-Means performs roughly consistently 
+after each of the dimensionality algorithms.  Other than Randomized projections, 
+which performs slightly worse than the other, the algorithms tend to converge in 
+both accuracy and adjusted mutual information.  Similar to before, however, the 
+permanent visa dataset is easily classified and does vary 
+significantly depending on the algorithm used.
+\\ \\
+For the housing dataset, it becomes clear that random forest feature selection 
+provides the best manner of selecting features.  In a way, this makes sense as 
+the random forest feature selector is a robust, generic way of viewing which 
+features contribute the most to classification.
 
 \subsection*{Expectation Maximization after Dimensionality Reduction}
 
@@ -393,7 +415,23 @@ Text
   \end{figure}
 
 \subsubsection*{Analysis}
-Text
+Similar to k-Means, based on part 2, 5 and 9 were the dimension parameters used for expectation 
+maximization. 
+\\ \\
+Again, the clusters generated vary signficiantly based on the dimensionality 
+reduction algorithm used.  This can be observed through the log liklihood 
+calculations plotted above for each dimensionality reduction algorithm and 
+baseline expectation algorithm.  In EM, the log liklihood represents the liklihood of the data being correctly 
+classified.  After dimensionality reducing, the number of clusters generally increases 
+this liklihood for both datasets.
+\\ \\
+Performance results, again, were similar to the k-Means analysis above.  One 
+noticeable difference, however, was that ICA proved to be the most succesful 
+algorithm for the more complex housing dataset.  While random forests still 
+performed well, they did not stand out as before.  Since expectation 
+maximization tries to maximize likilhood and ICA seeks to separate mixed data, 
+this is a viable outcome for scoring.  On average, expectation maximization 
+performs slightly worse across algorithms than k-Means, however.
 
 \section*{Part 4/5: Dimensionality Reduction, Clustering, and Neural Networks}
 \subsection*{Overview}
