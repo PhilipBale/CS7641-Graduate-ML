@@ -16,6 +16,8 @@ import sys
 out = './results/clustering/'
 perm_x, perm_y, housing_x, housing_y = load_data() # perm, housing
 
+raise Exception('Remove this line to run code')
+
 SSE = defaultdict(dict) # some of squared errors
 ll = defaultdict(dict) # log likelihood
 acc = defaultdict(lambda: defaultdict(dict))

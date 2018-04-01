@@ -11,7 +11,7 @@ from sklearn.model_selection import GridSearchCV
 out = './results/random_forest/'
 
 perm_x, perm_y, housing_x, housing_y = load_data() # perm, housing
-raise Exception()
+raise Exception('Remove this line to run code')
 
 #2
 

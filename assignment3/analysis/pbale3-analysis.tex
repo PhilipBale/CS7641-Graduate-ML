@@ -98,7 +98,7 @@ has a clear impact on the performance of k-Means clustering.  For both datasets,
 clusters increases, the clusters are more able to represent the data. Logically, 
 there are instances where increasing number of clusters will decrease the 
 accuracy instead of increasing it, such as when just starting out and before 
-convergence (using Euclidean distance).
+convergence (using Euclidean distance for converge properties).
 \\ \\
 The first measurement used to determine the effectiveness is the sum of square 
 errors (SSE).  The SSE measures how far away an instance data point is from the mean of its cluster.
@@ -246,8 +246,9 @@ While PCA sought to maximize variance, ICA seeks to separate mixed data into
 subcomponents.  As a dimensionality aglorithm, independent components analysis also wants to minimize 
 dimesionality while preserving data quality.  Using the kurtosis measurement, 
 we are able to measure the spikiness of the data distribution.  It's important to note that kurtosis is 
-sensitive to outliers and therefore not always robust to measuring gaussianity.  
-Similar to PCA, it is observed that the permanent visa dataset is significantly 
+sensitive to outliers and therefore not always robust to measuring gaussianity. 
+\\ \\ 
+The parameter to tune was number of components (dimensions).  Similar to PCA, it is observed that the permanent visa dataset is significantly 
 more homogenous then the housing dataset.  It also suggest that 5 dimensions 
 be kept for the permanent visa dataset and approximately 5-9 for the housing 
 dataset.
@@ -286,16 +287,21 @@ varoius tests on how well the lower dimension data captures the original.
 Randomized projections, of all the dimesionality reduction algorithms, was the 
 most susceptible to variation in performance due to its random nature.  In such, 
 various trials were run, each varying the random state and maintaining that same random state for a variety of 
-number of components.  The first measure used to determine the appropriate 
+number of components.  We ran 10 trials for each dataset (and kept the most relevant 7).  
+\\ \\
+The first measure used to determine the appropriate 
 number of dimensions to reduce to was pairwise distance between the original and 
 reduced data.  From the graphs, it is easy to see that the distance (akin to difference in the instances) 
 converges around 5 components for the permanent visa dataset and 9-10 for the 
 housing dataset.
 \\ \\
-The second, measurement used was reconstruction error.  For both datsets, the 
+The second, measurement used was reconstruction error.  For both datasets, the 
 reconstuction error decreases signficiantly as the number of dimensions is 
 increased.  This makes sense as the more dimensions available, the more easily 
-the initial data can be reconstructed.
+the initial data can be reconstructed.  While reconstruction error doesn't give 
+us a clear indicator as to how well a learner will perform on the deconstructed 
+data, it does give insight into how much data is thrown away at each reduction 
+of dimension.
 
 \subsection*{4) Random Forest Feature Selection}  
 \subsubsection*{Overview}
@@ -318,7 +324,12 @@ important features and disregard unimporant features.
 
 \subsubsection*{Analysis}
 The last dimensionality reduction algorithm produces results consistent with the 
-others.  For the permanent visa dataset, approximately 5 of the features have high importance 
+others. The number of estimators used was 100 to give a robust learner and all 
+class weights were treated equally.  To keep trials consistent, the same random 
+state, number of estimators, and initial class weights were used for each 
+trial of the random forest feature selector.
+\\ \\
+For the permanent visa dataset, approximately 5 of the features have high importance 
 in terms of a random forest classying data correctly, whereas approximately 9 of 
 the features have high importance for the housing dataset.  Interestingly 
 enough, the feature importance graph for the housing dataset indicates that there is a quick dropoff 
