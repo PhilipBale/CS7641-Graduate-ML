@@ -279,7 +279,19 @@ varoius tests on how well the lower dimension data captures the original.
 \end{figure}
 
 \subsubsection*{Analysis}
-IText
+Randomized projections, of all the dimesionality reduction algorithms, was the 
+most susceptible to variation in performance due to its random nature.  In such, 
+various trials were run, each varying the random state and maintaining that same random state for a variety of 
+number of components.  The first measure used to determine the appropriate 
+number of dimensions to reduce to was pairwise distance between the original and 
+reduced data.  From the graphs, it is easy to see that the distance (akin to difference in the instances) 
+converges around 5-6 components for the permaentn visa dataset and 9-10 for the 
+housing dataset.
+\\ \\
+The second, measurement used was reconstruction error.  For both datsets, the 
+reconstuction error decreases signficiantly as the number of dimensions is 
+increased.  This makes sense as the more dimensions available, the more easily 
+the initial data can be reconstructed.
 
 \subsection*{4) Random Forest Feature Selection}  
 \subsubsection*{Overview}
