@@ -125,21 +125,34 @@ similar to k-means, is a clustering algorithm.  Expectation Maximization works
 by iteratively finding the maximum liklihood of parameters leading to a labeling 
 of an instance despite possibly not having all data or parameters.  For our 
 examples, we used Scikit-learn's Gaussian mixture models to implement the 
-Expectation Maximization algorithm.  A varying number of mixture components were 
+Expectation Maximization algorithm.  A varying number of mixture components (or number of distributions) were 
 used to determine the best possible parameters for the clustering.
 
 \subsubsection*{Expectation Maximization Analysis}
 Text
 
 
+
+
+
+
+
+
  
 \section*{Part 2: Dimensionality Reduction Algorithms}
 \subsection*{ Introduction}  
-Text
+Part 2 deals with dimensionality reduction algorithms.  The four algorithms used 
+are principal components analysis, individual components analysis, randomized projections, and random 
+forests.  After running the algorithms on both datasets, an analysis is provided 
+on the results.
 
 \subsection*{1) Principal Components Analysis (PCA)}  
 \subsubsection*{Overview}
-Text
+The first dimenstionality reductation algorithm, Principal component analysis is a statistics approach to finding vectors that 
+maximize variance and thus help to determine components that are correlated.  Each subsequent component is found with the intent to be 
+orthoganal to the preceding component.  The resulting eigenvalue matrix from PCA 
+is therefore maximized for covariance.
+
 
 \subsubsection*{Analysis}
 IText

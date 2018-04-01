@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
-from helpers import load_data, nn_layers, nn_reg, nn_iter, cluster_acc, myGMM, clusters, dims, run_clustering
+from helpers import load_data, nn_layers, nn_reg, nn_iter, cluster_acc, myGMM, clusters, dims, dims_big, run_clustering
 from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.decomposition import FastICA
@@ -28,7 +28,7 @@ kurt.to_csv(out+'perm scree.csv')
 
 ica = FastICA(random_state=5)
 kurt = {}
-for dim in dims:
+for dim in dims_big:
     ica.set_params(n_components=dim)
     tmp = ica.fit_transform(housing_x)
     tmp = pd.DataFrame(tmp)
@@ -52,7 +52,7 @@ tmp = pd.DataFrame(gs.cv_results_)
 tmp.to_csv(out+'perm dim red.csv')
 
 
-grid ={'ica__n_components':dims,'NN__alpha':nn_reg,'NN__hidden_layer_sizes':nn_layers}
+grid ={'ica__n_components':dims_big,'NN__alpha':nn_reg,'NN__hidden_layer_sizes':nn_layers}
 ica = FastICA(random_state=5)       
 mlp = MLPClassifier(activation='relu',max_iter=nn_iter,early_stopping=True,random_state=5)
 pipe = Pipeline([('ica',ica),('NN',mlp)])

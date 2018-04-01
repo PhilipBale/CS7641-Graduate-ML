@@ -3,7 +3,7 @@ import numpy as np
 
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
-from helpers import load_data, nn_layers, nn_reg, nn_iter, cluster_acc, myGMM, clusters, dims, run_clustering, pairwiseDistCorr, reconstructionError, ImportanceSelect
+from helpers import load_data, nn_layers, nn_reg, nn_iter, cluster_acc, myGMM, clusters, dims, dims_big, run_clustering, pairwiseDistCorr, reconstructionError, ImportanceSelect
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import GridSearchCV
@@ -37,7 +37,7 @@ tmp = pd.DataFrame(gs.cv_results_)
 tmp.to_csv(out+'perm dim red.csv')
 
 
-grid ={'filter__n':dims,'NN__alpha':nn_reg,'NN__hidden_layer_sizes':nn_layers}  
+grid ={'filter__n':dims_big,'NN__alpha':nn_reg,'NN__hidden_layer_sizes':nn_layers}  
 mlp = MLPClassifier(activation='relu',max_iter=nn_iter,early_stopping=True,random_state=5)
 pipe = Pipeline([('filter',filtr),('NN',mlp)])
 gs = GridSearchCV(pipe,grid,verbose=10,cv=5)

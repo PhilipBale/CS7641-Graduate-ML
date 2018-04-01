@@ -1,1 +1,1 @@
-python code/pca.py
+python code/ica.py

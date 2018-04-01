@@ -2,7 +2,7 @@
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
-from helpers import load_data, nn_layers, nn_reg, nn_iter, cluster_acc, myGMM, clusters, dims, run_clustering
+from helpers import load_data, nn_layers, nn_reg, nn_iter, cluster_acc, myGMM, clusters, dims, dims_big, run_clustering
 from matplotlib import cm
 from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import GridSearchCV
