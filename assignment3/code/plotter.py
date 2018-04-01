@@ -69,8 +69,8 @@ def plot_timing_curve(iterations, timeDuration, title):
     plt.legend(loc="best")
     return plt
 
-def get_df(path):
-    return pandas.read_csv('./results/' + path)
+def get_df(path, headerVal=0):
+    return pandas.read_csv('./results/' + path, header=headerVal)
 
 def print_latex_row(vals, sig=3):
     sigString = '{:0.' + str(sig) + 'f}'
@@ -154,8 +154,42 @@ def plot_clustering():
     plot_log_liklihood('clustering', 'housing log-likelihood', 'Housing Logliklihood')
     plot_log_liklihood('clustering', 'perm log-likelihood', 'Permanent Visa Logliklihood')
 
+def plot_eigen(folderFile, title):
+    df = get_df(folderFile + ' scree.csv', None)
 
-plot_clustering()
+    print(df[0].values)
+    print(df[1].values)
+    plt.figure()
+    plt.title(title) 
+
+    plt.xlabel('# Components')
+    plt.ylabel('Eigenvalues')
+    
+    plt.grid()
+    
+    plt.plot(df[0].values, df[1].values, 'o-', color="g",
+             label='Eigenvalue')
+    plt.plot(df[0].values, df[2].values, 'o-', color="b",
+             label='Variance')
+    plt.plot(df[0].values, df[3].values, 'o-', color="black",
+             label='Cumulative Variance')
+
+    plt.legend(loc="best")
+
+    save_plot(plt, title)
+    plt.close()
+
+def plot_pca():
+    plot_eigen('pca/housing', 'Housing PCA Eigenvalues')
+    plot_eigen('pca/perm', 'Permanent Visa PCA Eigenvalues')
+
+
+def plot_dr():
+    plot_pca()
+
+
+# plot_clustering()
+plot_dr()
 
 # plot('NN_OUTPUT/BACKPROP_LOG.txt', 'Backprop NN')
 
