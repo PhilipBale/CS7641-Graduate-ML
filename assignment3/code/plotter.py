@@ -2,6 +2,8 @@ import matplotlib.pyplot as plt
 import pandas
 
 
+colors = ['r', 'b', 'g', 'k', 'm', 'c', 'y']
+
 def plot_learning_curve(iterations, train_scores, test_scores, title):
 #     _, _, test_scores_base = base_curve
 
@@ -196,6 +198,52 @@ def plot_kurt(folderFile, title):
     save_plot(plt, title)
     plt.close()
 
+def plot_reconstruction(folderFile, title):
+    df = get_df(folderFile + ' scree2.csv')
+
+    plt.figure()
+    plt.title(title) 
+
+    plt.xlabel('# Components')
+    plt.ylabel('Reconstruction Error')
+    
+    plt.grid()
+
+    for i in range(len(colors)):
+        color = colors[i]
+        
+        plt.plot(df[df.columns[0]].values, df[df.columns[i + 1]].values, 'o-', color=color,
+                 label='Error for Trial ' + str(i + 1))
+
+    plt.legend(loc="best")
+
+    save_plot(plt, title)
+    plt.close()
+
+
+def plot_pairwise_distance_corr(folderFile, title):
+    df = get_df(folderFile + ' scree1.csv')
+
+    plt.figure()
+    plt.title(title) 
+
+    plt.xlabel('# Components')
+    plt.ylabel('Parise Distance Correlation')
+    
+    plt.grid()
+
+    for i in range(len(colors)):
+        color = colors[i]
+        
+        plt.plot(df[df.columns[0]].values, df[df.columns[i + 1]].values, 'o-', color=color,
+                 label='Correlation for Trial ' + str(i + 1))
+
+    plt.legend(loc="best")
+
+    save_plot(plt, title)
+    plt.close()
+
+
 def plot_pca():
     plot_eigen('pca/housing', 'Housing PCA Eigenvalues')
     plot_eigen('pca/perm', 'Permanent Visa PCA Eigenvalues')
@@ -204,10 +252,17 @@ def plot_ica():
     plot_kurt('ica/housing', 'Housing ICA Kurtosis')
     plot_kurt('ica/perm', 'Permanent Visa ICA Kurtosis')
 
+def plot_rp():
+    plot_reconstruction('randomized_projections/housing', 'Housing Randomized Projections Reconstruction Error')
+    plot_reconstruction('randomized_projections/perm', 'Permanent Visa Randomized Projections Reconstruction Error')
+
+    plot_pairwise_distance_corr('randomized_projections/housing', 'Housing Randomized Projections Pairwise Dist. Corr.')
+    plot_pairwise_distance_corr('randomized_projections/perm', 'Permanent Visa Randomized Projections Pairwise Dist. Corr.')
 
 def plot_dr():
-    plot_pca()
-    plot_ica()
+    # plot_pca()
+    # plot_ica()
+    plot_rp()
 
 
 # plot_clustering()
