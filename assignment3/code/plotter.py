@@ -285,6 +285,78 @@ def plot_all_sse(valName, title):
     save_plot(plt, title)
     plt.close()
 
+def plot_all_log_liklihood(valName, title):
+    title = title + ' Log Liklihood Comparison after DR'
+    plt.figure()
+    plt.title(title) 
+
+    plt.xlabel('# of Clusters')
+    plt.ylabel('Log Liklihood')
+    
+    plt.grid()
+
+    index = 0
+    for folder in all_folders:
+        line = '*-'
+        if index == 0:
+            line = 'o-'
+        df = get_df(folder + '/logliklihood.csv')
+        color = colors[index]
+        name = all_folders_name[index]  
+        vals = df[valName]
+        plt.plot(clusters, vals, line, color=color,
+             label=name + ' Log Liklihood')
+
+        index += 1
+
+    plt.legend(loc="best")
+
+    save_plot(plt, title)
+    plt.close()
+
+def plot_all_scoring(fileName, title, kMeans=True):
+
+    title = title + ' Scoring'
+    plt.figure()
+    plt.title(title) 
+
+    plt.xlabel('# of Clusters')
+    plt.ylabel('Score')
+    
+    plt.grid()
+
+    index = 0
+    for folder in all_folders:
+        line = '*-'
+        if index == 0:
+            line = 'o-'
+
+        color = colors[index]
+        # color1 = colors[-1 * index - 1]
+        name = all_folders_name[index] 
+
+        ami = get_df(folder + '/' + fileName + ' adjMI.csv')
+        acc = get_df(folder + '/' + fileName + ' acc.csv')
+
+        vals1 = ami.loc[0].values[1:]
+        vals2 = acc.loc[0].values[1:]
+
+        if kMeans: 
+            vals1 = ami.loc[1].values[1:]
+            vals2 = acc.loc[1].values[1:]
+
+        plt.plot(clusters, vals1, line, color=color,
+             label=name + ' AMI')
+        plt.plot(clusters, vals2, line, color=color,
+             label=name + ' Accuracy')
+
+        index += 1
+
+    plt.legend(loc="best")
+
+    save_plot(plt, title)
+    plt.close()
+
 def plot_clustering():
     plot_sse('clustering', 'perm SSE (left)', 'Perm Visa SSE')
     plot_sse('clustering', 'housing SSE (left)', 'Housing SSE')
@@ -360,6 +432,15 @@ def plot_dr():
 def plot_comparison():
     plot_all_sse('perm SSE (left)', 'Perm Visa')
     plot_all_sse('housing SSE (left)', 'Housing')
+
+    plot_all_log_liklihood('perm log-likelihood', 'Perm Visa')
+    plot_all_log_liklihood('housing log-likelihood', 'Housing')
+
+    plot_all_scoring('housing', 'Housing k-Means after DR', True)
+    plot_all_scoring('housing', 'Housing Estimation Maximization after DR', False)
+
+    plot_all_scoring('perm', 'Perm Visa k-Means after DR', True)
+    plot_all_scoring('perm', 'Perm Visa Estimation Maximization after DR', False)
 
 
 # plot_clustering()

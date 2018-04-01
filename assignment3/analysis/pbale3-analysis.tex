@@ -251,80 +251,64 @@ IText
 
 \section*{Part 3: Dimensionality Reduction and Clustering}
 \subsection*{Overview}
+In this section, clustering algorithms are run on the results of the 
+dimensionality reduction algorithms and then compared.  All dimenstionality 
+reduction and all clustering algorithms from above are used.
 
 \subsection*{k-Means after Dimensionality Reduction}
 
  \begin{figure}[H]
   \minipage{.25\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{perm_visa_sse_comparison_after_dr.jpg} 
-      \caption*{Original Visa Data} 
+      \caption*{Perm Visa SSE} 
    \endminipage\hfill
-   \minipage{.2\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{pca_perm_visa_sse.jpg} 
-      \caption*{PCA} 
+   \minipage{.25\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{perm_visa_k-means_after_dr_scoring.jpg} 
+      \caption*{Perm Visa Scoring} 
    \endminipage\hfill
-     \minipage{.2\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{ica_perm_visa_sse.jpg} 
-      \caption*{ICA} 
+  \minipage{.25\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{housing_sse_comparison_after_dr.jpg} 
+      \caption*{Housing SSE} 
    \endminipage\hfill
-   \minipage{.2\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{rp_perm_visa_sse.jpg} 
-      \caption*{Randomized Projections} 
+   \minipage{.25\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{housing_k-means_after_dr_scoring.jpg} 
+      \caption*{Housing Scoring} 
    \endminipage\hfill
-\end{figure}
-
-\subsubsection*{SSE Analysis}
+  \end{figure}
+  
+\subsubsection*{Analysis}
 Text
 
 \subsection*{Expectation Maximization after Dimensionality Reduction}
 
  \begin{figure}[H]
-  \minipage{.2\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{permanent_visa_logliklihood.jpg} 
-      \caption*{Original Visa Data} 
+  \minipage{.25\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{perm_visa_log_liklihood_comparison_after_dr.jpg} 
+      \caption*{Perm Visa Log Liklihood} 
    \endminipage\hfill
-   \minipage{.2\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{pca_permanent_visa_logliklihood.jpg} 
-      \caption*{PCA} 
+   \minipage{.25\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{perm_visa_estimation_maximization_after_dr_scoring.jpg} 
+      \caption*{Perm Visa Scoring} 
    \endminipage\hfill
-     \minipage{.2\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{ica_permanent_visa_logliklihood.jpg} 
-      \caption*{ICA} 
+  \minipage{.25\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{housing_log_liklihood_comparison_after_dr.jpg} 
+      \caption*{Housing Log Liklihood} 
    \endminipage\hfill
-   \minipage{.2\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{rp_permanent_visa_logliklihood.jpg} 
-      \caption*{Randomized Projections} 
+   \minipage{.25\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{housing_estimation_maximization_after_dr_scoring.jpg} 
+      \caption*{Housing Scoring} 
    \endminipage\hfill
-   \minipage{.2\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{rf_permanent_visa_logliklihood.jpg} 
-      \caption*{Random Forest} 
-   \endminipage\hfill
-\end{figure}
- \begin{figure}[H]
-  \minipage{.2\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{housing_logliklihood.jpg} 
-      \caption*{Original Housing Data} 
-   \endminipage\hfill
-   \minipage{.2\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{pca_housing_logliklihood.jpg} 
-      \caption*{PCA} 
-   \endminipage\hfill
-     \minipage{.2\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{ica_housing_logliklihood.jpg} 
-      \caption*{ICA} 
-   \endminipage\hfill
-   \minipage{.2\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{rp_housing_logliklihood.jpg} 
-      \caption*{Randomized Projections} 
-   \endminipage\hfill
-   \minipage{.2\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{rf_housing_logliklihood.jpg} 
-      \caption*{Random Forest} 
-   \endminipage\hfill
-\end{figure}
+  \end{figure}
 
-\subsubsection*{PCA Analysis}
+\subsubsection*{Analysis}
 Text
+
+\section*{Part 4: Dimensionality Reduction and Neural Networks}
+\subsection*{Overview}
+In this section, similar to part 3, neural networks are run on the results of the 
+dimensionality reduction algorithms and then compared.
+
+\subsection*{k-Means after Dimensionality Reduction}
 
 \section*{Conclusion}  
 Todo conclusion
