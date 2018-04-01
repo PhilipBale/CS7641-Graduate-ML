@@ -80,7 +80,7 @@ def print_latex_row(vals, sig=3):
 def save_plot(plot, title):
     plot.savefig('analysis/plots/' + title.replace(' ', '_').replace('.', 'pt').lower() + '.jpg')
 
-def plot_item(df, valName, title, yLabel, lineLabel, latexVal = 3):
+def plot_item(df, valName, title, yLabel, lineLabel, xLabel = 'Number of Clusters', latexVal = 3):
     clusters = df[df.columns[0]]
     vals = df[valName]
     print_latex_row(vals, latexVal)
@@ -88,7 +88,7 @@ def plot_item(df, valName, title, yLabel, lineLabel, latexVal = 3):
     plt.figure()
     plt.title(title) 
 
-    plt.xlabel("Number of Clusters")
+    plt.xlabel(xLabel)
     plt.ylabel(yLabel)
     
     plt.grid()
@@ -142,7 +142,7 @@ def plot_clustering_accuracy(folderFile, title):
 
 def plot_log_liklihood(folder, valName, title):
     df = get_df(folder + '/logliklihood.csv')
-    plot_item(df, valName, title, 'Log Likelihood', 'Log Likelihood', 2)
+    plot_item(df, valName, title, 'Log Likelihood', 'Log Likelihood', 'Number of Components', 2)
 
 def plot_clustering():
     plot_sse('clustering', 'perm SSE (left)', 'Perm Visa SSE')

@@ -70,7 +70,7 @@ K-means works by clustering n instances into k-clusters of similarity using leas
    \endminipage\hfill
    \minipage{0.33\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{housing_logliklihood.jpg} 
-      \caption*{Housing Log Liklihood vs. \# Clusters} 
+      \caption*{Housing Log Liklihood vs. \# Components} 
    \endminipage\hfill
    \minipage{0.33\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{housing_clustering_scoring.jpg} 
@@ -84,7 +84,7 @@ K-means works by clustering n instances into k-clusters of similarity using leas
    \endminipage\hfill
       \minipage{0.33\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{permanent_visa_logliklihood.jpg} 
-      \caption*{Perm Visa Log Liklihood vs. \# Clusters} 
+      \caption*{Perm Visa Log Liklihood vs. \# Components} 
    \endminipage\hfill
    \minipage{0.33\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{permanent_visa_clustering_scoring.jpg} 
@@ -92,12 +92,14 @@ K-means works by clustering n instances into k-clusters of similarity using leas
    \endminipage\hfill
 \end{figure}
 
+\subsubsection*{k-Means Analysis}
+Text
+
 \begin{figure}[H] 
 \begin{tabular}{ | c | c  | c | c | c | c | c | c| c| c| c| c| c | } 
 \hline
 \textbf{ # Clusters } & \textbf{2} & \textbf{5} & \textbf{10} & \textbf{15} & \textbf{20} & \textbf{25} & \textbf{30} & \textbf{35} & \textbf{40} & \textbf{50} & \textbf{60} & \textbf{70}   \\
 \hline
-
 \textbf{PERM VISA} \\ \hline
 \textbf{SSE} &  108717 & 71834 & 47453 & 37701 & 31090 & 27611 & 25517 & 23874 & 22410 & 20267 & 18532 & 17331 \\ \hline
 \textbf{Log Liklihood} & -9.44 & 2.67 & 9.57 & 13.25 & 13.90 & 16.01 & 15.78 & 15.29 & 17.56 & 19.12 & 20.04 & 20.47 \\ \hline
@@ -116,11 +118,17 @@ K-means works by clustering n instances into k-clusters of similarity using leas
 \caption*{Table of Housing Data Results for Cluster } 
 \end{figure}
 
-\subsubsection*{Analysis}
-Text
-
 \subsection*{2) Expectation Maximization}  
 \subsubsection*{Overview}
+Expectation Maximization is the second algorithm applied to the datasets and, 
+similar to k-means, is a clustering algorithm.  Expectation Maximization works 
+by iteratively finding the maximum liklihood of parameters leading to a labeling 
+of an instance despite possibly not having all data or parameters.  For our 
+examples, we used Scikit-learn's Gaussian mixture models to implement the 
+Expectation Maximization algorithm.  A varying number of mixture components were 
+used to determine the best possible parameters for the clustering.
+
+\subsubsection*{Expectation Maximization Analysis}
 Text
 
 
