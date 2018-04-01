@@ -157,8 +157,6 @@ def plot_clustering():
 def plot_eigen(folderFile, title):
     df = get_df(folderFile + ' scree.csv', None)
 
-    print(df[0].values)
-    print(df[1].values)
     plt.figure()
     plt.title(title) 
 
@@ -179,13 +177,37 @@ def plot_eigen(folderFile, title):
     save_plot(plt, title)
     plt.close()
 
+def plot_kurt(folderFile, title):
+    df = get_df(folderFile + ' scree.csv', None)
+
+    plt.figure()
+    plt.title(title) 
+
+    plt.xlabel('# Components')
+    plt.ylabel('Kurtosis')
+    
+    plt.grid()
+    
+    plt.plot(df[0].values, df[1].values, 'o-', color="g",
+             label='Kurtosis')
+
+    plt.legend(loc="best")
+
+    save_plot(plt, title)
+    plt.close()
+
 def plot_pca():
     plot_eigen('pca/housing', 'Housing PCA Eigenvalues')
     plot_eigen('pca/perm', 'Permanent Visa PCA Eigenvalues')
 
+def plot_ica():
+    plot_kurt('ica/housing', 'Housing ICA Kurtosis')
+    plot_kurt('ica/perm', 'Permanent Visa ICA Kurtosis')
+
 
 def plot_dr():
     plot_pca()
+    plot_ica()
 
 
 # plot_clustering()
