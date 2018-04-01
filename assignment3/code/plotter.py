@@ -603,8 +603,8 @@ def plot_comparison():
     plot_nn_cluster('housing', ' dim red', '# Clusters', 'Housing NN after Cluster')
 
 
-# plot_clustering()
-# plot_dr()
+plot_clustering()
+plot_dr()
 plot_comparison()
 
 # plot('NN_OUTPUT/BACKPROP_LOG.txt', 'Backprop NN')
