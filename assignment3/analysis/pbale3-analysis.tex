@@ -69,6 +69,10 @@ K-means works by clustering n instances into k-clusters of similarity using leas
       \caption*{Housing Sum of Square Errors for Clusters vs. \# Clusters} 
    \endminipage\hfill
    \minipage{0.33\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{housing_logliklihood.jpg} 
+      \caption*{Housing Log Liklihood vs. \# Clusters} 
+   \endminipage\hfill
+   \minipage{0.33\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{housing_clustering_scoring.jpg} 
       \caption*{Housing Scoring for k-means and expectation maximization} 
    \endminipage\hfill
@@ -77,6 +81,10 @@ K-means works by clustering n instances into k-clusters of similarity using leas
   \minipage{0.33\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{perm_visa_sse.jpg} 
       \caption*{Perm Visa Sum of Square Errors for Clusters vs. \# Clusters} 
+   \endminipage\hfill
+      \minipage{0.33\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{permanent_visa_logliklihood.jpg} 
+      \caption*{Perm Visa Log Liklihood vs. \# Clusters} 
    \endminipage\hfill
    \minipage{0.33\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{permanent_visa_clustering_scoring.jpg} 
@@ -92,11 +100,12 @@ K-means works by clustering n instances into k-clusters of similarity using leas
 
 \textbf{PERM VISA} \\ \hline
 \textbf{SSE} &  108717 & 71834 & 47453 & 37701 & 31090 & 27611 & 25517 & 23874 & 22410 & 20267 & 18532 & 17331 \\ \hline
+\textbf{Log Liklihood} & -9.44 & 2.67 & 9.57 & 13.25 & 13.90 & 16.01 & 15.78 & 15.29 & 17.56 & 19.12 & 20.04 & 20.47 \\ \hline
 \textbf{k-Means AMI} & 0.022 & 0.008 & 0.005 & 0.005 & 0.004 & 0.005 & 0.004 & 0.004 & 0.004 & 0.004 & 0.004 & 0.004 \\ \hline
 \textbf{k-Means ACC} & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 \\ \hline
 \textbf{EM AMI} & 0.022 & 0.007 & 0.005 & 0.005 & 0.006 & 0.005 & 0.006 & 0.007 & 0.006 & 0.006 & 0.007 & 0.007 \\ \hline
 \textbf{EM ACC} & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 \\ \hline
-
+\\
 \textbf{HOUSING} \\ \hline
 \textbf{SSE} & 14840 & 10217 & 8265 & 7256 & 6589 & 6106 & 5687 & 5339 & 5063 & 4589 & 4276 & 4024 \\ \hline
 \textbf{k-Means AMI} & 0.105 & 0.134 & 0.120 & 0.103 & 0.091 & 0.080 & 0.086 & 0.090 & 0.086 & 0.081 & 0.083 & 0.081 \\ \hline

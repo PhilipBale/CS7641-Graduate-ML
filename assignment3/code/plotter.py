@@ -101,7 +101,8 @@ def plot_item(df, valName, title, yLabel, lineLabel, latexVal = 3):
     save_plot(plt, title)
     plt.close()
 
-def plot_sse(df, valName, title):
+def plot_sse(folder, valName, title):
+    df = get_df(folder + '/SSE.csv')
     plot_item(df, valName, title, 'Inner Cluster Sum of Squared Errors', "Sum of Squared Errors")
 
 def plot_clustering_accuracy(folderFile, title): 
@@ -141,13 +142,11 @@ def plot_clustering_accuracy(folderFile, title):
 
 def plot_log_liklihood(folder, valName, title):
     df = get_df(folder + '/logliklihood.csv')
-    plot_item(df, valName, title, 'Log Likelihood', 'Log Likelihood', 4)
+    plot_item(df, valName, title, 'Log Likelihood', 'Log Likelihood', 2)
 
 def plot_clustering():
-    sse = get_df('clustering/SSE.csv')
-
-    plot_sse(sse, 'perm SSE (left)', 'Perm Visa SSE')
-    plot_sse(sse, 'housing SSE (left)', 'Housing SSE')
+    plot_sse('clustering', 'perm SSE (left)', 'Perm Visa SSE')
+    plot_sse('clustering', 'housing SSE (left)', 'Housing SSE')
 
     plot_clustering_accuracy('clustering/Housing', 'Housing Clustering')
     plot_clustering_accuracy('clustering/Perm', 'Permanent Visa Clustering')
