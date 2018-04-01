@@ -10,6 +10,9 @@ all_folders_name = ['Original', 'ICA', 'PCA', 'Random Forest', 'Randomized Proje
 
 nn_items = ['', 'param_ica__n_components', 'param_pca__n_components', 'param_filter__n', 'param_rp__n_components'] 
 
+nn_items_cluster = ['param_gmm__n_components', 'param_km__n_clusters'] 
+
+
 nn_cols = ['mean_fit_time', 'mean_test_score', 'mean_train_score', 'param_NN__alpha', 'param_NN__hidden_layer_sizes']
 
 def plot_learning_curve(iterations, train_scores, test_scores, title):
@@ -428,6 +431,89 @@ def plot_nn(fileBase, extra, xLabel, title):
     save_plot(plt, title)
     plt.close()
 
+def plot_nn_cluster(fileBase, extra, xLabel, title):
+    print('')
+    title = title + ' Scoring'
+    plt.figure()
+    plt.title(title) 
+
+    plt.xlabel(xLabel)
+    plt.ylabel('Score')
+    
+    plt.grid() 
+
+    df = get_df('clustering/Housing cluster GMM.csv').sort_values('rank_test_score')
+    best = df.head(1)
+    # print(best)
+
+    best_data = best[nn_cols]
+
+    best_data = map(lambda x: str(x), list(best_data.values[0, :]))
+    # print(best_data)
+    print('Expectation Maximization' + ' & ' + ' & '.join(best_data) + ' \\\\ \\hline')
+
+    xVar = nn_items_cluster[0]
+
+    nnAlpha = list(best['param_NN__alpha'].values)[0]
+    nnLayers = list(best['param_NN__hidden_layer_sizes'].values)[0]
+
+    dfLayers = df['param_NN__hidden_layer_sizes'] == nnLayers
+    dfAlpha = df['param_NN__alpha'] == nnAlpha 
+
+    best_series = df[dfLayers & dfAlpha].sort_values(xVar)
+    # print(best_series)
+
+    xVals = list(set(df[xVar].values))
+    xVals.sort() 
+
+    vals = best_series['mean_test_score'].values
+
+    # print(xVals)
+    # print(vals)
+
+    plt.plot(xVals, vals, 'o-', color='g',
+         label='Expectation Maximization NN') 
+
+
+
+    df = get_df('clustering/Housing cluster Kmeans.csv').sort_values('rank_test_score')
+    best = df.head(1)
+    # print(best)
+
+    best_data = best[nn_cols]
+
+    best_data = map(lambda x: str(x), list(best_data.values[0, :]))
+    # print(best_data)
+    print('k-means' + ' & ' + ' & '.join(best_data) + ' \\\\ \\hline')
+
+    xVar = nn_items_cluster[1]
+
+    nnAlpha = list(best['param_NN__alpha'].values)[0]
+    nnLayers = list(best['param_NN__hidden_layer_sizes'].values)[0]
+
+    dfLayers = df['param_NN__hidden_layer_sizes'] == nnLayers
+    dfAlpha = df['param_NN__alpha'] == nnAlpha 
+
+    best_series = df[dfLayers & dfAlpha].sort_values(xVar)
+    # print(best_series)
+
+    xVals = list(set(df[xVar].values))
+    xVals.sort()
+
+    vals = best_series['mean_test_score'].values
+
+    # print(xVals)
+    # print(vals)
+
+    plt.plot(xVals, vals, 'o-', color='b',
+         label='k-Means NN') 
+
+    plt.legend(loc="best")
+
+    save_plot(plt, title)
+    plt.close()
+
+
 def plot_clustering():
     plot_sse('clustering', 'perm SSE (left)', 'Perm Visa SSE')
     plot_sse('clustering', 'housing SSE (left)', 'Housing SSE')
@@ -514,6 +600,7 @@ def plot_comparison():
     plot_all_scoring('perm', 'Perm Visa Estimation Maximization after DR', False)
 
     plot_nn('housing', ' dim red', '# Components', 'Housing NN after DR') 
+    plot_nn_cluster('housing', ' dim red', '# Clusters', 'Housing NN after Cluster')
 
 
 # plot_clustering()
