@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import pandas
-from code.helpers import clusters
+from helpers import clusters
 
 
 colors = ['r', 'b', 'g', 'k', 'm', 'c', 'y']
@@ -257,7 +257,7 @@ all_folders = ['clustering', 'ica', 'pca', 'random_forest', 'randomized_projecti
 all_folders_name = ['Original', 'ICA', 'PCA', 'Random Forest', 'Randomized Projections']
 
 def plot_all_sse(valName, title):
-    title = title + 'SSE Comparison after DR'
+    title = title + ' SSE Comparison after DR'
     plt.figure()
     plt.title(title) 
 
@@ -266,15 +266,16 @@ def plot_all_sse(valName, title):
     
     plt.grid()
 
-    clusters = None
-
     index = 0
     for folder in all_folders:
+        line = '*-'
+        if index == 0:
+            line = 'o-'
         df = get_df(folder + '/SSE.csv')
         color = colors[index]
-        name = all_folders_name[index] 
+        name = all_folders_name[index]  
         vals = df[valName]
-        plt.plot(clusters, vals, 'o-', color=color,
+        plt.plot(clusters, vals, line, color=color,
              label=name + ' SSE')
 
         index += 1
@@ -362,7 +363,8 @@ def plot_comparison():
 
 
 # plot_clustering()
-plot_dr()
+# plot_dr()
+plot_comparison()
 
 # plot('NN_OUTPUT/BACKPROP_LOG.txt', 'Backprop NN')
 

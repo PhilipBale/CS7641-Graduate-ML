@@ -11,7 +11,7 @@ from sklearn.model_selection import GridSearchCV
 out = './results/random_forest/'
 
 perm_x, perm_y, housing_x, housing_y = load_data() # perm, housing
-
+raise exception()
 
 #2
 
@@ -48,12 +48,12 @@ tmp.to_csv(out+'housing dim red.csv')
 
 
 #3
-dim = 7
+dim = 5
 filtr = ImportanceSelect(rfc,dim)
 perm_x2 = filtr.fit_transform(perm_x,perm_y)
 
 
-dim = 12
+dim = 9
 filtr = ImportanceSelect(rfc,dim)
 housing_x2 = filtr.fit_transform(housing_x,housing_y)
 

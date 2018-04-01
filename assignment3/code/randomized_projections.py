@@ -75,12 +75,12 @@ tmp.to_csv(out+'housing dim red.csv')
 
 
 #3
-dim = 7
+dim = 5
 rp = SparseRandomProjection(n_components=dim,random_state=5)
 perm_x2 = rp.fit_transform(perm_x)
 
 
-dim = 12
+dim = 9
 rp = SparseRandomProjection(n_components=dim,random_state=5)
 housing_x2 = rp.fit_transform(housing_x)
 
