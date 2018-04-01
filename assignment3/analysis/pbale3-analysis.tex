@@ -50,11 +50,18 @@ Kaggle competiton.  This dataset is interesting for two primary reasons: real-wo
 
 \section*{Part 1: Clustering Algorithms}
 \subsection*{Introduction}  
-Text 
+K-means clustering is the first algorithm applied to the datasets and expectation maximization is the second. 
+ Both algorithms work by clustering: gathering groups of instances together 
+ based upon their features.  The rationale is that similar instances will likely 
+ be labeled the same way--such as identical visa applications obtaining the same 
+ outcome.
 
 \subsection*{1) k-means clustering}  
 \subsubsection*{Overview}
-Test
+K-means works by clustering n instances into k-clusters of similarity using least-squares Euclidean distance
+ between the instances.  In practice, the algorithm converges on 'mean' for each cluster that is representative of the 
+ members of that cluster.   A variety of cluster sizes were tested to find the best parameters 
+ possible.
  
 % \begin{figure}[H]
 %  \minipage{0.49\textwidth}

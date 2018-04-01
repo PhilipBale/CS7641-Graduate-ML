@@ -18,8 +18,8 @@ raise execption()
 out = './results/clustering/'
 perm_x, perm_y, housing_x, housing_y = load_data() # perm, housing
 
-SSE = defaultdict(dict)
-ll = defaultdict(dict)
+SSE = defaultdict(dict) # some of squared errors
+ll = defaultdict(dict) # log likelihood
 acc = defaultdict(lambda: defaultdict(dict))
 adjMI = defaultdict(lambda: defaultdict(dict))
 km = kmeans(random_state=5)
