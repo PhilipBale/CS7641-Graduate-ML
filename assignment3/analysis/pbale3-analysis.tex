@@ -95,7 +95,10 @@ K-means works by clustering n instances into k-clusters of similarity using leas
 \subsubsection*{k-Means Analysis}
 Observing the graphs above, it is clear to see that varying the number of clusters used 
 has a clear impact on the performance of k-Means clustering.  For both datasets, as the number of 
-clusters increases, the clusters are more able to represent the data. 
+clusters increases, the clusters are more able to represent the data. Logically, 
+there are instances where increasing number of clusters will decrease the 
+accuracy instead of increasing it, such as when just starting out and before 
+convergence (using Euclidean distance).
 \\ \\
 The first measurement used to determine the effectiveness is the sum of square 
 errors (SSE).  The SSE measures how far away an instance data point is from the mean of its cluster.
@@ -198,7 +201,21 @@ is therefore maximized for covariance.
 \end{figure}
 
 \subsubsection*{Analysis}
-IText
+Principal component analysis seeks to reduce the number of dimensions in the data without sacrificing data quality.  The prinicipal component analysis results show that both the eigenvalues and the variance decrease for 
+both datasets as the number of components is increases.  For the permanent visa 
+dataset, the size of the eigenvalues starts to level off, indicating that the 
+there are features that are potentially unnecessary and removable.  The housing 
+dataset, however, has more of a continous downwards trend for its eigenvalues, 
+indicating that removing features may not be a wise thing to do.
+\\ \\
+The variance graphs also provide interesting views into the ability of PCA to reduce 
+dimensionality without sacrificing data quality.  While the housing dataset 
+indiciates a higher variance between different features, the permanent visa 
+dataset proves to be more evenly distributed.  Since we are trying to maximize 
+variance between the different components (so that we most accurately represent the higher dimension 
+data), we want to choose a number of components that demonstrates such.  For 
+the permanent visa dataset, that number appears to be around 5 components and for 
+the housing dataset it apepars to be around 9 components.
 
 \subsection*{2) Independent Components Analysis (ICA)}  
 \subsubsection*{Overview}
@@ -223,7 +240,14 @@ is an approach to separating a mixture of a data into appropriate subcomponents.
 
 
 \subsubsection*{Analysis}
-IText
+While PCA sought to maximize variance, ICA seeks to separate mixed data into 
+subcomponents.  As a dimensionality aglorithm, independent components analysis also wants to minimize 
+dimesionality while preserving data quality.  Using the kurtosis measurement, 
+we are able to measure the spikiness of the data distribution.  It's important to note that kurtosis is 
+sensitive to outliers and therefore not always robust to measuring gaussianity.  
+Similar to PCA, it is observed that the permanent visa dataset is significantly 
+more homogenous then the housing dataset.
+
 
 \subsection*{3) Randomized Projections}  
 \subsubsection*{Overview}
