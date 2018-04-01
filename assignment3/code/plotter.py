@@ -146,16 +146,6 @@ def plot_log_liklihood(folder, valName, title):
     df = get_df(folder + '/logliklihood.csv')
     plot_item(df, valName, title, 'Log Likelihood', 'Log Likelihood', 'Number of Components', 2)
 
-def plot_clustering():
-    plot_sse('clustering', 'perm SSE (left)', 'Perm Visa SSE')
-    plot_sse('clustering', 'housing SSE (left)', 'Housing SSE')
-
-    plot_clustering_accuracy('clustering/Housing', 'Housing Clustering')
-    plot_clustering_accuracy('clustering/Perm', 'Permanent Visa Clustering')
-
-    plot_log_liklihood('clustering', 'housing log-likelihood', 'Housing Logliklihood')
-    plot_log_liklihood('clustering', 'perm log-likelihood', 'Permanent Visa Logliklihood')
-
 def plot_eigen(folderFile, title):
     df = get_df(folderFile + ' scree.csv', None)
 
@@ -262,9 +252,28 @@ def plot_feature_importances(folderFile, title):
     save_plot(plt, title)
     plt.close()
 
+def plot_clustering():
+    plot_sse('clustering', 'perm SSE (left)', 'Perm Visa SSE')
+    plot_sse('clustering', 'housing SSE (left)', 'Housing SSE')
+
+    plot_clustering_accuracy('clustering/Housing', 'Housing Clustering')
+    plot_clustering_accuracy('clustering/Perm', 'Permanent Visa Clustering')
+
+    plot_log_liklihood('clustering', 'housing log-likelihood', 'Housing Logliklihood')
+    plot_log_liklihood('clustering', 'perm log-likelihood', 'Permanent Visa Logliklihood')
+
 def plot_pca():
     plot_eigen('pca/housing', 'Housing PCA Eigenvalues')
     plot_eigen('pca/perm', 'Permanent Visa PCA Eigenvalues')
+
+    plot_sse('pca', 'perm SSE (left)', 'PCA Perm Visa SSE')
+    plot_sse('pca', 'housing SSE (left)', 'PCA Housing SSE')
+
+    plot_clustering_accuracy('pca/Housing', 'PCA Housing Clustering')
+    plot_clustering_accuracy('pca/Perm', 'PCA Permanent Visa Clustering')
+
+    plot_log_liklihood('pca', 'housing log-likelihood', 'PCA Housing Logliklihood')
+    plot_log_liklihood('pca', 'perm log-likelihood', 'PCA Permanent Visa Logliklihood')
 
 def plot_ica():
     plot_kurt('ica/housing', 'Housing ICA Kurtosis')
@@ -282,7 +291,7 @@ def plot_rf():
     plot_feature_importances('random_forest/perm', 'Permanent Visa Random Forests Feature Importances')
 
 def plot_dr():
-    # plot_pca()
+    plot_pca()
     # plot_ica()
     # plot_rp()
     plot_rf()
