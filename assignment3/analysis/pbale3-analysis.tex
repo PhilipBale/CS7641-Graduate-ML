@@ -36,7 +36,7 @@ permanent visa dataset.  This dataset is interesting due to its potential to aid
 from a cost and time savings potential. It could also enable confidence in those interested in applying for a 
 US permanent visa but doubting their chances of acceptance. 
 At the end of the day, the goal is it to try to determine the application result before time, money, 
-nd other resources are spent. 
+nd other resources are spent.   As before, 6 features are used. 
 \\  \\
 The second dataset is a home sale price prediction dataset taken from an ongoing 
 Kaggle competiton.  This dataset is interesting for two primary reasons: real-world applicability and participating in a Kaggle challenge.
@@ -46,7 +46,7 @@ Kaggle competiton.  This dataset is interesting for two primary reasons: real-wo
  This applies to flipping, investing, and remodeling. 
  Second, the dataset is part of an ongoing Kaggle competition that does not have a winning solution yet.
   By taking part of the competition, the dataset presents the opportunity to work towards a winning solution 
-  and advance ones algorithms over time.
+  and advance ones algorithms over time. As before, 11 features are used. 
 
 \section*{Part 1: Clustering Algorithms}
 \subsection*{Introduction}  
@@ -180,7 +180,8 @@ datasets exist that would fare better using expectation maximization.
 Part 2 deals with dimensionality reduction algorithms.  The four algorithms used 
 are principal components analysis, individual components analysis, randomized projections, and random 
 forests.  After running the algorithms on both datasets, an analysis is provided 
-on the results.
+on the results.  Later, we will take the results of the dimensionality reduction 
+algorithms and use them as inputs to a neural network.
 
 \subsection*{1) Principal Components Analysis (PCA)}  
 \subsubsection*{Overview}
@@ -203,10 +204,11 @@ is therefore maximized for covariance.
 \subsubsection*{Analysis}
 Principal component analysis seeks to reduce the number of dimensions in the data without sacrificing data quality.  The prinicipal component analysis results show that both the eigenvalues and the variance decrease for 
 both datasets as the number of components is increases.  For the permanent visa 
-dataset, the size of the eigenvalues starts to level off, indicating that the 
-there are features that are potentially unnecessary and removable.  The housing 
-dataset, however, has more of a continous downwards trend for its eigenvalues, 
-indicating that removing features may not be a wise thing to do.
+dataset, the size of the eigenvalues is consistant with a slight continous decrease.  In the case that there was a sharp decrease and then level off,
+it would indicate that there are features that are potentially unnecessary and removable.  Since the level off is gradual, 
+it indicates that each feature is important to representing the initial data.  While the housing 
+dataset has a sharp very initial drop, it then has a continous downwards trend for its eigenvalues, 
+also indicating that removing too many features may not be a wise thing to do.
 \\ \\
 The variance graphs also provide interesting views into the ability of PCA to reduce 
 dimensionality without sacrificing data quality.  While the housing dataset 
@@ -246,7 +248,9 @@ dimesionality while preserving data quality.  Using the kurtosis measurement,
 we are able to measure the spikiness of the data distribution.  It's important to note that kurtosis is 
 sensitive to outliers and therefore not always robust to measuring gaussianity.  
 Similar to PCA, it is observed that the permanent visa dataset is significantly 
-more homogenous then the housing dataset.
+more homogenous then the housing dataset.  It also suggest that 5 dimensions 
+be kept for the permanent visa dataset and approximately 5-9 for the housing 
+dataset.
 
 
 \subsection*{3) Randomized Projections}  
@@ -285,7 +289,7 @@ various trials were run, each varying the random state and maintaining that same
 number of components.  The first measure used to determine the appropriate 
 number of dimensions to reduce to was pairwise distance between the original and 
 reduced data.  From the graphs, it is easy to see that the distance (akin to difference in the instances) 
-converges around 5-6 components for the permaentn visa dataset and 9-10 for the 
+converges around 5 components for the permanent visa dataset and 9-10 for the 
 housing dataset.
 \\ \\
 The second, measurement used was reconstruction error.  For both datsets, the 
@@ -313,9 +317,17 @@ important features and disregard unimporant features.
 \end{figure}
 
 \subsubsection*{Analysis}
-IText
-
-
+The last dimensionality reduction algorithm produces results consistent with the 
+others.  For the permanent visa dataset, approximately 5 of the features have high importance 
+in terms of a random forest classying data correctly, whereas approximately 9 of 
+the features have high importance for the housing dataset.  Interestingly 
+enough, the feature importance graph for the housing dataset indicates that there is a quick dropoff 
+between 5 features in terms of importance.  These findings are consistent 
+with the results of the other dimensionality reduction algorithms.  
+\\ \\ 
+By using the various algorithms in tandem, it gives us confidence to safely pick 
+a dimensionality of 5 for the permanent visa dataset and 9 for the housing 
+dataset.
 
 
 \section*{Part 3: Dimensionality Reduction and Clustering}
