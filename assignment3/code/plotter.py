@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import pandas
+from code.helpers import clusters
 
 
 colors = ['r', 'b', 'g', 'k', 'm', 'c', 'y']
@@ -252,6 +253,37 @@ def plot_feature_importances(folderFile, title):
     save_plot(plt, title)
     plt.close()
 
+all_folders = ['clustering', 'ica', 'pca', 'random_forest', 'randomized_projections']
+all_folders_name = ['Original', 'ICA', 'PCA', 'Random Forest', 'Randomized Projections']
+
+def plot_all_sse(valName, title):
+    title = title + 'SSE Comparison after DR'
+    plt.figure()
+    plt.title(title) 
+
+    plt.xlabel('# of Clusters')
+    plt.ylabel('Inner Cluster Sum of Squared Errors')
+    
+    plt.grid()
+
+    clusters = None
+
+    index = 0
+    for folder in all_folders:
+        df = get_df(folder + '/SSE.csv')
+        color = colors[index]
+        name = all_folders_name[index] 
+        vals = df[valName]
+        plt.plot(clusters, vals, 'o-', color=color,
+             label=name + ' SSE')
+
+        index += 1
+
+    plt.legend(loc="best")
+
+    save_plot(plt, title)
+    plt.close()
+
 def plot_clustering():
     plot_sse('clustering', 'perm SSE (left)', 'Perm Visa SSE')
     plot_sse('clustering', 'housing SSE (left)', 'Housing SSE')
@@ -279,6 +311,15 @@ def plot_ica():
     plot_kurt('ica/housing', 'Housing ICA Kurtosis')
     plot_kurt('ica/perm', 'Permanent Visa ICA Kurtosis')
 
+    plot_sse('ica', 'perm SSE (left)', 'ICA Perm Visa SSE')
+    plot_sse('ica', 'housing SSE (left)', 'ICA Housing SSE')
+
+    plot_clustering_accuracy('ica/Housing', 'ICA Housing Clustering')
+    plot_clustering_accuracy('ica/Perm', 'ICA Permanent Visa Clustering')
+
+    plot_log_liklihood('ica', 'housing log-likelihood', 'ICA Housing Logliklihood')
+    plot_log_liklihood('ica', 'perm log-likelihood', 'ICA Permanent Visa Logliklihood')
+
 def plot_rp():
     plot_reconstruction('randomized_projections/housing', 'Housing Randomized Projections Reconstruction Error')
     plot_reconstruction('randomized_projections/perm', 'Permanent Visa Randomized Projections Reconstruction Error')
@@ -286,15 +327,38 @@ def plot_rp():
     plot_pairwise_distance_corr('randomized_projections/housing', 'Housing Randomized Projections Pairwise Dist. Corr.')
     plot_pairwise_distance_corr('randomized_projections/perm', 'Permanent Visa Randomized Projections Pairwise Dist. Corr.')
 
+    plot_sse('randomized_projections', 'perm SSE (left)', 'RP Perm Visa SSE')
+    plot_sse('randomized_projections', 'housing SSE (left)', 'RP Housing SSE')
+
+    plot_clustering_accuracy('randomized_projections/Housing', 'RP Housing Clustering')
+    plot_clustering_accuracy('randomized_projections/Perm', 'RP Permanent Visa Clustering')
+
+    plot_log_liklihood('randomized_projections', 'housing log-likelihood', 'RP Housing Logliklihood')
+    plot_log_liklihood('randomized_projections', 'perm log-likelihood', 'RP Permanent Visa Logliklihood')
+
 def plot_rf():
     plot_feature_importances('random_forest/housing', 'Housing Random Forests Feature Importances')
     plot_feature_importances('random_forest/perm', 'Permanent Visa Random Forests Feature Importances')
 
+    plot_sse('random_forest', 'perm SSE (left)', 'RF Perm Visa SSE')
+    plot_sse('random_forest', 'housing SSE (left)', 'RF Housing SSE')
+
+    plot_clustering_accuracy('random_forest/Housing', 'RF Housing Clustering')
+    plot_clustering_accuracy('random_forest/Perm', 'RF Permanent Visa Clustering')
+
+    plot_log_liklihood('random_forest', 'housing log-likelihood', 'RF Housing Logliklihood')
+    plot_log_liklihood('random_forest', 'perm log-likelihood', 'RF Permanent Visa Logliklihood')
+
 def plot_dr():
     plot_pca()
-    # plot_ica()
-    # plot_rp()
+    plot_ica()
+    plot_rp()
     plot_rf()
+
+
+def plot_comparison():
+    plot_all_sse('perm SSE (left)', 'Perm Visa')
+    plot_all_sse('housing SSE (left)', 'Housing')
 
 
 # plot_clustering()

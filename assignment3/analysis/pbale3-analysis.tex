@@ -255,44 +255,102 @@ IText
 \subsection*{k-Means after Dimensionality Reduction}
 
  \begin{figure}[H]
-  \minipage{.25\textwidth}
+  \minipage{.2\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{perm_visa_sse.jpg} 
+      \caption*{Original Visa Data} 
+   \endminipage\hfill
+   \minipage{.2\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{pca_perm_visa_sse.jpg} 
-      \caption*{PCA perm Visa Sum of Square Errors for Clusters vs. \# Clusters} 
+      \caption*{PCA} 
    \endminipage\hfill
-   \minipage{.25\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{pca_permanent_visa_clustering_scoring.jpg} 
-      \caption*{PCA Perm Visa Scoring for k-means and expectation maximization} 
+     \minipage{.2\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{ica_perm_visa_sse.jpg} 
+      \caption*{ICA} 
    \endminipage\hfill
-     \minipage{0.25\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{pca_housing_sse.jpg} 
-      \caption*{PCA Housing Sum of Square Errors for Clusters vs. \# Clusters} 
+   \minipage{.2\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{rp_perm_visa_sse.jpg} 
+      \caption*{Randomized Projections} 
    \endminipage\hfill
-   \minipage{0.25\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{pca_housing_clustering_scoring.jpg} 
-      \caption*{PCA Housing Scoring for k-means and expectation maximization} 
+   \minipage{.2\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{rf_perm_visa_sse.jpg} 
+      \caption*{Random Forest} 
    \endminipage\hfill
 \end{figure}
+ \begin{figure}[H]
+  \minipage{.2\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{housing_sse.jpg} 
+      \caption*{Original Housing Data} 
+   \endminipage\hfill
+   \minipage{.2\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{pca_housing_sse.jpg} 
+      \caption*{PCA} 
+   \endminipage\hfill
+     \minipage{.2\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{ica_housing_sse.jpg} 
+      \caption*{ICA} 
+   \endminipage\hfill
+   \minipage{.2\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{rp_housing_sse.jpg} 
+      \caption*{Randomized Projections} 
+   \endminipage\hfill
+   \minipage{.2\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{rf_housing_sse.jpg} 
+      \caption*{Random Forest} 
+   \endminipage\hfill
+\end{figure}
+
+\subsubsection*{SSE Analysis}
+Text
 
 \subsection*{Expectation Maximization after Dimensionality Reduction}
 
  \begin{figure}[H]
-     \minipage{.25\textwidth}
+  \minipage{.2\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{permanent_visa_logliklihood.jpg} 
+      \caption*{Original Visa Data} 
+   \endminipage\hfill
+   \minipage{.2\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{pca_permanent_visa_logliklihood.jpg} 
-      \caption*{PCA Perm Visa Log Liklihood vs. \# Components} 
+      \caption*{PCA} 
    \endminipage\hfill
-   \minipage{.25\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{pca_permanent_visa_clustering_scoring.jpg} 
-      \caption*{PCA Perm Visa Scoring for k-means and expectation maximization} 
+     \minipage{.2\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{ica_permanent_visa_logliklihood.jpg} 
+      \caption*{ICA} 
    \endminipage\hfill
-    \minipage{.25\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{pca_housing_logliklihood.jpg} 
-      \caption*{PCA Housing Log Liklihood vs. \# Components} 
+   \minipage{.2\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{rp_permanent_visa_logliklihood.jpg} 
+      \caption*{Randomized Projections} 
    \endminipage\hfill
-   \minipage{0.25\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{pca_housing_clustering_scoring.jpg} 
-      \caption*{PCA Housing Scoring for k-means and expectation maximization} 
+   \minipage{.2\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{rf_permanent_visa_logliklihood.jpg} 
+      \caption*{Random Forest} 
    \endminipage\hfill
 \end{figure}
+ \begin{figure}[H]
+  \minipage{.2\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{housing_logliklihood.jpg} 
+      \caption*{Original Housing Data} 
+   \endminipage\hfill
+   \minipage{.2\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{pca_housing_logliklihood.jpg} 
+      \caption*{PCA} 
+   \endminipage\hfill
+     \minipage{.2\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{ica_housing_logliklihood.jpg} 
+      \caption*{ICA} 
+   \endminipage\hfill
+   \minipage{.2\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{rp_housing_logliklihood.jpg} 
+      \caption*{Randomized Projections} 
+   \endminipage\hfill
+   \minipage{.2\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{rf_housing_logliklihood.jpg} 
+      \caption*{Random Forest} 
+   \endminipage\hfill
+\end{figure}
+
+\subsubsection*{PCA Analysis}
+Text
 
 \section*{Conclusion}  
 Todo conclusion
