@@ -30,7 +30,7 @@ analysis, randomized projections, and random forests.  After running these six
 algorithms on the original datasets and observing the results, the results are 
 then piped into a neural network learner for further examination.
 
-\subsection*{Datasets chosen}  
+\subsection*{Datasets}  
 The datasets chosen were the same datasets chosen for assignment 1.  The first dataset is the US 
 permanent visa dataset.  This dataset is interesting due to its potential to aid in the visa application process 
 from a cost and time savings potential. It could also enable confidence in those interested in applying for a 
@@ -93,7 +93,25 @@ K-means works by clustering n instances into k-clusters of similarity using leas
 \end{figure}
 
 \subsubsection*{k-Means Analysis}
-Text
+Observing the graphs above, it is clear to see that varying the number of clusters used 
+has a clear impact on the performance of k-Means clustering.  For both datasets, as the number of 
+clusters increases, the clusters are more able to represent the data. 
+\\ \\
+The first measurement used to determine the effectiveness is the sum of square 
+errors (SSE).  The SSE measures how far away an instance data point is from the mean of its cluster.
+As the number of clusters increases, the SSE noticably drops and then converges.  This 
+makes sense because at a certain point, adding more clusters is overfitting and 
+not necessary to get the all training data into its best possible fit.
+\\ \\ 
+From the scoring data, it is shown that the permanent visa data, performs remarkably well with a small number of 
+clusters and does not show any noticable improvement by increasing clusters.  
+This is due to the fact that the permanent visa data is extremely homogenous and 
+does not contain many outliers at all.   On the other hand, the housing price 
+data is much more susceptible to changes in number of clusters.  As the number 
+of clusters increases, the testing data gradually increases in accuracy before leveling off.  
+Since the housing data is much more varied and complex, there are intricacies of 
+the data that require more clusters to capture well.
+
 
 \begin{figure}[H] 
 \begin{tabular}{ | c | c  | c | c | c | c | c | c| c| c| c| c| c | } 
@@ -110,6 +128,7 @@ Text
 \\
 \textbf{HOUSING} \\ \hline
 \textbf{SSE} & 14840 & 10217 & 8265 & 7256 & 6589 & 6106 & 5687 & 5339 & 5063 & 4589 & 4276 & 4024 \\ \hline
+\textbf{Log Liklihood} & \\ \hline
 \textbf{k-Means AMI} & 0.105 & 0.134 & 0.120 & 0.103 & 0.091 & 0.080 & 0.086 & 0.090 & 0.086 & 0.081 & 0.083 & 0.081 \\ \hline
 \textbf{k-Means ACC} & 0.628 & 0.634 & 0.695 & 0.702 & 0.694 & 0.688 & 0.695 & 0.704 & 0.705 & 0.715 & 0.719 & 0.726 \\ \hline
 \textbf{EM AMI} & 0.010 & 0.065 & 0.073 & 0.073 & 0.078 & 0.073 & 0.081 & 0.085 & 0.077 & 0.078 & 0.065 & 0.064 \\ \hline
@@ -129,8 +148,22 @@ Expectation Maximization algorithm.  A varying number of mixture components (or 
 used to determine the best possible parameters for the clustering.
 
 \subsubsection*{Expectation Maximization Analysis}
-Text
-
+Expectation maximization performed only slightly worse than k-means on the 
+datasets.  Insterad of using a sum of square errors calculation, a log liklihood 
+is calculated to effectively determine the probability of succesful labeling.  
+Interestingly, the housing dataset converges quite quickly to a near-peak log 
+liklihood where as the permanent visa dataset takes a bit longer.  This makes 
+sense, as the permanent visa dataset is much larger and while an indicitor of 
+classification performance and determining factor for component count, it does not gaurantee how well the 
+algorithm will perform using such settings.
+\\ \\
+In terms of scoring, while k-means performed slightly better, it isn't by 
+much for the housing dataset--and it was insignificantly better for the 
+permanent visa dataset.  The adjusted mutual info score, which helps to 
+determine the differences between clusters while accounting for chance, also 
+performs similarly for expectation maximization compared to k-means.  Overall, 
+while k-means performed better in our trials, it is reasonable to believe 
+datasets exist that would fare better using expectation maximization.
 
 
 
@@ -308,7 +341,20 @@ Text
 In this section, similar to part 3, neural networks are run on the results of the 
 dimensionality reduction algorithms and the clustering algorithms, and then compared.
 
-\subsection*{k-Means after Dimensionality Reduction}
+ \begin{figure}[H]
+  \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{housing_nn_after_dr_scoring.jpg} 
+      \caption*{Housing NN after dimenstionality reduction } 
+   \endminipage\hfill
+    \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{housing_nn_after_cluster_scoring.jpg} 
+      \caption*{Housing NN after clustering} 
+   \endminipage\hfill
+\end{figure}
+
+\subsubsection*{Dimensionality Reduction + NN Analysis}
+
+\subsubsection*{Clustering + NN Analysis}
 
 \section*{Conclusion}  
 Todo conclusion

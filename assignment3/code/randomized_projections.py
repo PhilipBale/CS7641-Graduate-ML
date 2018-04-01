@@ -14,7 +14,7 @@ from itertools import product
 out = './results/randomized_projections/'
 
 perm_x, perm_y, housing_x, housing_y = load_data() # perm, housing
-raise exception()
+# raise Exception()
 #2
 print(1)
 tmp = defaultdict(dict)
