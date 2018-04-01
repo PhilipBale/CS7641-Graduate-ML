@@ -72,12 +72,18 @@ def plot_timing_curve(iterations, timeDuration, title):
 def get_df(path):
     return pandas.read_csv('./results/' + path)
 
+def print_latex_row(vals, sig=3):
+    sigString = '{:0.' + str(sig) + 'f}'
+    vals = ' & '.join(list(map(lambda x: sigString.format(x), vals)))
+    print(vals + ' \\\\ \hline')
+
 def save_plot(plot, title):
     plot.savefig('analysis/plots/' + title.replace(' ', '_').replace('.', 'pt').lower() + '.jpg')
 
 def plot_sse(df, valName, title):
     clusters = df[df.columns[0]]
     vals = df[valName]
+    print_latex_row(vals, 0)
 
     plt.figure()
     plt.title(title) 
@@ -107,6 +113,11 @@ def plot_clustering_accuracy(folderFile, title):
     k_means_ami = ami.loc[1].values[1:]
     k_means_acc = acc.loc[1].values[1:]
 
+    print_latex_row(k_means_ami)
+    print_latex_row(k_means_acc)
+    print_latex_row(gmm_ami)
+    print_latex_row(gmm_acc)
+
     newTitle = title + ' Scoring'
     plt.figure()
     plt.title(newTitle) 
@@ -130,7 +141,7 @@ def plot_clustering():
     sse = get_df('clustering/SSE.csv')
 
     plot_sse(sse, 'perm SSE (left)', 'Perm Visa SSE')
-    plot_sse(sse, 'perm SSE (left)', 'Housing SSE')
+    plot_sse(sse, 'housing SSE (left)', 'Housing SSE')
 
     plot_clustering_accuracy('clustering/Housing', 'Housing Clustering')
     plot_clustering_accuracy('clustering/Perm', 'Permanent Visa Clustering')

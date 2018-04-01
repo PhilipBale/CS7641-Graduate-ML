@@ -13,8 +13,6 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import GridSearchCV
 import sys
 
-raise 'wtf'
-raise execption()
 out = './results/clustering/'
 perm_x, perm_y, housing_x, housing_y = load_data() # perm, housing
 
@@ -64,6 +62,10 @@ acc.ix[:,:,'perm'].to_csv(out+'Perm acc.csv')
 adjMI.ix[:,:,'housing'].to_csv(out+'Housing adjMI.csv')
 adjMI.ix[:,:,'perm'].to_csv(out+'Perm adjMI.csv')
 
+
+
+raise 'wtf'
+raise exception()
 
 #5 in assingment is below
 
