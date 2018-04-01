@@ -65,20 +65,6 @@ K-means works by clustering n instances into k-clusters of similarity using leas
  
  \begin{figure}[H]
   \minipage{0.33\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{housing_sse.jpg} 
-      \caption*{Housing Sum of Square Errors for Clusters vs. \# Clusters} 
-   \endminipage\hfill
-   \minipage{0.33\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{housing_logliklihood.jpg} 
-      \caption*{Housing Log Liklihood vs. \# Components} 
-   \endminipage\hfill
-   \minipage{0.33\textwidth}
-      \includegraphics[width=1\textwidth,keepaspectratio]{housing_clustering_scoring.jpg} 
-      \caption*{Housing Scoring for k-means and expectation maximization} 
-   \endminipage\hfill
-\end{figure}
-\begin{figure}[H]
-  \minipage{0.33\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{perm_visa_sse.jpg} 
       \caption*{Perm Visa Sum of Square Errors for Clusters vs. \# Clusters} 
    \endminipage\hfill
@@ -89,6 +75,20 @@ K-means works by clustering n instances into k-clusters of similarity using leas
    \minipage{0.33\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{permanent_visa_clustering_scoring.jpg} 
       \caption*{Perm Visa Scoring for k-means and expectation maximization} 
+   \endminipage\hfill
+\end{figure}
+ \begin{figure}[H]
+  \minipage{0.33\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{housing_sse.jpg} 
+      \caption*{Housing Sum of Square Errors for Clusters vs. \# Clusters} 
+   \endminipage\hfill
+   \minipage{0.33\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{housing_logliklihood.jpg} 
+      \caption*{Housing Log Liklihood vs. \# Components} 
+   \endminipage\hfill
+   \minipage{0.33\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{housing_clustering_scoring.jpg} 
+      \caption*{Housing Scoring for k-means and expectation maximization} 
    \endminipage\hfill
 \end{figure}
 
@@ -153,6 +153,20 @@ maximize variance and thus help to determine components that are correlated.  Ea
 orthoganal to the preceding component.  The resulting eigenvalue matrix from PCA 
 is therefore maximized for covariance.
 
+ \begin{figure}[H]
+  \minipage{0.33\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{permanent_visa_pca_eigenvalues.jpg} 
+      \caption*{Housing Principal Components Analysis } 
+   \endminipage\hfill
+   \minipage{0.33\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{housing_logliklihood.jpg} 
+      \caption*{Housing Log Liklihood vs. \# Components} 
+   \endminipage\hfill
+   \minipage{0.33\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{housing_clustering_scoring.jpg} 
+      \caption*{Housing Scoring for k-means and expectation maximization} 
+   \endminipage\hfill
+\end{figure}
 
 \subsubsection*{Analysis}
 IText

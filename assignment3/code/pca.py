@@ -13,6 +13,7 @@ import pandas as pd
 out = './results/pca/'
 
 perm_x, perm_y, housing_x, housing_y = load_data() # perm, housing
+raise Exception('wtf')
 
 
 # 2
