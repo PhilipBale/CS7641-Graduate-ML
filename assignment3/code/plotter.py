@@ -243,6 +243,24 @@ def plot_pairwise_distance_corr(folderFile, title):
     save_plot(plt, title)
     plt.close()
 
+def plot_feature_importances(folderFile, title):
+    df = get_df(folderFile + ' scree.csv', None)
+
+    plt.figure()
+    plt.title(title) 
+
+    plt.xlabel('Feature #')
+    plt.ylabel('Importance')
+    
+    plt.grid()
+    
+    plt.plot(df[0].values, df[1].values, 'o-', color="g",
+             label='Importance')
+
+    plt.legend(loc="best")
+
+    save_plot(plt, title)
+    plt.close()
 
 def plot_pca():
     plot_eigen('pca/housing', 'Housing PCA Eigenvalues')
@@ -259,10 +277,15 @@ def plot_rp():
     plot_pairwise_distance_corr('randomized_projections/housing', 'Housing Randomized Projections Pairwise Dist. Corr.')
     plot_pairwise_distance_corr('randomized_projections/perm', 'Permanent Visa Randomized Projections Pairwise Dist. Corr.')
 
+def plot_rf():
+    plot_feature_importances('random_forest/housing', 'Housing Random Forests Feature Importances')
+    plot_feature_importances('random_forest/perm', 'Permanent Visa Random Forests Feature Importances')
+
 def plot_dr():
     # plot_pca()
     # plot_ica()
-    plot_rp()
+    # plot_rp()
+    plot_rf()
 
 
 # plot_clustering()
