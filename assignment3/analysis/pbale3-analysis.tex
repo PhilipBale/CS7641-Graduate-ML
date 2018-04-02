@@ -436,18 +436,51 @@ performs slightly worse across algorithms than k-Means, however.
 \section*{Part 4/5: Dimensionality Reduction, Clustering, and Neural Networks}
 \subsection*{Overview}
 In this section, similar to part 3, neural networks are run on the results of the 
-dimensionality reduction algorithms and the clustering algorithms, and then compared.
+dimensionality reduction algorithms and the clustering algorithms, and then compared.  
+The housing dataset is used, since it contains more complex data with more 
+featurse and outliers.
+ Baseline results of simply running the neural network using grid searched 
+ parameters on the base dataset are used.  For the dimensionality reduction and 
+ clustering algorithms, grid search is also used on paremeters of the neural 
+ network and the best result for each algorithm is included below.
+ 
 
  \begin{figure}[H]
-  \minipage{0.49\textwidth}
+   \minipage{.25\textwidth} 
+   \endminipage\hfill 
+  \minipage{.25\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{housing_nn_after_dr_scoring.jpg} 
       \caption*{Housing NN after dimenstionality reduction } 
    \endminipage\hfill
-    \minipage{0.49\textwidth}
+    \minipage{.25\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{housing_nn_after_cluster_scoring.jpg} 
       \caption*{Housing NN after clustering} 
    \endminipage\hfill
+    \minipage{.25\textwidth} 
+   \endminipage\hfill
 \end{figure}
+
+\begin{figure}[H] 
+\begin{tabular}{ | c | c  | c | c | c | c | } 
+\hline
+\textbf{ Alg } & \textbf{ Training Time } & \textbf{ Mean Test Score} & \textbf{ Mean Train Score } & \textbf{Alpha} & \textbf{Layers}    \\
+\hline
+\textbf{Base} \\ \hline
+Base \#1 & 0.0620 & \textbf{0.7139} & 0.7191 & 0.01 & (100,) \\ \hline 
+Base \#2 & 0.0605 & 0.7133 & 0.7191 & 0.1 & (100,) \\ \hline 
+Base \#3 & 0.6855 & 0.7119 & 0.7193 & 0.001 & (100,) \\ \hline 
+\textbf{Dimensionality Reduction} \\ \hline
+ICA & 0.0274 & 0.6478 & 0.6528 & 0.001 & (100,) \\ \hline
+PCA & 0.0581 & 0.7050 & 0.7048 & 0.1 & (100,) \\ \hline
+Random Forest & 0.4450 & \textbf{0.7291} & 0.7482 & 0.01 & (50, 50) \\ \hline
+Randomized Projections & 0.0814 & 0.6940 & 0.6971 & 0.1 & (50, 50) \\ \hline
+\textbf{Clustering} \\ \hline
+Expectation Maximization & 0.3171 & 0.6395 & 0.6290 & 0.01 & (100,) \\ \hline
+k-means & 0.2958 & \textbf{0.7195} & 0.7163 & 0.1 & (100,) \\ \hline
+\end{tabular}
+\caption*{Table of Housing Data Results for Cluster } 
+\end{figure}
+
 
 \subsubsection*{Dimensionality Reduction + NN Analysis}
 
