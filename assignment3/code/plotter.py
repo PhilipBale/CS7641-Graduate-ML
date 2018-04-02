@@ -13,7 +13,7 @@ nn_items = ['', 'param_ica__n_components', 'param_pca__n_components', 'param_fil
 nn_items_cluster = ['param_gmm__n_components', 'param_km__n_clusters'] 
 
 
-nn_cols = ['mean_fit_time', 'mean_test_score', 'mean_train_score', 'param_NN__alpha', 'param_NN__hidden_layer_sizes']
+nn_cols = ['mean_fit_time', 'mean_test_score', 'mean_train_score', 'param_NN__alpha', 'param_NN__hidden_layer_sizes', 'params']
 
 def plot_learning_curve(iterations, train_scores, test_scores, title):
 #     _, _, test_scores_base = base_curve

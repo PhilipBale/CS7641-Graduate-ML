@@ -445,7 +445,7 @@ The housing dataset is used, since it contains more complex data with more
 featurse and outliers.
  Baseline results of simply running the neural network using grid searched 
  parameters on the base dataset are used.  For the dimensionality reduction and 
- clustering algorithms, grid search is also used on paremeters of the neural 
+ clustering algorithms, grid search and cross validation were used on paremeters of the neural 
  network and the best result for each algorithm is included below.
  
 
@@ -465,32 +465,77 @@ featurse and outliers.
 \end{figure}
 
 \begin{figure}[H] 
-\begin{tabular}{ | c | c  | c | c | c | c | } 
+\begin{tabular}{ | c | c  | c | c | c | c | c | } 
 \hline
-\textbf{ Alg } & \textbf{ Training Time } & \textbf{ Mean Test Score} & \textbf{ Mean Train Score } & \textbf{Alpha} & \textbf{Layers}    \\
+\textbf{ Alg } & \textbf{ Training Time } & \textbf{ Avg Test Score} & \textbf{ Avg Train Score } & \textbf{Alpha} & \textbf{Layers} & \textbf{Param}    \\
 \hline
 \textbf{Base} \\ \hline
 Base \#1 & 0.0620 & \textbf{0.7139} & 0.7191 & 0.01 & (100,) \\ \hline 
 Base \#2 & 0.0605 & 0.7133 & 0.7191 & 0.1 & (100,) \\ \hline 
-Base \#3 & 0.6855 & 0.7119 & 0.7193 & 0.001 & (100,) \\ \hline 
-\textbf{Dimensionality Reduction} \\ \hline
-ICA & 0.0274 & 0.6478 & 0.6528 & 0.001 & (100,) \\ \hline
-PCA & 0.0581 & 0.7050 & 0.7048 & 0.1 & (100,) \\ \hline
-Random Forest & 0.4450 & \textbf{0.7291} & 0.7482 & 0.01 & (50, 50) \\ \hline
-Randomized Projections & 0.0814 & 0.6940 & 0.6971 & 0.1 & (50, 50) \\ \hline
+Base \#3 & 0.0685 & 0.7119 & 0.7193 & 0.001 & (100,) \\ \hline 
+\textbf{Dim. Reduction} \\ \hline
+ICA & 0.0274 & 0.6478 & 0.6528 & 0.001 & (100,) & 2 components \\ \hline
+PCA & 0.0581 & 0.7050 & 0.7048 & 0.1 & (100,) & 3 components \\ \hline
+Random Forest & 0.4450 & \textbf{0.7291} & 0.7482 & 0.01 & (50, 50) & 9 dimensions \\ \hline
+Randomized Project. & 0.0814 & 0.6940 & 0.6971 & 0.1 & (50, 50) & 10 components \\ \hline
 \textbf{Clustering} \\ \hline
-Expectation Maximization & 0.3171 & 0.6395 & 0.6290 & 0.01 & (100,) \\ \hline
-k-means & 0.2958 & \textbf{0.7195} & 0.7163 & 0.1 & (100,) \\ \hline
+Expectation Maxim. & 0.3171 & 0.6395 & 0.6290 & 0.01 & (100,)  & 50 components \\ \hline
+k-means & 0.2958 & \textbf{0.7195} & 0.7163 & 0.1 & (100,) & 50 clusters\\ \hline
 \end{tabular}
 \caption*{Table of Housing Data Results for Cluster } 
 \end{figure}
 
 
 \subsubsection*{Dimensionality Reduction + NN Analysis}
-
+For each dimensionality reduction + NN pairing, the best mean test score was 
+selected.  When comparing to the base test results, the training time for each 
+dimensionality reduced neural net was faster than the baseline, except for the 
+random forest feature selection and the randomized projection reducer.  This makes sense, since 
+both decided to use a different NN layer structure.  For the algorithms that 
+grid searched and landed on the same network structure, training time was much 
+faster due to the reduction in data dimensions.
+\\ \\
+In terms of scoring performance, the best algorithm turned out to be the random 
+forest classifier in both test and training score.  As the random forest 
+classifier was able to make informed decisions about which features were not as 
+important to keep around, it was actually able to throw out data that was not 
+relevant (and potentially harmful).  In this case, the robustness of the random 
+forest classifier turned out to be exceedingly useful in a dataset that is prone 
+to outliers.
 \subsubsection*{Clustering + NN Analysis}
+For each clustering algorithm + NN pairing, the best mean test score was also 
+selected.  When comparing to the base test results, the clustering algorithms 
+took significantly more time to train (almost 5x).  Though still a very small 
+amount of time (less than 1 second)--it demonstrates the resources necessary to 
+calculate across various component parameters.  In our case, 50 was 
+found to be the most effective size of component/clusters for both algorithms.
+\\ \\
+In terms of performance, the k-means clustering + NN combo peformed even better 
+than the baseline algorithm, while the expectation maximization algorithm 
+performed significantly worse.  This makes sense, as the k-means algorithm is 
+prone to capturing outliers and complex datasets well (especially at a high number of clusters) 
+whereas expectation maximization has a tough time calculating liklihood for 
+complex datasets.
 
 \section*{Conclusion}  
-Todo conclusion
+In total, 4 different groupings of machine learning algorithsm were run.  First, 
+we looked at two clustering algorithms, k-means and expectation maximization, and 
+their impact on input data.  Then, we explored four dimensionality reduction 
+algorithms (PCA, ICA, randomized projections, and random forests) in an attempt 
+to reduce the size and complexity of the data without sacrificing important 
+feature information.  Next, we applied the clustering algorithms to data that 
+had already been dimension reduced, and found that, on average, doing so 
+increased the clustering algorithms accuracy and decreased its overall datasize. 
+Finally, we combined dimesionality reduction and clustering with neural 
+networks.  We found that some cases of these hybrid algorithms were noticably 
+more accurate than the baseline algorithms, and performed better than only 
+dimensionality reduction or 
+clustering/clustering with dimensionality reduction.
+\\ \\
+Overall, the assignment provides in-depth insight into the benefits of using clustering 
+and dimensionality reduction.  By applying the algorithms to two different 
+datasets, an analysis on real-world, concrete data can be handily applied and 
+readily 
+observed.
 
 \end{document}
