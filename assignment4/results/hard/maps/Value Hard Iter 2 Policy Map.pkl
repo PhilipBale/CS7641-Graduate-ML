@@ -1,6 +1,6 @@
 (lp0
 (lp1
-S'^'
+S'<'
 p2
 aS'<'
 p3
@@ -237,7 +237,7 @@ aS'>'
 p121
 aS'>'
 p122
-aS'v'
+aS'>'
 p123
 aS'None'
 p124
@@ -315,7 +315,7 @@ aS'v'
 p161
 aS'v'
 p162
-aS'>'
+aS'v'
 p163
 aS'None'
 p164
@@ -342,7 +342,7 @@ aS'>'
 p175
 aS'>'
 p176
-aS'^'
+aS'>'
 p177
 aS'None'
 p178
@@ -385,13 +385,13 @@ aS'>'
 p197
 aS'>'
 p198
-aS'^'
+aS'>'
 p199
 aS'None'
 p200
 aS'>'
 p201
-aS'>'
+aS'v'
 p202
 aS'None'
 p203
@@ -412,7 +412,7 @@ p210
 aa(lp211
 S'>'
 p212
-aS'v'
+aS'>'
 p213
 aS'None'
 p214
@@ -459,7 +459,7 @@ aS'>'
 p235
 aS'>'
 p236
-aS'^'
+aS'>'
 p237
 aS'None'
 p238
@@ -473,7 +473,7 @@ aS'^'
 p242
 aS'>'
 p243
-aS'^'
+aS'>'
 p244
 aS'None'
 p245
@@ -545,7 +545,7 @@ aS'^'
 p279
 aS'None'
 p280
-aS'^'
+aS'<'
 p281
 aS'v'
 p282
@@ -584,7 +584,7 @@ aS'v'
 p299
 aS'None'
 p300
-aS'^'
+aS'<'
 p301
 aS'>'
 p302
@@ -604,7 +604,7 @@ aS'v'
 p309
 aS'None'
 p310
-aS'<'
+aS'v'
 p311
 aS'<'
 p312
@@ -615,7 +615,7 @@ p314
 aS'^'
 p315
 aa(lp316
-S'>'
+S'<'
 p317
 aS'None'
 p318
@@ -623,7 +623,7 @@ aS'v'
 p319
 aS'>'
 p320
-aS'>'
+aS'^'
 p321
 aS'None'
 p322
@@ -686,7 +686,7 @@ aS'v'
 p351
 aS'None'
 p352
-aS'<'
+aS'^'
 p353
 aS'<'
 p354
@@ -783,7 +783,7 @@ S'^'
 p401
 aS'None'
 p402
-aS'<'
+aS'v'
 p403
 aS'<'
 p404

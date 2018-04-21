@@ -184,7 +184,8 @@ if __name__ == '__main__':
     MapPrinter.printPolicyMap(pi.getAllStates(), p, gen.getMap());
     print "\n\n\n"
     dumpCSV(nIter, timing['Policy'][1:], rewards['Policy'], steps['Policy'],convergence['Policy2'], world, 'Policy')
-    #raise
+    
+    raise Exception('Remove this line to run code')
       
     MAX_ITERATIONS=NUM_INTERVALS = MAX_ITERATIONS*10;
     increment = MAX_ITERATIONS/NUM_INTERVALS
