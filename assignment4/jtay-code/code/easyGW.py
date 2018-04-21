@@ -103,9 +103,9 @@ if __name__ == '__main__':
               [ 0, 1, 0, 1, 0, 0, 0, 0, 1, 0],
               [ 0, 1, 0, 1, 0, 0, 0, 0, 1, 0],
               [ 0, 1, 0, 1, 0, 0, 0, 0, 1, 0],
+              [ 0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
               [ 0, 1, 0, 1, 0, 0, 0, 0, 1, 0],
-              [ 0, 1, 0, 1, 0, 0, 0, 0, 1, 0],
-              [ 0, 1, 0, 1, 1, 1, 1, 1, 1, 0],
+              [ 0, 1, 0, 1, 1, 1, 1, 0, 1, 0],
               [ 0, -3, 0, 0, 0, 0, 0, 0, 0, 0],              
               ]
     n = len(userMap)
@@ -150,7 +150,7 @@ if __name__ == '__main__':
         convergence['Value'].append(vi.latestDelta)           
         # evaluate the policy with evalTrials roll outs
         runEvals(initialState,p,rewards['Value'],steps['Value'])
-        if nIter == 5 or vi.latestDelta < 1e-6:
+        if nIter == 2 or nIter == 5 or nIter == 10 or vi.latestDelta < 1e-6:
             dumpPolicyMap(MapPrinter.printPolicyMap(allStates, p, gen.getMap()),'Value {} Iter {} Policy Map.pkl'.format(world,nIter))
         if vi.latestDelta <1e-6:
             break
@@ -176,7 +176,7 @@ if __name__ == '__main__':
             convergence['Policy'].append(comparePolicies(last_policy,current_policy))       
         last_policy = current_policy                
         runEvals(initialState,p,rewards['Policy'],steps['Policy'])
-        if nIter == 5 or convergence['Policy2'][-1] < 1e-6:
+        if nIter == 2 or nIter == 5 or nIter == 10 or convergence['Policy2'][-1] < 1e-6:
             simpleValueFunctionVis(pi, p, initialState, domain, hashingFactory, "Policy Iteration {}".format(nIter))
         dumpPolicyMap(MapPrinter.printPolicyMap(allStates, p, gen.getMap()),'Policy {} Iter {} Policy Map.pkl'.format(world,nIter))
         if convergence['Policy2'][-1] <1e-6:
@@ -219,4 +219,6 @@ if __name__ == '__main__':
                         dumpPolicyMap(MapPrinter.printPolicyMap(allStates, p, gen.getMap()),'QL {} {} Iter {} Policy Map.pkl'.format(Qname,world,nIter));break
                 print "\n\n\n"
                 dumpCSV(nIter, timing[Qname], rewards[Qname], steps[Qname],convergence[Qname], world, Qname)
+
+    print("C'est fin")
      
