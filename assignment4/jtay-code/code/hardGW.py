@@ -42,8 +42,10 @@ import csv
 from collections import deque
 import pickle
 
+ROOT_DIR = '../../results/hard'
+
 def dumpCSV(nIter, times,rewards,steps,convergence,world,method):
-    fname = '{} {}.csv'.format(world,method)
+    fname = ROOT_DIR + '/{} {}.csv'.format(world,method)
     iters = range(1,nIter+1)
     assert len(iters)== len(times)
     assert len(iters)== len(rewards)
@@ -54,7 +56,11 @@ def dumpCSV(nIter, times,rewards,steps,convergence,world,method):
         writer = csv.writer(f,delimiter=',')
         writer.writerows(zip(iters,times,rewards,steps,convergence))
     
-    
+def dumpPolicyMap(javaStrArr,fname):
+    pic = mapPicture(javaStrArr)
+    with open(ROOT_DIR + '/maps' + fname,'wb') as f:
+        pickle.dump(pic,f)
+
 def runEvals(initialState,plan,rewardL,stepL):
     r = []
     s = []
@@ -80,11 +86,6 @@ def mapPicture(javaStrArr):
         for element in row:
             out[-1].append(str(element))
     return out
-
-def dumpPolicyMap(javaStrArr,fname):
-    pic = mapPicture(javaStrArr)
-    with open(fname,'wb') as f:
-        pickle.dump(pic,f)
     
 
 if __name__ == '__main__':
