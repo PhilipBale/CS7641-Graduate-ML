@@ -29,7 +29,7 @@ iteration and policy iteration, and the results are compared against each other.
  compared to the original results.
  
 \subsection*{Problems Chosen}
-Gridworld was chosen as the basis for the two Markov Decision Processes.  This 
+Gridworld path finding was chosen as the basis for the two Markov Decision Processes.  This 
 was done for a few different reasons.  First, the ease in visual representation 
 and understanding.  Second, path finding is a common problem in real-life that 
 has applications from walking to work, to driving cross-country, etc.  Third, it 
@@ -50,13 +50,17 @@ states.  Fourth, for a solveable grid, one or more optimal solutions must exist.
  assosciated with them and are color-coated in the state graphs below.
  
   \begin{figure}[H]
-  \minipage{0.49\textwidth}
+  \minipage{0.05\textwidth}
+   \endminipage\hfill
+  \minipage{0.45\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{easy-grid.png} 
       \caption*{10x10 Easy Gridworld w/ 70 States} 
    \endminipage\hfill
-   \minipage{0.5\textwidth}
+   \minipage{0.45\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{hard-grid.png} 
       \caption*{20x20 Hard Gridworld w/ 353 States} 
+   \endminipage\hfill
+   \minipage{0.05\textwidth}
    \endminipage\hfill
 \end{figure}
 

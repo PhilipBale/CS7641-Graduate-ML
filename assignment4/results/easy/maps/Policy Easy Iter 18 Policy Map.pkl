@@ -18,7 +18,7 @@ aS'>'
 p9
 aS'>'
 p10
-aS'v'
+aS'<'
 p11
 aa(lp12
 S'^'

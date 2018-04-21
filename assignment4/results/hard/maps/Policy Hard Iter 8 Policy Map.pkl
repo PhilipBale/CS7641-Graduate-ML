@@ -416,7 +416,7 @@ aS'^'
 p213
 aS'None'
 p214
-aS'^'
+aS'>'
 p215
 aS'None'
 p216
@@ -502,7 +502,7 @@ aS'v'
 p257
 aS'>'
 p258
-aS'v'
+aS'^'
 p259
 aS'None'
 p260

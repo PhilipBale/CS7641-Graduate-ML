@@ -159,8 +159,12 @@ if __name__ == '__main__':
         convergence['Value'].append(vi.latestDelta)           
         # evaluate the policy with evalTrials roll outs
         runEvals(initialState,p,rewards['Value'],steps['Value'])
-        if nIter == 2 or nIter == 5 or nIter == 10 or vi.latestDelta < 1e-6:
-            dumpPolicyMap(MapPrinter.printPolicyMap(allStates, p, gen.getMap()),'Value {} Iter {} Policy Map.pkl'.format(world,nIter))
+        # if nIter == 5 or nIter == 15 or nIter == 30 or vi.latestDelta < 1e-6:
+        #     simpleValueFunctionVis(vi, p, initialState, domain, hashingFactory, "Value Iteration {}".format(nIter))
+        #     raw_input('Press enter to continue')
+
+        dumpPolicyMap(MapPrinter.printPolicyMap(allStates, p, gen.getMap()),'Value {} Iter {} Policy Map.pkl'.format(world,nIter))
+
         if vi.latestDelta <1e-6:
             break
     print "\n\n\n"    
@@ -185,9 +189,13 @@ if __name__ == '__main__':
             convergence['Policy'].append(comparePolicies(last_policy,current_policy))       
         last_policy = current_policy                
         runEvals(initialState,p,rewards['Policy'],steps['Policy'])
-        if nIter == 2 or nIter == 5 or nIter == 10 or convergence['Policy2'][-1] < 1e-6:
-            simpleValueFunctionVis(pi, p, initialState, domain, hashingFactory, "Policy Iteration {}".format(nIter))
+
+        # if nIter == 2 or nIter == 5 or nIter == 10 or nIter == 22:
+        #     simpleValueFunctionVis(pi, p, initialState, domain, hashingFactory, "Policy Iteration {}".format(nIter))
+        #     raw_input('Press enter to continue')
+
         dumpPolicyMap(MapPrinter.printPolicyMap(allStates, p, gen.getMap()),'Policy {} Iter {} Policy Map.pkl'.format(world,nIter))
+        
         if convergence['Policy2'][-1] < 1e-6:
             break
     MapPrinter.printPolicyMap(pi.getAllStates(), p, gen.getMap());

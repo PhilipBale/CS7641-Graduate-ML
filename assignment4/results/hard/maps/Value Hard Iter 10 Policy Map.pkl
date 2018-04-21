@@ -38,7 +38,7 @@ aS'>'
 p19
 aS'>'
 p20
-aS'>'
+aS'<'
 p21
 aa(lp22
 S'>'
@@ -385,7 +385,7 @@ aS'>'
 p197
 aS'>'
 p198
-aS'>'
+aS'^'
 p199
 aS'None'
 p200
@@ -416,7 +416,7 @@ aS'v'
 p213
 aS'None'
 p214
-aS'^'
+aS'<'
 p215
 aS'None'
 p216
@@ -502,7 +502,7 @@ aS'^'
 p257
 aS'>'
 p258
-aS'v'
+aS'>'
 p259
 aS'None'
 p260
@@ -545,7 +545,7 @@ aS'^'
 p279
 aS'None'
 p280
-aS'^'
+aS'<'
 p281
 aS'<'
 p282
@@ -584,7 +584,7 @@ aS'v'
 p299
 aS'None'
 p300
-aS'<'
+aS'v'
 p301
 aS'<'
 p302
@@ -623,7 +623,7 @@ aS'>'
 p319
 aS'>'
 p320
-aS'^'
+aS'>'
 p321
 aS'None'
 p322
@@ -670,7 +670,7 @@ aS'>'
 p343
 aS'>'
 p344
-aS'>'
+aS'v'
 p345
 aS'None'
 p346
@@ -738,7 +738,7 @@ p377
 aS'^'
 p378
 aa(lp379
-S'>'
+S'<'
 p380
 aS'None'
 p381
@@ -783,7 +783,7 @@ S'^'
 p401
 aS'None'
 p402
-aS'<'
+aS'v'
 p403
 aS'<'
 p404

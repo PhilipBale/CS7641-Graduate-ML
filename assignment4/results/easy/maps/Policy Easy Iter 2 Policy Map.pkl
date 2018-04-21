@@ -18,7 +18,7 @@ aS'>'
 p9
 aS'>'
 p10
-aS'v'
+aS'<'
 p11
 aa(lp12
 S'^'
@@ -56,7 +56,7 @@ aS'v'
 p29
 aS'>'
 p30
-aS'^'
+aS'>'
 p31
 aS'None'
 p32
@@ -67,7 +67,7 @@ S'^'
 p35
 aS'None'
 p36
-aS'>'
+aS'<'
 p37
 aS'None'
 p38
@@ -84,7 +84,7 @@ p43
 aS'^'
 p44
 aa(lp45
-S'>'
+S'<'
 p46
 aS'None'
 p47
