@@ -38,15 +38,16 @@ states.  Fourth, for a solveable grid, one or more optimal solutions must exist.
  All-in-all, gridworld is great for demonstration reinforcement learning.
  \\ \\ % 30 walls
  The first gridworld problem is an ``easy'' configuration.  It has a 10x10 
- shape with 70 possible states.  The start state is in the bottom left corner and 
- the end state is in the top right corner.  Various ``walls'' exist that cause 
- the learner to optimize around.
+ shape with 70 possible states.
 % 47 walls
  \\ \\ 
  The second gridworld problem is a ``hard'' configuration.  It has a 20x20 
- shape with 353 possible states.  The start state is in the bottom left corner and 
- the end state is in the top right corner.  Various ``walls'' exist that cause 
- the learner to optimize around.
+ shape with 353 possible states.  
+ \\ \\
+ Each gridworld has its start state is in the bottom left corner and 
+ its end state is in the top right corner.  Various ``walls'' exist that force 
+ the solution to optimize around.  Various states have negative rewards 
+ assosciated with them and are color-coated in the state graphs below.
  
   \begin{figure}[H]
   \minipage{0.49\textwidth}
@@ -60,38 +61,35 @@ states.  Fourth, for a solveable grid, one or more optimal solutions must exist.
 \end{figure}
 
 
-\subsection*{Datasets}  
-The datasets chosen were the same datasets chosen for assignment 1.  The first dataset is the US 
-permanent visa dataset.  This dataset is interesting due to its potential to aid in the visa application process 
-from a cost and time savings potential. It could also enable confidence in those interested in applying for a 
-US permanent visa but doubting their chances of acceptance. 
-At the end of the day, the goal is it to try to determine the application result before time, money, 
-nd other resources are spent.   As before, 6 features are used. 
-\\  \\
-The second dataset is a home sale price prediction dataset taken from an ongoing 
-Kaggle competiton.  This dataset is interesting for two primary reasons: real-world applicability and participating in a Kaggle challenge.
- First, modeling home prices is both a difficult and lucrative task. 
- If one can succesfully model home sale prices on large sets of data, he/she can make large amounts of money 
- investing in real estate when he/she detects outliers in listed price vs. what it is expected to sell for. 
- This applies to flipping, investing, and remodeling. 
- Second, the dataset is part of an ongoing Kaggle competition that does not have a winning solution yet.
-  By taking part of the competition, the dataset presents the opportunity to work towards a winning solution 
-  and advance ones algorithms over time. As before, 11 features are used. 
+\section*{Value Iteration}
+\subsection*{Introduction}
+The first reinforcement learning algorithm used to optimally solve the MDPs is Value Iteration. 
+ Value iteration works by using the Bellman equation while moving from 
+ state to state in an attempt to reach convergence.  Since the utility is not 
+ initially known, the algorithm begins with the reward at the final state and works 
+ backwards calculating utility for nearest states.  This continues 
+ until all states are evaluated.  After a number of iterations, the algorithm 
+ will eventually converge on an optimal solution.
+ 
+\section*{Policy Iteration}
+\subsection*{Introduction}
+The second reinforcement learning algorithm used to optimally solve the MDPs is 
+Policy Iteration.  Policy iteration works by beginning with a random policy and then 
+attemping to modify it state by state by taking different actions.  This continues throughout each state of the policy in an attempt
+ to find a better solution.  When no further policy changes are found, the algorithm 
+ is finished.  Policy Iteration tends to take longer than Value Iteration due to 
+ the additional number of explorations and calculations being done.
+ 
+\section*{Q-learning}
+\subsection*{Introduction}
+The third reinforcement algorithm used to optimally solve the MDPs is 
+Q-learning.  Q-learning works by assigning q values to every state.  At each state, the learner calculates new 
+q values based on both immediate and future rewards.  Initially, Q-learning will 
+spend time exploring and learning, whereas it will eventually optimize
+based on knowledge learned and converge.  While the first two algorithms have domain knowledge about the problem, 
+Q-learning has no such information and learns as it goes. 
 
-\section*{Part 1: Clustering Algorithms}
-\subsection*{Introduction}  
-K-means clustering is the first algorithm applied to the datasets and expectation maximization is the second. 
- Both algorithms work by clustering: gathering groups of instances together 
- based upon their features.  The rationale is that similar instances will likely 
- be labeled the same way--such as identical visa applications obtaining the same 
- outcome.
 
-%\subsection*{1) k-means clustering}  
-%\subsubsection*{Overview}
-%K-means works by clustering n instances into k-clusters of similarity using least-squares Euclidean distance
-% between the instances.  In practice, the algorithm converges on 'mean' for each cluster that is representative of the 
-% members of that cluster.   A variety of cluster sizes were tested to find the best parameters 
-% possible.
 % 
 % \begin{figure}[H]
 %  \minipage{0.33\textwidth}
