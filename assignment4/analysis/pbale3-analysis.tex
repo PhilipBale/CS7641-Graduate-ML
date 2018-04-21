@@ -8,7 +8,7 @@
 \usepackage{subcaption}
 \usepackage{float} 
 \usepackage{flafter}
-\graphicspath{ {./plots/} }
+\graphicspath{ {../results/vis/} }
 \usepackage{adjustbox}
 
 
@@ -22,13 +22,43 @@
 \maketitle
 
 \section*{Introduction}  
-This assignment explores unsupervised learning and dimensitonality reduction.  
-It begins by examining clustering algorithms, specifically k-means and 
-expectation maximization.  It then proceeds to cover four dimensionality 
-reduction algorithms: principal components analysis, individual components 
-analysis, randomized projections, and random forests.  After running these six 
-algorithms on the original datasets and observing the results, the results are 
-then piped into a neural network learner for further examination.
+This assignment explores reinforcement learning.  It begins by choosing two 
+Markov Decision Procceses (MDPs).  Both MDPs are solved using both value 
+iteration and policy iteration, and the results are compared against each other. 
+ Afterwards, Q-learning is applied to both problems and those results are then 
+ compared to the original results.
+ 
+\subsection*{Problems Chosen}
+Gridworld was chosen as the basis for the two Markov Decision Processes.  This 
+was done for a few different reasons.  First, the ease in visual representation 
+and understanding.  Second, path finding is a common problem in real-life that 
+has applications from walking to work, to driving cross-country, etc.  Third, it 
+is easy to scale the complexity of a grid as well as increase in the number of 
+states.  Fourth, for a solveable grid, one or more optimal solutions must exist. 
+ All-in-all, gridworld is great for demonstration reinforcement learning.
+ \\ \\ % 30 walls
+ The first gridworld problem is an ``easy'' configuration.  It has a 10x10 
+ shape with 70 possible states.  The start state is in the bottom left corner and 
+ the end state is in the top right corner.  Various ``walls'' exist that cause 
+ the learner to optimize around.
+% 47 walls
+ \\ \\ 
+ The second gridworld problem is a ``hard'' configuration.  It has a 20x20 
+ shape with 353 possible states.  The start state is in the bottom left corner and 
+ the end state is in the top right corner.  Various ``walls'' exist that cause 
+ the learner to optimize around.
+ 
+  \begin{figure}[H]
+  \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{easy-grid.png} 
+      \caption*{10x10 Easy Gridworld w/ 70 States} 
+   \endminipage\hfill
+   \minipage{0.5\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{hard-grid.png} 
+      \caption*{20x20 Hard Gridworld w/ 353 States} 
+   \endminipage\hfill
+\end{figure}
+
 
 \subsection*{Datasets}  
 The datasets chosen were the same datasets chosen for assignment 1.  The first dataset is the US 
