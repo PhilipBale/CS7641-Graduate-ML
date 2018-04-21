@@ -179,9 +179,9 @@ if __name__ == '__main__':
             convergence['Policy'].append(comparePolicies(last_policy,current_policy))       
         last_policy = current_policy                
         runEvals(initialState,p,rewards['Policy'],steps['Policy'])
-        if nIter == 2 or nIter == 5 or nIter == 10 or convergence['Policy2'][-1] < 1e-6:
-            simpleValueFunctionVis(pi, p, initialState, domain, hashingFactory, "Policy Iteration {}".format(nIter))
-            raw_input('Press enter to continue')
+        # if nIter == 2 or nIter == 5 or nIter == 10 or convergence['Policy2'][-1] < 1e-6:
+        #     simpleValueFunctionVis(pi, p, initialState, domain, hashingFactory, "Policy Iteration {}".format(nIter))
+        #     raw_input('Press enter to continue')
 
         dumpPolicyMap(MapPrinter.printPolicyMap(allStates, p, gen.getMap()),'Policy {} Iter {} Policy Map.pkl'.format(world,nIter))
         if convergence['Policy2'][-1] <1e-6:
