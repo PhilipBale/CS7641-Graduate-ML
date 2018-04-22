@@ -218,7 +218,12 @@ if __name__ == '__main__':
                         last10Chg.append(agent.maxQChangeInLastEpisode)
                         convergence[Qname].append(sum(last10Chg)/10.)          
                         # evaluate the policy with one roll out visualize the trajectory
-                        runEvals(initialState,p,rewards[Qname],steps[Qname])                    
+                        runEvals(initialState,p,rewards[Qname],steps[Qname])     
+
+                        if nIter == 2 or nIter == 5 or nIter == 10 or convergence[Qname][-1] <0.5:
+                            simpleValueFunctionVis(agent, p, initialState, domain, hashingFactory, "Q-learning Iteration {}".format(nIter))
+                            raw_input('Press enter to continue')
+
                         if nIter == 50 :
                             dumpPolicyMap(MapPrinter.printPolicyMap(allStates, p, gen.getMap()),'QL {} {} Iter {} Policy Map.pkl'.format(Qname,world,nIter))
                         if convergence[Qname][-1] <0.5:

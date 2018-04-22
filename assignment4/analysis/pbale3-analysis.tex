@@ -178,6 +178,43 @@ based on knowledge learned and converge.  While the first two algorithms have do
 Q-learning has no such information and learns as it goes. 
 
 
+\begin{figure}[H] 
+\centering
+\begin{tabular}{ | c | c  | c | c | c | c | c | c| c| c| c| c| c | } 
+\hline
+\textbf{ Q-learning Params } & \textbf{Iterations} & \textbf{Time} & \textbf{Reward} & \textbf{Steps} & \textbf{Convergence}   \\
+\hline
+\textbf{EASY Gridworld} \\ \hline
+\textbf{L0.1 q0.0 E0.1} & 158.0000 & 0.0896 & 50.4200 & 47.9200 & 5.3800 \\ \hline
+\textbf{L0.9 q100.0 E0.3} & 294.0000 & 0.0571 & 49.9600 & 48.4200 & 21.9495 \\ \hline
+\textbf{L0.9 q0.0 E0.3} & 156.0000 & 0.0416 & 48.4000 & 47.4000 & 53.3545 \\ \hline
+\textbf{L0.9 q0.0 E0.5} & 19.0000 & 0.0093 & 45.9200 & 50.9800 & 63.1121 \\ \hline
+\textbf{L0.9 q100.0 E0.5} & 615.0000 & 0.1257 & 44.5200 & 47.1200 & 25.2423 \\ \hline
+\textbf{L0.9 q100.0 E0.1} & 372.0000 & 0.0806 & 44.0600 & 48.4800 & 22.5748 \\ \hline
+\textbf{L0.9 q0.0 E0.1} & 902.0000 & 0.1461 & 43.7200 & 25.2200 & 26.0067 \\ \hline
+\textbf{L0.9 q-100.0 E0.5} & 880.0000 & 0.1724 & 43.6400 & 25.3000 & 26.0176 \\ \hline
+\textbf{L0.1 q100.0 E0.1} & 210.0000 & 0.0940 & 42.3800 & 52.1000 & 0.6710 \\ \hline
+\textbf{L0.1 q0.0 E0.3} & 936.0000 & 0.1276 & 41.8000 & 25.2200 & 3.5595 \\ 
+\hline
+\\
+\textbf{HARD Gridworld} \\ \hline
+\textbf{L0.1 q0.0 E0.1} & 2900.0000 & 0.8542 & 19.6100 & 63.7700 & 2.1298 \\ \hline
+\textbf{L0.1 q100.0 E0.5} & 1882.0000 & 0.8056 & 19.5100 & 63.8700 & 1.3662 \\ \hline
+\textbf{L0.1 q0.0 E0.3} & 2411.0000 & 0.8169 & 19.0300 & 64.1900 & 2.9960 \\ \hline
+\textbf{L0.1 q0.0 E0.5} & 1177.0000 & 0.5065 & 18.9700 & 62.9800 & 3.6562 \\ \hline
+\textbf{L0.1 q100.0 E0.3} & 2958.0000 & 1.0309 & 18.4100 & 64.9200 & 1.8214 \\ \hline
+\textbf{L0.1 q100.0 E0.1} & 2685.0000 & 0.9719 & 17.8000 & 63.1300 & 1.7738 \\ \hline
+\textbf{L0.9 q0.0 E0.3} & 1728.0000 & 0.9165 & 5.7800 & 70.0500 & 64.5125 \\ \hline
+\textbf{L0.9 q0.0 E0.1} & 754.0000 & 0.4340 & -15.2900 & 63.1400 & 46.8360 \\ \hline
+\textbf{L0.9 q100.0 E0.5} & 1891.0000 & 0.9692 & -17.2500 & 89.3400 & 40.4389 \\ \hline
+\textbf{L0.9 q100.0 E0.1} & 2791.0000 & 1.4653 & -19.1800 & 62.6200 & 42.1840 \\ 
+\hline
+\hline
+\end{tabular}
+\caption*{Gridworld Q-learning results for various parameter configurations, sorted by max reward } 
+\end{figure}
+
+
 % 
 % \begin{figure}[H]
 %  \minipage{0.33\textwidth}
