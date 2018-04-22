@@ -342,6 +342,39 @@ Q-learning has no such information and learns as it goes.
 \end{figure}
 
 
+ \subsubsection*{Q-Learning Results}
+ The results obtained using Q-learning on the gridworld problems were quite 
+ interesting.  Unlike the policy and value iterations, Q-learning knows nothing 
+ about the model and learns as it explores.  
+ \\ \\ 
+ A variety of parameters were 
+ used to tune an optimal learne for each problem.  These parameters included the
+ learning rate, the intial q value to be set, and the epsilon 
+ parameter for the greedy method of selecting from available actions.  For each 
+ trial, a maximum number of steps to explore for each learning episode is defined as 300.  
+ A summary of the results from varying these parameters is displayed above.
+ \\ \\
+ Interestingly enough, a learning rate of 0.1, initial q values of 0, and an 
+ epsilon value of 0.1 were the optimal parameters for both the easy and hard 
+ gridworld problem.  The number of iterations and time, however, varied greatly.
+ \\ \\
+ For the easy gridworld problem, the optimal results took 158 iterations to 
+ achieve a maximum reward as well as meet a somewhat low convergence factor.  
+ These results were very similar to the ones observed from the previous policy and 
+ value iterations.  Interestingly, the time to run the algorithm was even 
+ faster.  This can be attributed to the q-learnign algorithm not wasting its 
+ time exploring bad worthless paths as it progresses.  A lower learning rate 
+ also helps to make sure it doesn't skip over potentially valuable paths.
+ \\ \\
+ For the hard gridworld problem, the optimal result took a much longer 2900 
+ iterations.  As the learner had to explore and navigate a fairly complex maze, 
+ this makes sense.  From the policy maps below, it's clear that the algorithm 
+ develops an optimal path that it tries to follow barring randomly choosing a 
+ wrong direction.  Again, its runtime time was quite low compared to the other 
+ approaches for solving the MDP.  Reasonably, the hard gridworld q-learner takes 
+ longer to run than the easy gridworld q-learner. 
+
+
     \begin{figure}[H]
   \minipage{0.245\textwidth}
       \includegraphics[width=1\textwidth,keepaspectratio]{easy-q-8.png} 
@@ -360,7 +393,6 @@ Q-learning has no such information and learns as it goes.
       \caption*{Easy GW Q-learning Iteration \#1000} 
    \endminipage\hfill
 \end{figure}
-
 
    \begin{figure}[H]
   \minipage{0.245\textwidth}
@@ -382,7 +414,7 @@ Q-learning has no such information and learns as it goes.
 \end{figure}
 
 
-\section*{Comparison}
+\section*{Algorithm Comparisons}
 
   \begin{figure}[H]
   \minipage{0.01\textwidth}
@@ -398,6 +430,12 @@ Q-learning has no such information and learns as it goes.
    \minipage{0.01\textwidth}
    \endminipage\hfill
 \end{figure}
+
+When comparing the convergence properties of all 3 algorithms, for both MDP problems, it becomes very 
+clear that policy iteration has the easiest time converging.  While value 
+iteration comes relatively close to policy iteration, Q-learning has a much more 
+difficult time.
+
 
   \begin{figure}[H]
   \minipage{0.01\textwidth}

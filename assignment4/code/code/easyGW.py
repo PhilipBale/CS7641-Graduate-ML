@@ -230,6 +230,7 @@ if __name__ == '__main__':
                     print "\n\n\n"
                     dumpCSV(nIter, timing[Qname], rewards[Qname], steps[Qname],convergence[Qname], world, Qname)
 
+    # Optimal values
     if True:
         lr = 0.1
         qInit = 0
