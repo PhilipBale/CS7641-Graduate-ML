@@ -315,495 +315,54 @@ Q-learning has no such information and learns as it goes.
 \end{figure}
 
 
-% 
-% \begin{figure}[H]
-%  \minipage{0.33\textwidth}
-%      \includegraphics[width=1\textwidth,keepaspectratio]{perm_visa_sse.jpg} 
-%      \caption*{Perm Visa Sum of Square Errors for Clusters vs. \# Clusters} 
-%   \endminipage\hfill
-%      \minipage{0.33\textwidth}
-%      \includegraphics[width=1\textwidth,keepaspectratio]{permanent_visa_logliklihood.jpg} 
-%      \caption*{Perm Visa Log Liklihood vs. \# Components} 
-%   \endminipage\hfill
-%   \minipage{0.33\textwidth}
-%      \includegraphics[width=1\textwidth,keepaspectratio]{permanent_visa_clustering_scoring.jpg} 
-%      \caption*{Perm Visa Scoring for k-means and expectation maximization} 
-%   \endminipage\hfill
-%\end{figure}
-% \begin{figure}[H]
-%  \minipage{0.33\textwidth}
-%      \includegraphics[width=1\textwidth,keepaspectratio]{housing_sse.jpg} 
-%      \caption*{Housing Sum of Square Errors for Clusters vs. \# Clusters} 
-%   \endminipage\hfill
-%   \minipage{0.33\textwidth}
-%      \includegraphics[width=1\textwidth,keepaspectratio]{housing_logliklihood.jpg} 
-%      \caption*{Housing Log Liklihood vs. \# Components} 
-%   \endminipage\hfill
-%   \minipage{0.33\textwidth}
-%      \includegraphics[width=1\textwidth,keepaspectratio]{housing_clustering_scoring.jpg} 
-%      \caption*{Housing Scoring for k-means and expectation maximization} 
-%   \endminipage\hfill
-%\end{figure}
-%
-%\subsubsection*{k-Means Analysis}
-%Observing the graphs above, it is clear to see that varying the number of clusters used 
-%has a clear impact on the performance of k-Means clustering.  For both datasets, as the number of 
-%clusters increases, the clusters are more able to represent the data. Logically, 
-%there are instances where increasing number of clusters will decrease the 
-%accuracy instead of increasing it, such as when just starting out and before 
-%convergence (using Euclidean distance for converge properties).
-%\\ \\
-%The first measurement used to determine the effectiveness is the sum of square 
-%errors (SSE).  The SSE measures how far away an instance data point is from the mean of its cluster.
-%As the number of clusters increases, the SSE noticably drops and then converges.  This 
-%makes sense because at a certain point, adding more clusters is overfitting and 
-%not necessary to get the all training data into its best possible fit.
-%\\ \\ 
-%From the scoring data, it is shown that the permanent visa data, performs remarkably well with a small number of 
-%clusters and does not show any noticable improvement by increasing clusters.  
-%This is due to the fact that the permanent visa data is extremely homogenous and 
-%does not contain many outliers at all.   On the other hand, the housing price 
-%data is much more susceptible to changes in number of clusters.  As the number 
-%of clusters increases, the testing data gradually increases in accuracy before leveling off.  
-%Since the housing data is much more varied and complex, there are intricacies of 
-%the data that require more clusters to capture well.
-%
-%
-%\begin{figure}[H] 
-%\begin{tabular}{ | c | c  | c | c | c | c | c | c| c| c| c| c| c | } 
-%\hline
-%\textbf{ # Clusters } & \textbf{2} & \textbf{5} & \textbf{10} & \textbf{15} & \textbf{20} & \textbf{25} & \textbf{30} & \textbf{35} & \textbf{40} & \textbf{50} & \textbf{60} & \textbf{70}   \\
-%\hline
-%\textbf{PERM VISA} \\ \hline
-%\textbf{SSE} &  108717 & 71834 & 47453 & 37701 & 31090 & 27611 & 25517 & 23874 & 22410 & 20267 & 18532 & 17331 \\ \hline
-%\textbf{Log Liklihood} & -9.44 & 2.67 & 9.57 & 13.25 & 13.90 & 16.01 & 15.78 & 15.29 & 17.56 & 19.12 & 20.04 & 20.47 \\ \hline
-%\textbf{k-Means AMI} & 0.022 & 0.008 & 0.005 & 0.005 & 0.004 & 0.005 & 0.004 & 0.004 & 0.004 & 0.004 & 0.004 & 0.004 \\ \hline
-%\textbf{k-Means ACC} & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 \\ \hline
-%\textbf{EM AMI} & 0.022 & 0.007 & 0.005 & 0.005 & 0.006 & 0.005 & 0.006 & 0.007 & 0.006 & 0.006 & 0.007 & 0.007 \\ \hline
-%\textbf{EM ACC} & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 & 0.865 \\ \hline
-%\\
-%\textbf{HOUSING} \\ \hline
-%\textbf{SSE} & 14840 & 10217 & 8265 & 7256 & 6589 & 6106 & 5687 & 5339 & 5063 & 4589 & 4276 & 4024 \\ \hline
-%\textbf{Log Liklihood} & -2.09 & 0.03 & 2.97 & 3.79 & 5.41 & 5.44 & 6.45 & 6.48 & 8.59 & 8.63 & 9.26 & 9.90 \\ \hline
-%\textbf{k-Means AMI} & 0.105 & 0.134 & 0.120 & 0.103 & 0.091 & 0.080 & 0.086 & 0.090 & 0.086 & 0.081 & 0.083 & 0.081 \\ \hline
-%\textbf{k-Means ACC} & 0.628 & 0.634 & 0.695 & 0.702 & 0.694 & 0.688 & 0.695 & 0.704 & 0.705 & 0.715 & 0.719 & 0.726 \\ \hline
-%\textbf{EM AMI} & 0.010 & 0.065 & 0.073 & 0.073 & 0.078 & 0.073 & 0.081 & 0.085 & 0.077 & 0.078 & 0.065 & 0.064 \\ \hline
-%\textbf{EM ACC} & 0.628 & 0.631 & 0.631 & 0.644 & 0.657 & 0.666 & 0.682 & 0.688 & 0.686 & 0.677 & 0.673 & 0.679 \\ \hline
-%\end{tabular}
-%\caption*{Table of Housing Data Results for Cluster } 
-%\end{figure}
-%
-%\subsection*{2) Expectation Maximization}  
-%\subsubsection*{Overview}
-%Expectation Maximization is the second algorithm applied to the datasets and, 
-%similar to k-means, is a clustering algorithm.  Expectation Maximization works 
-%by iteratively finding the maximum liklihood of parameters leading to a labeling 
-%of an instance despite possibly not having all data or parameters.  For our 
-%examples, we used Scikit-learn's Gaussian mixture models to implement the 
-%Expectation Maximization algorithm.  A varying number of mixture components (or number of distributions) were 
-%used to determine the best possible parameters for the clustering.
-%
-%\subsubsection*{Expectation Maximization Analysis}
-%Expectation maximization performed slightly worse than k-means on the 
-%datasets.  Instead of using a sum of square errors calculation, a log liklihood 
-%is calculated to effectively determine the probability of succesful labeling.  
-%Interestingly, the housing dataset converges quite quickly to a near-peak log 
-%liklihood where as the permanent visa dataset takes a bit longer.  This makes 
-%sense, as the permanent visa dataset is much larger and while an indicitor of 
-%classification performance and determining factor for component count, it does not gaurantee how well the 
-%algorithm will perform using such settings.  Since the housing dataset is more 
-%complicated and contains outliers, however, it's reasonable to expect 
-%expectation maximization to perform worse than k-means.
-%\\ \\
-%In terms of scoring, k-means performed slightly better, for the housing dataset--though it was insignificantly better for the 
-%permanent visa dataset.  The adjusted mutual info score, which helps to 
-%determine the differences between clusters while accounting for chance, also 
-%performs similarly for expectation maximization compared to k-means.  Overall, 
-%while k-means performed better in our trials, it is reasonable to believe 
-%datasets exist that would fare better using expectation maximization.  Such 
-%datasets would likely be more susceptible to a consistent 
-%structure such that maximizing priors is an effective strategy.
-%
-%
-%
-%
-%
-%
-%
-% 
-%\section*{Part 2: Dimensionality Reduction Algorithms}
-%\subsection*{ Introduction}  
-%Part 2 deals with dimensionality reduction algorithms.  The four algorithms used 
-%are principal components analysis, individual components analysis, randomized projections, and random 
-%forests.  After running the algorithms on both datasets, an analysis is provided 
-%on the results.  Later, we will take the results of the dimensionality reduction 
-%algorithms and use them as inputs to a neural network.
-%
-%\subsection*{1) Principal Components Analysis (PCA)}  
-%\subsubsection*{Overview}
-%The first dimenstionality reductation algorithm, Principal component analysis is a statistics approach to finding vectors that 
-%maximize variance and thus help to determine components that are correlated.  Each subsequent component is found with the intent to be 
-%orthoganal to the preceding component.  The resulting eigenvalue matrix from PCA 
-%is therefore maximized for covariance.
-%
-% \begin{figure}[H]
-%  \minipage{0.49\textwidth}
-%      \includegraphics[width=1\textwidth,keepaspectratio]{permanent_visa_pca_eigenvalues.jpg} 
-%      \caption*{Permanent Visa Principal Components Analysis } 
-%   \endminipage\hfill
-%    \minipage{0.49\textwidth}
-%      \includegraphics[width=1\textwidth,keepaspectratio]{housing_pca_eigenvalues.jpg} 
-%      \caption*{Housing Principal Components Analysis } 
-%   \endminipage\hfill
-%\end{figure}
-%
-%\subsubsection*{Analysis}
-%Principal component analysis seeks to reduce the number of dimensions in the data without sacrificing data quality.  The prinicipal component analysis results show that both the eigenvalues and the variance decrease for 
-%both datasets as the number of components is increases.  For the permanent visa 
-%dataset, the size of the eigenvalues is consistant with a slight continous decrease.  In the case that there was a sharp decrease and then level off,
-%it would indicate that there are features that are potentially unnecessary and removable.  Since the level off is gradual, 
-%it indicates that each feature is important to representing the initial data.  While the housing 
-%dataset has a sharp very initial drop, it then has a continous downwards trend for its eigenvalues, 
-%also indicating that removing too many features may not be a wise thing to do.  
-%The housing dataset has a much wider distribution for its eigenvalues than the 
-%permanent visa dataset--indicating that the importance of features is more 
-%skewed for the housing data as well.
-%\\ \\
-%The variance graphs also provide interesting views into the ability of PCA to reduce 
-%dimensionality without sacrificing data quality.  While the housing dataset 
-%indiciates a higher variance between different features, the permanent visa 
-%dataset proves to be more evenly distributed.  Since we are trying to maximize 
-%variance between the different components (so that we most accurately represent the higher dimension 
-%data), we want to choose a number of components that demonstrates such.  For 
-%the permanent visa dataset, that number appears to be around 5 components and for 
-%the housing dataset it apepars to be around 9 components.
-%
-%\subsection*{2) Independent Components Analysis (ICA)}  
-%\subsubsection*{Overview}
-%The second dimensionality reduction algorithm, independent components analysis, 
-%is an approach to separating a mixture of a data into appropriate subcomponents. 
-% As discussed in lecture, a good example of what ICA is used for is the cocktail problem; where one needs to 
-% separate various sounds into their sources: a tv show, humans, car noises, etc.  
-%  Kurtosis is used as a measurement of how gaussian the derived components 
-%  are.
-%  
-%
-% \begin{figure}[H]
-%  \minipage{0.49\textwidth}
-%      \includegraphics[width=1\textwidth,keepaspectratio]{permanent_visa_ica_kurtosis.jpg} 
-%      \caption*{Permanent Visa Independent Components Analysis } 
-%   \endminipage\hfill
-%    \minipage{0.49\textwidth}
-%      \includegraphics[width=1\textwidth,keepaspectratio]{housing_ica_kurtosis.jpg} 
-%      \caption*{Housing Independent Components Analysis } 
-%   \endminipage\hfill
-%\end{figure}
-%
-%
-%\subsubsection*{Analysis}
-%While PCA sought to maximize variance, ICA seeks to separate mixed data into 
-%subcomponents.  As a dimensionality aglorithm, independent components analysis also wants to minimize 
-%dimesionality while preserving data quality.  Using the kurtosis measurement, 
-%we are able to measure the spikiness of the data distribution.  It's important to note that kurtosis is 
-%sensitive to outliers and therefore not always robust to measuring gaussianity. 
-%\\ \\ 
-%The parameter to tune was number of components (dimensions).  Similar to PCA, it is observed that the permanent visa dataset is significantly 
-%more homogenous then the housing dataset.  It also suggest that 5 dimensions 
-%be kept for the permanent visa dataset and approximately 5-9 for the housing 
-%dataset.
-%
-%
-%\subsection*{3) Randomized Projections}  
-%\subsubsection*{Overview}
-%The third dimensionality reduction algorithm, randomized projections, is an 
-%approach that randomly generates a projection matrix that attempts to create a 
-%lower dimension representation of the data that is approximately accurate to 
-%its original state.  By varying the number of components to project, we can run 
-%various tests on how well the lower dimension data captures the original.  We 
-%can also run tests to determine how well the original data can be reconstructed 
-%from the lower dimension data.
-%\\ \\
-%
-% \begin{figure}[H]
-%  \minipage{0.49\textwidth}
-%      \includegraphics[width=1\textwidth,keepaspectratio]{permanent_visa_randomized_projections_pairwise_distpt_corrpt.jpg} 
-%      \caption*{Permanent Visa Randomized Projections Pairwise Correlation } 
-%   \endminipage\hfill
-%    \minipage{0.49\textwidth}
-%      \includegraphics[width=1\textwidth,keepaspectratio]{housing_randomized_projections_pairwise_distpt_corrpt.jpg} 
-%      \caption*{Housing Randomized Projections Pairwise Correlation} 
-%   \endminipage\hfill
-%\end{figure}
-% \begin{figure}[H]
-%  \minipage{0.49\textwidth}
-%      \includegraphics[width=1\textwidth,keepaspectratio]{permanent_visa_randomized_projections_reconstruction_error.jpg} 
-%      \caption*{Permanent Visa Randomized Projections Reconstruction Error } 
-%   \endminipage\hfill
-%    \minipage{0.49\textwidth}
-%      \includegraphics[width=1\textwidth,keepaspectratio]{housing_randomized_projections_reconstruction_error.jpg} 
-%      \caption*{Housing Randomized Projections Reconstruction Error} 
-%   \endminipage\hfill
-%\end{figure}
-%
-%\subsubsection*{Analysis}
-%Randomized projections, of all the dimesionality reduction algorithms, was the 
-%most susceptible to variation in performance due to its random nature.  In such, 
-%various trials were run, each varying the random state and maintaining that same random state for a variety of 
-%number of components.  We ran 10 trials for each dataset (and kept the most relevant 7).  
-%\\ \\
-%The first measure used to determine the appropriate 
-%number of dimensions to reduce to was pairwise distance between the original and 
-%reduced data.  From the graphs, it is easy to see that the distance (akin to difference in the instances) 
-%converges around 5 components for the permanent visa dataset and 9-10 for the 
-%housing dataset.
-%\\ \\
-%The second, measurement used was reconstruction error.  For both datasets, the 
-%reconstuction error decreases signficiantly as the number of dimensions is 
-%increased.  This makes sense as the more dimensions available, the more easily 
-%the initial data can be reconstructed.  While reconstruction error doesn't give 
-%us a clear indicator as to how well a learner will perform on the deconstructed 
-%data, it does give insight into how much data is thrown away at each reduction 
-%of dimension.
-%
-%\subsection*{4) Random Forest Feature Selection}  
-%\subsubsection*{Overview}
-%The fourth, and last, dimensionality reduction algorithm, random forest feature selection, is an 
-%approach that uses an ensemble of decision trees conditioned on different 
-%features.  By training the decision tree and observing the impact of each 
-%feature by its ability to classify data correctly, we can select the most 
-%important features and disregard unimporant features.
-%
-% \begin{figure}[H]
-%    \minipage{0.1\textwidth}
-%    \endminipage\hfill 
-%  \minipage{0.4\textwidth}
-%      \includegraphics[width=1\textwidth,keepaspectratio]{permanent_visa_random_forests_feature_importances.jpg} 
-%      \caption*{Permanent Visa Random Forest Feature Importances (Descending Order) } 
-%   \endminipage\hfill
-%    \minipage{0.4\textwidth}
-%      \includegraphics[width=1\textwidth,keepaspectratio]{housing_random_forests_feature_importances.jpg} 
-%      \caption*{Housing Random Forest Feature Importances (Descending Order)} 
-%   \endminipage\hfill
-%   \minipage{0.1\textwidth}
-%    \endminipage\hfill
-%\end{figure}
-%
-%\subsubsection*{Analysis}
-%The last dimensionality reduction algorithm produces results consistent with the 
-%others. The number of estimators used was 100 to give a robust learner and all 
-%class weights were treated equally.  To keep trials consistent, the same random 
-%state, number of estimators, and initial class weights were used for each 
-%trial of the random forest feature selector.
-%\\ \\
-%For the permanent visa dataset, approximately 5 of the features have high importance 
-%in terms of a random forest classying data correctly, whereas approximately 9 of 
-%the features have high importance for the housing dataset.  Interestingly 
-%enough, the feature importance graph for the housing dataset indicates that there is a quick dropoff 
-%between 5 features in terms of importance.  These findings are consistent 
-%with the results of the other dimensionality reduction algorithms.  
-%
-%\subsection*{Dimensionality Reduction Inferences}
-%Each DR algorithm tuned its 'k', or number of final dimensions, for each dataset based 
-%on its own strategy.  By using the various algorithms in tandem, it gives us confidence to safely pick 
-%a dimensionality of 5 for the permanent visa dataset and 9 for the housing 
-%dataset.  As we'll see later, these numbers hold consistent when running grid 
-%search on a combination of dimensionality reduction and neural networks.
-%
-%
-%\section*{Part 3: Dimensionality Reduction and Clustering}
-%\subsection*{Overview}
-%In this section, clustering algorithms are run on the results of the 
-%dimensionality reduction algorithms and then compared.  All dimenstionality 
-%reduction and all clustering algorithms from above are used.
-%
-%\subsection*{k-Means after Dimensionality Reduction}
-%
-% \begin{figure}[H]
-%  \minipage{.25\textwidth}
-%      \includegraphics[width=1\textwidth,keepaspectratio]{perm_visa_sse_comparison_after_dr.jpg} 
-%      \caption*{Perm Visa SSE} 
-%   \endminipage\hfill
-%   \minipage{.25\textwidth}
-%      \includegraphics[width=1\textwidth,keepaspectratio]{perm_visa_k-means_after_dr_scoring.jpg} 
-%      \caption*{Perm Visa Scoring} 
-%   \endminipage\hfill
-%  \minipage{.25\textwidth}
-%      \includegraphics[width=1\textwidth,keepaspectratio]{housing_sse_comparison_after_dr.jpg} 
-%      \caption*{Housing SSE} 
-%   \endminipage\hfill
-%   \minipage{.25\textwidth}
-%      \includegraphics[width=1\textwidth,keepaspectratio]{housing_k-means_after_dr_scoring.jpg} 
-%      \caption*{Housing Scoring} 
-%   \endminipage\hfill
-%  \end{figure}
-%  
-%\subsubsection*{Analysis}
-%Above, graphs were computed showing the baseline clustering from Part 1, as well 
-%as clustering after each of the dimensionality reductions.  Based on the results of part 2, 
-%a dimension of 5 was used for the permanent visa dataset and 9 for the housing 
-%dataset.
-%\\ \\ 
-%As is immediately apparent, the types of clusters generated vary greatly based on the 
-%dimensionality reduction algorithm used.  A great way of seeing this is the 
-%sum of squared errors for each number of clusters.  Each algorithm calculated a 
-%different SSE--while part of this can be attributed to the random start of the 
-%cluster centers, they do not converge to the same error rates (and thus 
-%locations for the testing data).
-%\\ \\
-%When looking at the scoring graph, it is observed that k-Means performs roughly consistently 
-%after each of the dimensionality algorithms.  Other than Randomized projections, 
-%which performs slightly worse than the other, the algorithms tend to converge in 
-%both accuracy and adjusted mutual information.  Similar to before, however, the 
-%permanent visa dataset is easily classified and does vary 
-%significantly depending on the algorithm used.
-%\\ \\
-%For the housing dataset, it becomes clear that random forest feature selection 
-%provides the best manner of selecting features.  In a way, this makes sense as 
-%the random forest feature selector is a robust, generic way of viewing which 
-%features contribute the most to classification.
-%
-%\subsection*{Expectation Maximization after Dimensionality Reduction}
-%
-% \begin{figure}[H]
-%  \minipage{.25\textwidth}
-%      \includegraphics[width=1\textwidth,keepaspectratio]{perm_visa_log_liklihood_comparison_after_dr.jpg} 
-%      \caption*{Perm Visa Log Liklihood} 
-%   \endminipage\hfill
-%   \minipage{.25\textwidth}
-%      \includegraphics[width=1\textwidth,keepaspectratio]{perm_visa_estimation_maximization_after_dr_scoring.jpg} 
-%      \caption*{Perm Visa Scoring} 
-%   \endminipage\hfill
-%  \minipage{.25\textwidth}
-%      \includegraphics[width=1\textwidth,keepaspectratio]{housing_log_liklihood_comparison_after_dr.jpg} 
-%      \caption*{Housing Log Liklihood} 
-%   \endminipage\hfill
-%   \minipage{.25\textwidth}
-%      \includegraphics[width=1\textwidth,keepaspectratio]{housing_estimation_maximization_after_dr_scoring.jpg} 
-%      \caption*{Housing Scoring} 
-%   \endminipage\hfill
-%  \end{figure}
-%
-%\subsubsection*{Analysis}
-%Similar to k-Means, based on part 2, 5 and 9 were the dimension parameters used for expectation 
-%maximization. 
-%\\ \\
-%Again, the clusters generated vary signficiantly based on the dimensionality 
-%reduction algorithm used.  This can be observed through the log liklihood 
-%calculations plotted above for each dimensionality reduction algorithm and 
-%baseline expectation algorithm.  In EM, the log liklihood represents the liklihood of the data being correctly 
-%classified.  After dimensionality reducing, the number of clusters generally increases 
-%this liklihood for both datasets.
-%\\ \\
-%Performance results, again, were similar to the k-Means analysis above.  One 
-%noticeable difference, however, was that ICA proved to be the most succesful 
-%algorithm for the more complex housing dataset.  While random forests still 
-%performed well, they did not stand out as before.  Since expectation 
-%maximization tries to maximize likilhood and ICA seeks to separate mixed data, 
-%this is a viable outcome for scoring.  On average, expectation maximization 
-%performs slightly worse across algorithms than k-Means, however.
-%
-%\section*{Part 4/5: Dimensionality Reduction, Clustering, and Neural Networks}
-%\subsection*{Overview}
-%In this section, similar to part 3, neural networks are run on the results of the 
-%dimensionality reduction algorithms and the clustering algorithms, and then compared.  
-%The housing dataset is used, since it contains more complex data with more 
-%featurse and outliers.
-% Baseline results of simply running the neural network using grid searched 
-% parameters on the base dataset are used.  For the dimensionality reduction and 
-% clustering algorithms, grid search and cross validation were used on paremeters of the neural 
-% network and the best result for each algorithm is included below.
-% 
-%
-% \begin{figure}[H]
-%   \minipage{.1\textwidth} 
-%   \endminipage\hfill 
-%  \minipage{.4\textwidth}
-%      \includegraphics[width=1\textwidth,keepaspectratio]{housing_nn_after_dr_scoring.jpg} 
-%      \caption*{Housing NN after dimenstionality reduction } 
-%   \endminipage\hfill
-%    \minipage{.4\textwidth}
-%      \includegraphics[width=1\textwidth,keepaspectratio]{housing_nn_after_cluster_scoring.jpg} 
-%      \caption*{Housing NN after clustering} 
-%   \endminipage\hfill
-%    \minipage{.1\textwidth} 
-%   \endminipage\hfill
-%\end{figure}
-%
-%\begin{figure}[H] 
-%\begin{tabular}{ | c | c  | c | c | c | c | c | } 
-%\hline
-%\textbf{ Alg } & \textbf{ Training Time } & \textbf{ Avg Test Score} & \textbf{ Avg Train Score } & \textbf{Alpha} & \textbf{Layers} & \textbf{Param}    \\
-%\hline
-%\textbf{Base} \\ \hline
-%Base \#1 & 0.0620 & \textbf{0.7139} & 0.7191 & 0.01 & (100,) \\ \hline 
-%Base \#2 & 0.0605 & 0.7133 & 0.7191 & 0.1 & (100,) \\ \hline 
-%Base \#3 & 0.0685 & 0.7119 & 0.7193 & 0.001 & (100,) \\ \hline 
-%\textbf{Dim. Reduction} \\ \hline
-%ICA & 0.0274 & 0.6478 & 0.6528 & 0.001 & (100,) & 2 components \\ \hline
-%PCA & 0.0581 & 0.7050 & 0.7048 & 0.1 & (100,) & 3 components \\ \hline
-%Random Forest & 0.4450 & \textbf{0.7291} & 0.7482 & 0.01 & (50, 50) & 9 dimensions \\ \hline
-%Randomized Project. & 0.0814 & 0.6940 & 0.6971 & 0.1 & (50, 50) & 10 components \\ \hline
-%\textbf{Clustering} \\ \hline
-%Expectation Maxim. & 0.3171 & 0.6395 & 0.6290 & 0.01 & (100,)  & 50 components \\ \hline
-%k-means & 0.2958 & \textbf{0.7195} & 0.7163 & 0.1 & (100,) & 50 clusters\\ \hline
-%\end{tabular}
-%\caption*{Table of Housing Data Results for Cluster } 
-%\end{figure}
-%
-%
-%\subsubsection*{Dimensionality Reduction + NN Analysis}
-%For each dimensionality reduction + NN pairing, the best mean test score was 
-%selected.  When comparing to the base test results, the training time for each 
-%dimensionality reduced neural net was faster than the baseline, except for the 
-%random forest feature selection and the randomized projection reducer.  This makes sense, since 
-%both decided to use a different NN layer structure.  For the algorithms that 
-%grid searched and landed on the same network structure, training time was much 
-%faster due to the reduction in data dimensions.
-%\\ \\
-%In terms of scoring performance, the best algorithm turned out to be the random 
-%forest classifier in both test and training score.  As the random forest 
-%classifier was able to make informed decisions about which features were not as 
-%important to keep around, it was actually able to throw out data that was not 
-%relevant (and potentially harmful).  In this case, the robustness of the random 
-%forest classifier turned out to be exceedingly useful in a dataset that is prone 
-%to outliers.
-%\subsubsection*{Clustering + NN Analysis}
-%For each clustering algorithm + NN pairing, the best mean test score was also 
-%selected.  When comparing to the base test results, the clustering algorithms 
-%took significantly more time to train (almost 5x).  Though still a very small 
-%amount of time (less than 1 second)--it demonstrates the resources necessary to 
-%calculate across various component parameters.  In our case, 50 was 
-%found to be the most effective size of component/clusters for both algorithms.  
-%This is logical due to the algorithms wanting to find highly-representative 
-%structures but not use too many components/clusters so that it overfits and does 
-%unuseful work.
-%\\ \\
-%In terms of performance, the k-means clustering + NN combo peformed even better 
-%than the baseline algorithm, while the expectation maximization algorithm 
-%performed significantly worse.  This makes sense, as the k-means algorithm is 
-%prone to capturing outliers and complex datasets well (especially at a high number of clusters) 
-%whereas expectation maximization has a tough time calculating liklihood for 
-%complex datasets.
-%
-%\section*{Conclusion}  
-%In total, 4 different groupings of machine learning algorithsm were run.  First, 
-%we looked at two clustering algorithms, k-means and expectation maximization, and 
-%their impact on input data.  Then, we explored four dimensionality reduction 
-%algorithms (PCA, ICA, randomized projections, and random forests) in an attempt 
-%to reduce the size and complexity of the data without sacrificing important 
-%feature information.  Next, we applied the clustering algorithms to data that 
-%had already been dimension reduced, and found that, on average, doing so 
-%increased the clustering algorithms accuracy and decreased its overall datasize. 
-%Finally, we combined dimesionality reduction and clustering with neural 
-%networks.  We found that some cases of these hybrid algorithms were noticably 
-%more accurate than the baseline algorithms, and performed better than only 
-%dimensionality reduction or 
-%clustering/clustering with dimensionality reduction.
-%\\ \\
-%Overall, the assignment provides in-depth insight into the benefits of using clustering 
-%and dimensionality reduction.  By applying the algorithms to two different 
-%datasets, an analysis on real-world, concrete data can be handily applied and 
-%readily 
-%observed.
+\section*{Comparison}
+
+  \begin{figure}[H]
+  \minipage{0.01\textwidth}
+   \endminipage\hfill
+  \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{easy_convergence.jpg} 
+      \caption*{10x10 Easy Gridworld Convergence Comparison} 
+   \endminipage\hfill
+   \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{hard_convergence.jpg} 
+      \caption*{20x20 Hard Gridworld Convergence Comparison} 
+   \endminipage\hfill
+   \minipage{0.01\textwidth}
+   \endminipage\hfill
+\end{figure}
+
+  \begin{figure}[H]
+  \minipage{0.01\textwidth}
+   \endminipage\hfill
+  \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{easy_time.jpg} 
+      \caption*{10x10 Easy Gridworld Time Comparison} 
+   \endminipage\hfill
+   \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{hard_time.jpg} 
+      \caption*{20x20 Hard Gridworld Time Comparison} 
+   \endminipage\hfill
+   \minipage{0.01\textwidth}
+   \endminipage\hfill
+\end{figure}
+
+
+  \begin{figure}[H]
+  \minipage{0.01\textwidth}
+   \endminipage\hfill
+  \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{easy_reward.jpg} 
+      \caption*{10x10 Easy Gridworld Reward Comparison} 
+   \endminipage\hfill
+   \minipage{0.49\textwidth}
+      \includegraphics[width=1\textwidth,keepaspectratio]{hard_reward.jpg} 
+      \caption*{20x20 Hard Gridworld Reward Comparison} 
+   \endminipage\hfill
+   \minipage{0.01\textwidth}
+   \endminipage\hfill
+\end{figure}
+
+
 
 \end{document}
