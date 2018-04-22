@@ -434,7 +434,15 @@ Q-learning has no such information and learns as it goes.
 When comparing the convergence properties of all 3 algorithms, for both MDP problems, it becomes very 
 clear that policy iteration has the easiest time converging.  While value 
 iteration comes relatively close to policy iteration, Q-learning has a much more 
-difficult time.
+difficult time.  \\ \\ 
+Since policy iteration starts with a random policy and then 
+tweaks it for improvements, it is susceptible to converging quickly due to not 
+having much reason to change from it's current state.  Similarly, while value 
+iteration works backwards, it develops variations but will inevitably converge 
+before long to an optimal solution as it is also aided by knowledge of the 
+model.  Q-learning, however, goes in completely blind and has much greater 
+difficulty knowing if the policy chosen is optimal.  With various options to 
+take at each state, it takes many more iterations to converge.
 
 
   \begin{figure}[H]
@@ -451,7 +459,11 @@ difficult time.
    \minipage{0.01\textwidth}
    \endminipage\hfill
 \end{figure}
-
+In terms of time necessary to run the algorithm, Q-learning is far and away the 
+fastest.  Conversely, policy iteration is the slowest.  Both of these statements 
+hold true for both MDPs.  Q-learning does not involve any complex math or 
+calculations, unlike policy and value iteration.  Thus, it is able to explore 
+and compare its policies much faster than the others.
 
   \begin{figure}[H]
   \minipage{0.01\textwidth}
@@ -468,6 +480,24 @@ difficult time.
    \endminipage\hfill
 \end{figure}
 
+Reward analsyis proves to be the most interesting comparison across all three 
+algorithms.  Both policy iteration and value iteration were able to find maximal 
+rewards quite quickly in terms of iterations, and were able to keep that value 
+rather consistent despite thier explorations.  Q-learning, however, struggled 
+significantly to find maximal reward polciies, and even once trending towards 
+maximal rewards, varied significantly from iteration to iteration.
+\\ \\
+Policy iteration, having the advantage of making improvement modifications to an 
+initial policy, is always seeking to maximize its reward and is thus able to 
+almost monotonically increase its reward return while reaching convergence.  
+Value iteration is not quite as effective, as it's simply working backwards and 
+trying to find good options along the way, but it still performs rather well.  
+\\ \\
+Q-learning, on the other hand, deals with a large amount of exploration and 
+discovery that causes it to take a large number of iterations before it finds 
+policies that are able to map to maximal rewards.  Even once it starts 
+perfomring well, it takes a long time to converge and is extremely variable due 
+to its tendency to still try to explore new alternatives.
 
   \begin{figure}[H]
    \minipage{0.32\textwidth}
