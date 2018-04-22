@@ -83,7 +83,7 @@ def plot_convergence(difficulty):
   plt.title(difficulty.title() + ' Gridworld Convergence by Algorithm') 
 
   plt.xlabel('# Iterations')
-  plt.ylabel('Convergence')
+  plt.ylabel('Convergence Delta')
 
   if easy:
     plt.ylim((0, 15))

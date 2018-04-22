@@ -103,12 +103,50 @@ The first reinforcement learning algorithm used to optimally solve the MDPs is V
 35 & 0.8843 & 13.7700 & 63.4800 & 0.3277 \\ \hline
 45 & 1.1318 & 9.1400 & 65.3000 & 0.0054 \\ \hline
 55 & 1.3517 & 10.6000 & 63.7800 & 3.16e-5 \\ \hline
-60 & 1.4623 & 13.2900 & 62.4400 & 1.72e-6 \\ \hline
+61 & 1.4623 & 13.2900 & 62.4400 & 1.72e-6 \\ \hline
 
 \end{tabular}
 \caption*{Gridworld Value Iteration Results} 
 \end{figure}
  
+ \subsubsection*{Easy Gridworld Value Iteration Results}
+ The first MDP examined is the easy gridworld pathfinding experiment.  A 10x10 
+ grid with various walls, it is a relatively easy problem with a relatively 
+ small number of total states.  The results obtained and displayed above lend to various analyses.
+ \\ \\
+ To measure converge, an iteration threshold of 1e-6 is used.  For this 
+ gridworld problem, it takes 64 iterations for value iteration's policy delta to converge 
+ below the threshold.  This is reasonable, as the value iteration works 
+ backwards and attempts to find the best possible policy.  Improvements are made 
+ overtime and eventually it, in this case at 64 iterations, falls below our 
+ threshold.    
+ \\ \\
+ In terms of performance, the maximum reward value is found at iteration \#64--indicating 
+ that that value iteration found an optimal policy.  At 64 steps, the journey 
+ taken is much more complex than the naive solutions found at iteration \#5.  
+ Unsurprisingly, the shortest path is not necessarily the most valuable.  In 
+ terms of iteration time, the algorithm is rather fast--less than half of a 
+ second to converge on my machine.  Observing the policy maps below, the algorithm does well at determining an optimal policy for the various possible states. 
+ 
+  \subsubsection*{Hard Gridworld Value Iteration Results}
+ The second MDP examined is the hard gridworld pathfinding experiment.  A 20x20 
+ grid with various walls, it is significantly more complex than the easy 
+ gridworld layout--there are many more states, rewards, and walls.
+  \\ \\
+ Similar to above, to measure converge, an iteration threshold of 1e-6 is used.  For this 
+ gridworld problem, it takes 61 iterations for value iteration's policy delta to converge 
+ below the threshold.  While a more complex problem than before, it demonstates that problem complexity does not gaurantee 
+ that more iterations are necessary for convergence.
+ \\ \\
+ Performance-wise, the maximum reward is actually not found at the last 
+ iteration where convergence is achieved, but rather at iteration \#35.  It 
+ does, however, fall within a very small margin of the last iteration \#61.  
+ The path of the highest reward solution is approximately 63 
+ steps--significantly less than the initial solutions of around 300 steps.  The 
+ hard gridworld problem, reasonable, takes signficiantly longer to converge than 
+ the easy problem (1.4 seconds vs 0.4).
+ Viewing the policy maps below, it becomes clear that the algorithm does a 
+ rather superb job at determining a policy with the best action to take at the various states.
  
    \begin{figure}[H]
   \minipage{0.245\textwidth}
@@ -186,6 +224,35 @@ attemping to modify it state by state by taking different actions.  This continu
 \end{tabular}
 \caption*{Gridworld Policy Iteration Results} 
 \end{figure}
+
+
+ \subsubsection*{Easy Gridworld Policy Iteration Results}
+Here we examine policy iteration for the easy gridworld pathfinding experiment.  To measure converge, an iteration threshold of 1e-6 is used.  For this 
+ gridworld problem, it takes 33 iterations for policy iteration's policy delta to converge 
+ below the threshold.  While the policy iteration approach starts to converge 
+ very quickly, it starts to level off and does not see substantial benefits 
+ after approximately 10 iterations--which can also be observed in the policy map 
+ graphics below.
+ \\ \\
+ In terms of performance, the maximum reward value is found at iteration \#33--indicating 
+ that that policy iteration found an optimal policy as it converged.  At 48 steps, the journey 
+ taken is much more complex than the naive solutions found at early iterations but optimized further than similarly high reward policies.  
+  In terms of iteration time, the algorithm is rather fast--which is aided by the fact that only 33 steps are needed for convergence.
+   Looking at the policy maps, it is evident that policy iteration performs very well for this problem. 
+ 
+  \subsubsection*{Hard Gridworld Policy Iteration Results}
+ Using a similar converence approach to above, converge is acheived even 
+ earlier--at only 22 iterations.  The biggest change is between iterations 10 and 15 
+ iterations, after which things somewhat level off before hitting \#22.  In this 
+ case, the policy iteration approach fairs very well since it is able to branch 
+ off and positively manipulate as it progress from state to state.  The policy 
+ maps included below do a great job of displaying so.
+ \\ \\
+ Performance-wise, the maximum reward is found at one of the middle iterations--\#15.  At 63 steps and higher rewards, the path is much more optimal than initial trials.
+  It takes nearly 2 and half seconds to converge--which is markedly longer for 
+  the hard grid than the easy grid.  Still, at the end of the day, policy 
+  iteration does a fantastic job at determining an optimal policy.
+ 
  
     \begin{figure}[H]
   \minipage{0.245\textwidth}
