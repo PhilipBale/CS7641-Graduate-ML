@@ -36,13 +36,39 @@ def find_best_q_learning(difficulty):
     count = count + 1
     if count > 10:
       continue
-      
+
     sig = 4
     sigString = '{:0.' + str(sig) + 'f}'
-    vals = map(lambda x: sigString.format(x), [ row['iter'], row['time'], row['reward'], row['steps'], row['convergence'] ])
+    vals = map(lambda x: sigString.format(x).replace(".0000", ''), [ row['iter'], row['time'], row['reward'], row['steps'], row['convergence'] ])
     print('\\textbf{' + row['params'] + '} & ' + ' & '.join(vals) + ' \\\\ \\hline')
+
+
+def print_value_results(difficulty, policy):
+  path = difficulty + '/' + difficulty.title() + ' ' + policy + '.csv' 
+  print(path)
+  df = get_df(path)
+
+  count = 0
+  for index, row in df.iterrows():
+    if count == 0 or (count + 1) % 5 == 0 or count + 1 == len(df):
+      sig = 4
+      sigString = '{:0.' + str(sig) + 'f}'
+      vals = map(lambda x: sigString.format(x).replace(".0000", ''), [ row['iter'], row['time'], row['reward'], row['steps'], row['convergence'] ])
+      print(' & '.join(vals) + ' \\\\ \\hline')
+
+    count = count + 1
+  print('')
+
+
+
 
 
 find_best_q_learning('easy')
 print(' ')
 find_best_q_learning('hard')
+
+print_value_results('easy', 'Value')
+print_value_results('easy', 'Policy')
+
+print_value_results('hard', 'Value')
+print_value_results('hard', 'Policy')
