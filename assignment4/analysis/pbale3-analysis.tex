@@ -348,29 +348,33 @@ Q-learning has no such information and learns as it goes.
  about the model and learns as it explores.  
  \\ \\ 
  A variety of parameters were 
- used to tune an optimal learne for each problem.  These parameters included the
+ used to tune an optimal learner for each problem.  These parameters included the
  learning rate, the intial q value to be set, and the epsilon 
- parameter for the greedy method of selecting from available actions.  For each 
+ parameter for the greedy method of selecting from available actions.  In a follow-up excercise, it would be worthwhile to use other decision policies 
+ than Epsilon Greedy policy.  For each 
  trial, a maximum number of steps to explore for each learning episode is defined as 300.  
- A summary of the results from varying these parameters is displayed above.
+ A summary of the results from varying these parameters is displayed above.  
  \\ \\
  Interestingly enough, a learning rate of 0.1, initial q values of 0, and an 
  epsilon value of 0.1 were the optimal parameters for both the easy and hard 
- gridworld problem.  The number of iterations and time, however, varied greatly.
+ gridworld problem.  The low q values helped to encourage exploration as they indicated neutral initial information.
+ The low learning rate also put an emphasis on older information which is 
+ helpful in navigating a maze succesfully.
+ The number of iterations and time, however, varied greatly.  
  \\ \\
  For the easy gridworld problem, the optimal results took 158 iterations to 
  achieve a maximum reward as well as meet a somewhat low convergence factor.  
  These results were very similar to the ones observed from the previous policy and 
  value iterations.  Interestingly, the time to run the algorithm was even 
- faster.  This can be attributed to the q-learnign algorithm not wasting its 
+ faster.  This can be attributed to the q-learning algorithm not wasting its 
  time exploring bad worthless paths as it progresses.  A lower learning rate 
- also helps to make sure it doesn't skip over potentially valuable paths.
+ also helps to make sure it utilizes information about valuable paths.
  \\ \\
  For the hard gridworld problem, the optimal result took a much longer 2900 
  iterations.  As the learner had to explore and navigate a fairly complex maze, 
  this makes sense.  From the policy maps below, it's clear that the algorithm 
  develops an optimal path that it tries to follow barring randomly choosing a 
- wrong direction.  Again, its runtime time was quite low compared to the other 
+ wrong direction.  Again, its run time was quite low compared to the other 
  approaches for solving the MDP.  Reasonably, the hard gridworld q-learner takes 
  longer to run than the easy gridworld q-learner. 
 
@@ -463,7 +467,9 @@ In terms of time necessary to run the algorithm, Q-learning is far and away the
 fastest.  Conversely, policy iteration is the slowest.  Both of these statements 
 hold true for both MDPs.  Q-learning does not involve any complex math or 
 calculations, unlike policy and value iteration.  Thus, it is able to explore 
-and compare its policies much faster than the others.
+and compare its policies much faster than the others.  Q-learning is able to run 
+in constant time, whereas value and policy iteration take incrementally more 
+time.
 
   \begin{figure}[H]
   \minipage{0.01\textwidth}
@@ -479,7 +485,6 @@ and compare its policies much faster than the others.
    \minipage{0.01\textwidth}
    \endminipage\hfill
 \end{figure}
-
 Reward analsyis proves to be the most interesting comparison across all three 
 algorithms.  Both policy iteration and value iteration were able to find maximal 
 rewards quite quickly in terms of iterations, and were able to keep that value 
@@ -496,8 +501,9 @@ trying to find good options along the way, but it still performs rather well.
 Q-learning, on the other hand, deals with a large amount of exploration and 
 discovery that causes it to take a large number of iterations before it finds 
 policies that are able to map to maximal rewards.  Even once it starts 
-perfomring well, it takes a long time to converge and is extremely variable due 
+performing well, it takes a long time to converge and is extremely variable due 
 to its tendency to still try to explore new alternatives.
+
 
   \begin{figure}[H]
    \minipage{0.32\textwidth}
@@ -528,6 +534,18 @@ to its tendency to still try to explore new alternatives.
       \caption*{Hard GW Q-Learning Iteration \#2900} 
    \endminipage\hfill
 \end{figure}
+
+\section*{Conclusion}
+In this analaysis, two Markov Decision Processes were proposed, disected, and then solved using three different reinforcement learning algorithms: 
+value iteration, policy iteration, and Q-learning.  The different algorithms were compared and contrasted, to arrive at various conditions where one may be more optimal than
+others.
+\\ \\
+While Q-learning tends to take many iterations 
+to converge, value and policy iteration do so in much fewer iterations.  Interestingly though, in terms of raw time q-learning is instead much quicker.  
+In the event that the model is known beforehand, value and policy iteration tend to 
+be able to compute the optimal policy much more aptly.  In the event that no model 
+is known, Q-learning is able to handle the situation better due to its ability to 
+explore and discover as it iterates.  
 
 
 \end{document}
